@@ -1,0 +1,3 @@
+conecto_search_homepage:
+    path:     /conecto_search
+    defaults: { _controller: ConectoSearchBundle:Default:index }

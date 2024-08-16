@@ -1,0 +1,67 @@
+<a href="tel:+4971312040690" class="main-nav--phone">
+    <i class="iconfont-phone"></i>
+</a>
+<label for="main-nav--toggle" class="main-nav--burger">
+    <span></span>
+</label>
+
+<nav class="main-nav" role="navigation">
+    {% if not document is defined or not document %}
+        {% set document = pimcore_document(1) %}
+    {% endif %}
+    {% set mainNavStartNode = document.getProperty('mainnavStartNode') %}
+    {% set mainNav = conecto_build_nav(document, mainNavStartNode) %}
+    {% set renderer = pimcore_nav_renderer('menu') %}
+    <ul class="main-nav--first-level">
+
+        {% for key, page in mainNav %}
+            {% if page.isVisible() and renderer.accept(page) %}
+                {% set activeClass = '' %}
+                {% set hiddenClass = '' %}
+                {% set siteClass = '' %}
+                {% set url = '' %}
+                {% if page.getActive(true) %}
+                    {% set activeClass = 'main-nav--active' %}
+                {% endif %}
+                {% if page.getCustomSetting('siteClass') %}
+                    {% set siteClass = 'site-' ~ page.getCustomSetting('siteClass') %}
+                {% endif %}
+                {% if page.getCustomSetting('url') %}
+                    {% set url = page.getCustomSetting('url') %}
+                {% endif %}
+                {% if not page.getCustomSetting('special') %}
+                    <li class="{{ activeClass }} {{ siteClass }}">
+                        <a href="{{ url }}">
+                            {{ page.label }}
+                        </a>
+                        {% if page.hasPages %}
+                            <ul class="main-nav--sub" aria="submenu">
+                                {% for child in page.pages %}
+                                    {% if child.isVisible() and renderer.accept(child) %}
+                                        <li {% if child.getActive(true) %} class="main-nav--sub-active"{% endif %}>
+                                            {% set childUrl = '' %}
+                                            {% if child.getCustomSetting('url') %}
+                                                {% set childUrl = child.getCustomSetting('url') %}
+                                            {% endif %}
+                                            <a href="{{ childUrl }}">{{ child.label }}</a>
+                                        </li>
+                                    {% endif %}
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                    </li>
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+
+        <li class="search">
+            <form method="GET" action="{{ document.getProperty('searchpage') }}">
+                <input type="text" name="q" placeholder="Suchbegriff eingeben">
+                <button type="submit">
+                    <i class="iconfont-magnifier"></i>
+                </button>
+            </form>
+        </li>
+
+    </ul>
+</nav>

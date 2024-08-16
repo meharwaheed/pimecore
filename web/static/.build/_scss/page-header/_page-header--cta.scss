@@ -1,0 +1,86 @@
+@keyframes flip-horizontal-bottom {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    transform: rotateX(-180deg);
+    opacity: 1;
+  }
+  100% {
+    transform: rotateX(0);
+  }
+}
+
+.page-header--lead {
+  position: relative;
+}
+
+.page-header--cta-orientation {
+  @include fluidAll(padding-top, 15px, 50px, 100px);
+  @include fluidAll(padding-bottom, 50px, 100px, 100px);
+  @include fluidAll(padding-left, 50px, 100px, 100px);
+  @include fluidAll(padding-right, 50px, 100px, 100px);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  // justify-content = horizontal
+  // align-content = vertical
+  align-content: end;
+  &.hor-right {
+    justify-content: right;
+    .page-header--cta {
+      text-align: right;
+    }
+  }
+  &.ver-top {
+    align-content: start;
+  }
+  &.ver-center {
+    align-content: center;
+  }
+}
+
+.page-header--cta {
+  z-index: 1;
+  padding-left: pxToVwMobile(30px);
+  padding-right: pxToVwMobile(30px);
+  background-color: $white;
+  @include fluidAll(padding-top, 10px, 10px, 30px);
+  @include fluidAll(padding-bottom, 10px, 10px, 30px);
+  @include fluidAll(padding-left, 18px, 18px, 30px);
+  @include fluidAll(padding-right, 18px, 18px, 30px);
+  @include fluidAll(border-radius, 10px, 10px, 10px);
+
+  max-width: calc(100% - #{pxToVwMobile(30px)});
+  @include media-breakpoint-up(md) {
+    max-width: 345px;
+  }
+  @include media-breakpoint-up(xl) {
+    max-width: 775px;
+  }
+
+  will-change: transform;
+  transform: rotateX(-180deg);
+  animation: flip-horizontal-bottom 0.8s cubic-bezier(0.455, 0.030, 0.515, 0.955) both;
+  animation-delay: 1s;
+
+  h2 {
+    @include fluidAll(font-size, 35px, 35px, 65px);
+    @include fluidAll(line-height, 40px, 40px, 75px);
+    margin-bottom: 0;
+    color: $black;
+    font-family: $font-family-headlines;
+    font-weight: 300;
+  }
+}
+
+.frontend {
+  .page-header--cta {
+    h2 {
+      text-transform: uppercase;
+    }
+  }
+}

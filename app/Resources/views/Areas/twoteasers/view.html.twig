@@ -1,0 +1,69 @@
+{# margins #}
+{% set marginTop = pimcore_select('margin-top').getData() %}
+{% set margin = pimcore_select('margin-bottom').getData() %}
+
+{# background color #}
+{% set bgcolor = pimcore_select('background-color').getData() %}
+
+{# container-width #}
+{% set container = pimcore_select('container').getData() %}
+
+{# id #}
+{% set anchorId = pimcore_input('anchor').getData() %}
+
+{# html #}
+<div {% if anchorId %} id="{{ anchorId }}"{% endif %}
+        class="contentblock contentblock--twoteasers margin-top-{{ marginTop }} margin-bottom-{{ margin }} bg-{{ bgcolor }}">
+
+    {% set relations = pimcore_relations('twoteasers', {
+        'types': ['object'],
+        'classes': ['Teaser'],
+        'title': 'Bitte zwei gewünschte Teaser-Elemente hierher ziehen',
+        'width': '568px',
+        'reload': 'true'
+    }) %}
+    {% set widthSelect = pimcore_select("width", {
+        "store": [
+            ["standard", "Normal"],
+            ["full", "Ganze Breite"]
+        ],
+        "defaultValue" : "standard",
+        "width": 150,
+        "reload": 'true'
+    }) %}
+    {% if editmode %}
+        <div>
+            <label>
+                {{ widthSelect|raw }}
+            </label>
+        </div>
+        <label>
+            {{ relations|raw }}
+        </label>
+    {% else %}
+        <div class="container container-{{ widthSelect.getData() }}">
+            <div class="grid">
+                {% if not relations.isEmpty() %}
+                    {% for key, element in relations %}
+                        {% if element.getLink().getHref() != '' %}
+                            {% set cat = element.getCategory() %}
+                            <a href="{{ element.getLink().getHref() }}"
+                               class="cat-{{ cat }}"
+                               target="{{ element.getLink().getTarget() }}">
+                                <div class="teaser--image">
+                                    {{ element.getImage().getThumbnail('twoteasers-' ~ widthSelect.getData()).getHtml()|raw }}
+                                </div>
+                                <div class="teaser--title">
+                                    <span class="symbol">
+                                        <i class="iconfont"></i>
+                                    </span>
+                                    <h5>{{ element.getTitle() }}</h5>
+                                </div>
+                            </a>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+    {% endif %}
+</div>

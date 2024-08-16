@@ -1,0 +1,137 @@
+// ratios
+$mobileRatio: 100%;
+$tabletRatio: 100%;
+$desktopRatioSmall: 100%;
+$desktopRatioLarge: 52.846%;
+
+.contentblock--teaserslider {
+  @include media-breakpoint-down(lg) {
+    .container {
+      padding: 0;
+    }
+    .teaserslider--controls { display: none; }
+  }
+  @include media-breakpoint-up(teasersliderouter) {
+    .container {
+      max-width: map-get($grid-breakpoints, teasersliderouter);
+      padding-left: 67px;
+      padding-right: 67px;
+    }
+  }
+}
+
+.splide__arrow {
+  &--next,
+  &--prev {
+    background: none;
+    opacity: 1;
+  }
+  &--next {
+    right: -44px;
+  }
+  &--prev {
+    left: -44px;
+  }
+}
+
+
+.contentblock--teaserslider {
+  @include media-breakpoint-down(sm) {
+    &.margin-bottom-small {
+
+      margin-bottom: pxToVwMobile(20px);
+    }
+  }
+}
+
+.teaserslider--item {
+  a {
+    display: block;
+  }
+  img {
+    width: 100%;
+    height: auto;
+  }
+}
+
+@include media-breakpoint-up(xl) {
+  .teaserslider--item {
+    &.variant-33 {
+      width: 385px;
+    }
+    &.variant-50 {
+      width: 555px;
+    }
+    &.variant-66 {
+      width: 732px;
+    }
+  }
+}
+
+@include media-breakpoint-up(teasersliderouter) {
+  .teaserslider--item {
+    &.variant-33 {
+      width: 580px;
+    }
+    &.variant-50 {
+      width: 843px;
+    }
+    &.variant-66 {
+      width: 1107px;
+    }
+  }
+}
+
+.teaserslider--item {
+  a {
+    position: relative;
+    &.cat-garten { background-color: $color-garden; }
+    &.cat-pool { background-color: $color-pool; }
+    &.cat-schwimmteich { background-color: $color-garden; }
+    &.cat-zubehoer { background-color: $color-zubehoer; }
+    &.cat-planung { background-color: $color-planung; }
+  }
+}
+
+  .teaserslider--item-content  {
+    display: grid;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    &:after {
+      @include pseudo(block, absolute);
+      background: rgba($black, 0.7);
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
+    .teasertitle {
+      display: block;
+      text-align: center;
+      color: $white;
+      text-transform: uppercase;
+      font-weight: 300;
+      @include fluidDiff(font-size, 25px, 25px);
+      @include fluidDiff(line-height, 30px, 30px);
+      @include fluidDiff(padding-left, 21px, 42px);
+      @include fluidDiff(padding-right, 21px, 42px);
+      z-index: 2;
+      position: relative;
+      @include media-breakpoint-up(teasersliderouter) {
+        font-size: 45px;
+        line-height: 55px;
+        padding-left: 68px;
+        padding-right: 68px;
+      }
+    }
+  }
+
+
+
+
+

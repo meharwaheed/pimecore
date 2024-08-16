@@ -1,0 +1,627 @@
+<!doctype html>
+<html lang="{{ app.request.locale }}">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no">
+    <link rel="apple-touch-icon" sizes="180x180" href="/static/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/static/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/static/favicons/favicon-16x16.png">
+    <link rel="manifest" href="/static/favicons/site.webmanifest">
+    <link rel="mask-icon" href="/static/favicons/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="shortcut icon" href="/static/favicons/favicon.ico">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-config" content="/static/favicons/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+    {% spaceless -%}
+
+        {#preload fonts#}
+        {% do pimcore_head_link({
+            "rel":"preload",
+            "href":preload(asset("static/fonts/roboto-v20-latin-300.woff2")),
+            "extras":{
+                "type":"font/woff2",
+                "crossorigin": "anonymous",
+                "as":"font"
+            }
+        }) %}
+        {% do pimcore_head_link({
+            "rel":"preload",
+            "href":preload(asset("roboto-v20-latin-regular.woff2")),
+            "extras":{
+                "type":"font/woff2",
+                "crossorigin": "anonymous",
+                "as":"font"
+            }
+        }) %}
+        {% do pimcore_head_link({
+            "rel":"preload",
+            "href":preload(asset("static/fonts/roboto-v20-latin-italic.woff2")),
+            "extras":{
+                "type":"font/woff2",
+                "crossorigin": "anonymous",
+                "as":"font"
+            }
+        }) %}
+        {% do pimcore_head_link({
+            "rel":"preload",
+            "href":preload(asset("static/fonts/roboto-v20-latin-500.woff2")),
+            "extras":{
+                "type":"font/woff2",
+                "crossorigin": "anonymous",
+                "as":"font"
+            }
+        }) %}
+        {% do pimcore_head_link({
+            "rel":"preload",
+            "href":preload(asset("static/fonts/iconfont.ttf")),
+            "extras":{
+                "type":"font/ttf",
+                "crossorigin": "anonymous",
+                "as":"font"
+            }
+        }) %}
+
+
+        {% do pimcore_head_link({
+            "rel":"preload",
+            "href":preload(asset('static/css/styles.min.css')),
+            "extras":{
+                "type":"text/css",
+                "crossorigin": "anonymous",
+                "as":"style"
+            }
+        }) %}
+
+        {% do pimcore_head_link({
+            "rel":"preload",
+            "href":preload(asset('static/css/styles.data.css')),
+            "extras":{
+                "type":"text/css",
+                "crossorigin": "anonymous",
+                "as":"style"
+            }
+        }) %}
+
+        {% do pimcore_head_link({
+            "rel":"preload",
+            "href":preload(asset('static/js/main.min.js')),
+            "extras":{
+                "type":"text/javascript",
+                "crossorigin": "anonymous",
+                "as":"script"
+            }
+        }) %}
+        {% do pimcore_head_link({
+            "rel":"preload",
+            "href":preload(asset('static/css/new/navigation.css')),
+            "extras":{
+                "type":"text/css",
+                "crossorigin": "anonymous",
+                "as":"style"
+            }
+        }) %}
+        {% do pimcore_head_link({
+            "rel":"preload",
+            "href":preload(asset('static/newJs/navigation.js')),
+            "extras":{
+                "type":"text/javascript",
+                "crossorigin": "anonymous",
+                "as":"script"
+            }
+        }) %}
+
+        {% do pimcore_head_link().appendStylesheet(asset('static/css/styles.min.css')) %}
+        {% do pimcore_head_link().appendStylesheet(asset('static/css/styles.data.css')) %}
+        {% do pimcore_head_link().appendStylesheet(asset('static/css/new/navigation.css')) %}
+        {% do pimcore_head_script().appendFile(asset('static/newJs/navigation.js')) %}
+
+        {% if editmode %}
+            {% do pimcore_head_link().appendStylesheet(asset('static/css/editmode.css')) %}
+        {% endif %}
+
+        {% if not editmode %}
+            {% do pimcore_head_script().appendFile(asset('static/js/main.min.js')) %}
+        {% endif %}
+
+        {% if not document is defined or not document %}
+            {% set document = pimcore_document(1) %}
+        {% endif %}
+
+        {% if document is instanceof('\\Pimcore\\Model\\Document\\Link') %}
+            {# @var document \Pimcore\Model\Document\Link #}
+            {% set document = document.getObject() %}
+        {% endif %}
+
+        {% if document.getTitle() is not empty %}
+            {% do pimcore_head_title().set(document.getTitle()) %}
+        {% endif %}
+
+        {% if document.getDescription() is not empty %}
+            {% do pimcore_head_meta().setDescription(document.getDescription()) %}
+        {% endif %}
+
+        {% do pimcore_head_title().append(pimcore_website_config('page-title')) %}
+        {% do pimcore_head_title().setSeparator(' - ') %}
+
+        {% for key, lang in get_localized_links(document) %}
+            {% do pimcore_head_link().appendAlternate("#{lang.link}", null, null, {"hreflang": "#{key}"}) %}
+        {% endfor %}
+
+    {%- endspaceless %}
+
+    {# we're using the deferred extension here to make sure this block is rendered after all helper calls #}
+    {% block layout_head_meta deferred %}
+
+    {{ pimcore_head_title() }}
+    {{ pimcore_head_meta() }}
+
+
+    {% for meta in document.getMetaData() %}
+        {{ meta|raw }}
+    {% endfor %}
+
+    {% endblock %}
+
+    {% block head_stylesheets deferred %}
+
+    {# tarteaucitron #}
+    {{ include('includes/cookie-consent.html.twig') }}
+
+    {{ pimcore_head_style() }}
+    {{ pimcore_head_link() }}
+
+    {% endblock %}
+
+    {% set siteClass = document.getProperty('siteClass')  %}
+
+
+    <!-- Matomo -->
+    <script type="text/javascript">
+        var _paq = window._paq = window._paq || [];
+        /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+        _paq.push(['trackPageView']);
+        _paq.push(['enableLinkTracking']);
+        (function() {
+            var u="//matomo.biegert-galabau.de/";
+            _paq.push(['setTrackerUrl', u+'matomo.php']);
+            _paq.push(['setSiteId', '5']);
+            var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+            g.type='text/javascript'; g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+        })();
+    </script>
+    <!-- End Matomo Code -->
+    <link href="/static/css/beepgarten/styles.css" rel="stylesheet">
+</head>
+{% set bodyClasses = '' %}
+{% if not editmode %}
+    {% set bodyClasses = bodyClasses ~ ' frontend'  %}
+{% endif %}
+{% if not document.getProperty('portal') %}
+    {% set bodyClasses = bodyClasses ~ ' subpages'  %}
+{% endif %}
+{% if document.getProperty('siteClass') %}
+    {% set bodyClasses = bodyClasses ~ ' site-' ~ document.getProperty('siteClass')  %}
+{% endif %}
+
+<body class="preload{{ bodyClasses }}">
+
+
+<a href="#content" class="a11y--jump-link sr-only-focusable" accesskey="0">{{ "Zum Inhalt springen"|trans }} (Alt+0)</a>
+<a href="#main-nav" class="a11y--jump-link sr-only-focusable" accesskey="1">{{ "Zum Hauptmenü springen"|trans }} (Alt+1)</a>
+
+<input type="checkbox" id="main-nav--toggle" class="main-nav--toggle" />
+
+{% if not document is defined or not document %}
+    {% set document = pimcore_document(1) %}
+{% endif %}
+
+<div class="beepgarten">
+    <div class="feature-fullscreen" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-describedby="modal-description" aria-hidden="true">
+        <div class="card-wrapper">
+            <button class="close" aria-label="Close">
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#B2B2B2" version="1.1" id="Capa_1" viewBox="0 0 41.756 41.756" xml:space="preserve" role="img" aria-labelledby="title desc">
+                    <title id="title">Close Button</title>
+                    <desc id="desc">An icon representing a close button, consisting of two diagonal lines forming an 'X' shape.</desc>
+                    <g>
+                        <path d="M27.948,20.878L40.291,8.536c1.953-1.953,1.953-5.119,0-7.071c-1.951-1.952-5.119-1.952-7.07,0L20.878,13.809L8.535,1.465 c-1.951-1.952-5.119-1.952-7.07,0c-1.953,1.953-1.953,5.119,0,7.071l12.342,12.342L1.465,33.22c-1.953,1.953-1.953,5.119,0,7.071 C2.44,41.268,3.721,41.755,5,41.755c1.278,0,2.56-0.487,3.535-1.464l12.343-12.342l12.343,12.343 c0.976,0.977,2.256,1.464,3.535,1.464s2.56-0.487,3.535-1.464c1.953-1.953,1.953-5.119,0-7.071L27.948,20.878z"/>
+                    </g>
+                </svg>
+            </button>
+
+            <div class="icon-title-wrapper">
+                <div class="icon"></div>
+                <h2 id="modal-title" class="feature-title"></h2>
+            </div>
+            <div id="modal-description" class="feature-desc"></div>
+        </div>
+    </div>
+    <div class="container full-width-1920 no-padding">
+        <div class="row header">
+            <div class="col col-12">
+                {{ pimcore_image("logo", {
+                    "thumbnail": "biepgarten",
+                    "width": "255px",
+                    "height": "50px",
+                    "attributes": {
+                        "class": "header-logo",
+                    }
+                }) }}
+            </div>
+        </div>
+        {% if editmode %}
+            {{ pimcore_image("hero_image", {
+                "thumbnail": "biepgarten",
+                "width": "160",
+                "height": "90",
+                "attributes": {
+                    "class": "header-logo",
+                }
+            }) }}
+        {% endif %}
+
+        
+            {% set hero_image = pimcore_image("hero_image").getThumbnail("biepgarten") %}
+        <section class="hero" style="background-image: url('{{ hero_image }}');">
+            
+            <div class="container full-width-1920 no-padding relative full-height">
+               
+                <div class="frosted-wrapper">
+                    <h1>{{ pimcore_input("headline") }} <span> {{ pimcore_input("details_subline") }}</span> <h1>
+                </div>
+            </div>
+            <a class="scroll-arrow" href="#content-start">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 171.795 96.97">
+                <path id="Pfad_2" data-name="Pfad 2" d="M1289.645,945.128a11.072,11.072,0,0,1-7.829-3.243L1206.99,867.06a11.072,11.072,0,1,1,15.659-15.659l67,67,67-67A11.072,11.072,0,0,1,1372.3,867.06l-74.825,74.825A11.072,11.072,0,0,1,1289.645,945.128Z" transform="translate(-1203.747 -848.158)" fill="#f1f1f1"/>
+                </svg>
+            </a>
+        </section>
+        <section class="text-img container" id="content-start">
+            <div class="row">
+                <div class="col col-6 rte">
+                    {{  pimcore_wysiwyg("text_image", {
+                            "height": 500
+                        }) 
+                    }}
+                </div>
+                <div class="col col-6 rte">
+                    {% if editmode %}
+                        {{ pimcore_image("image_right", {
+                            "thumbnail": "biepgarten",
+                            "width": "160",
+                            "height": "90",
+                        }) }}
+                    {% endif %}
+                    {% set image_right = pimcore_image("image_right").getImage() %}
+                    <img src="{{ image_right.getThumbnail("biepgarten") }}" alt="{{ image_right.getMetadata('alt') }}">
+                </div>
+            </div>
+        </section>
+        <section class="container features">
+            <div class="col col-5 feature-image">
+            
+                {% if editmode %}
+                    {{ pimcore_image("feature_image", {
+                        "thumbnail": "biepgarten",
+                        "width": "160",
+                        "height": "90"
+                    }) }}
+                {% endif %}
+                {% set feature_image = pimcore_image("feature_image").getImage() %}
+                <span class="img-wrapper">
+                    <img src="{{ feature_image.getThumbnail("biepgarten") }}" alt="{{ feature_image.getMetadata('alt') }}">
+                </span>
+            </div>
+            <div class="col col-7 feature-details">
+                <div class="row">
+                    <div class="col col-12 feature-logo">
+                        {{ pimcore_image("feature_logo", {
+                            "thumbnail": "biepgarten",
+                            "width": "446px",
+                            "height": "auto",
+                        }) }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col col-12">
+                        <h2>
+                            {{ pimcore_input("details_headline") }}
+                        </h2>
+                    </div>
+                </div>
+                <div class="row feature-cards">
+                    <div class="col col-3 ">
+                      <div class="card-wrapper">
+                        <div class="icon">
+                            {% if editmode %}
+                                {{ pimcore_image("card_1_image", {
+                                    "thumbnail": "biepgarten",
+                                    "width": "40px",
+                                    "height": "40px",
+                                }) }}
+                            {% endif %}
+                            {% set card_1_image = pimcore_image("card_1_image").getImage() %}
+                            <img src="{{ card_1_image.getThumbnail("biepgarten") }}" alt="{{ card_1_image.getMetadata('alt') }}">
+                        </div>
+                        <div class="feature-title">
+                            {{ pimcore_input("card_1_title", {'width': 150}) }}
+                        </div>
+                        <div class="feature-desc">
+                            {% if editmode %}
+                                {{pimcore_input("card_1_desc", {'width': 150})}}
+
+                            {% else %}
+                                {% set original_text_1 = pimcore_input("card_1_desc", {'width': 150}).getValue() %}
+                                {% set max_length_1 = 80 %}
+                                {% set truncated_text_1 = original_text_1|length > max_length_1 ? original_text_1[:max_length_1] ~ ' ...' : original_text_1 %}
+                                {{ truncated_text_1 }}
+                                <div data-full-text="{{ original_text_1 }}"></div>
+                            {% endif %}
+                            
+                        </div>
+                        <button class="show-more-btn">
+                            {{ 'beepgarden.show_more'|trans }}
+                        </button>
+                      </div>
+                    </div>
+                    <div class="col col-3 ">
+                      <div class="card-wrapper">
+                        <div class="icon">
+                            {% if editmode %}
+                                {{ pimcore_image("card_2_image", {
+                                    "thumbnail": "biepgarten",
+                                    "width": "40px",
+                                    "height": "40px",
+                                }) }}
+                            {% endif %}
+                            {% set card_2_image = pimcore_image("card_2_image").getImage() %}
+                            <img src="{{ card_2_image.getThumbnail("biepgarten") }}" alt="{{ card_2_image.getMetadata('alt') }}">
+                        </div>
+                        <div class="feature-title">
+                            {{ pimcore_input("card_2_title", {'width': 150}) }}
+                        </div>
+                        <div class="feature-desc">
+                            {% if editmode %}
+                                {{pimcore_input("card_2_desc", {'width': 150})}}
+
+                            {% else %}
+                                {% set original_text_2 = pimcore_input("card_2_desc", {'width': 150}).getValue() %}
+                                {% set max_length_2 = 80 %}
+                                {% set truncated_text_2 = original_text_2|length > max_length_2 ? original_text_2[:max_length_2] ~ ' ...' : original_text_2 %}
+                                {{ truncated_text_2 }}
+                                <div data-full-text="{{ original_text_2 }}"></div>
+                            {% endif %}
+                            
+                        </div>
+                        <button class="show-more-btn">
+                            {{ 'beepgarden.show_more'|trans }}
+                        </button>
+                      </div>
+                    </div>
+                    <div class="col col-3 ">
+                      <div class="card-wrapper">
+                        <div class="icon">
+                            {% if editmode %}
+                                {{ pimcore_image("card_3_image", {
+                                    "thumbnail": "biepgarten",
+                                    "width": "40px",
+                                    "height": "40px",
+                                }) }}
+                            {% endif %}
+                            {% set card_3_image = pimcore_image("card_3_image").getImage() %}
+                            <img src="{{ card_3_image.getThumbnail("biepgarten") }}" alt="{{ card_3_image.getMetadata('alt') }}">
+                        </div>
+                        <div class="feature-title">
+                            {{ pimcore_input("card_3_title", {'width': 150}) }}
+                        </div>
+                        <div class="feature-desc">
+                            {% if editmode %}
+                                {{pimcore_input("card_3_desc", {'width': 150})}}
+
+                            {% else %}
+                                {% set original_text_3 = pimcore_input("card_3_desc", {'width': 150}).getValue() %}
+                                {% set max_length_3 = 80 %}
+                                {% set truncated_text_3 = original_text_3|length > max_length_3 ? original_text_3[:max_length_3] ~ ' ...' : original_text_3 %}
+                                {{ truncated_text_3 }}
+                                <div data-full-text="{{ original_text_3 }}"></div>
+                            {% endif %}
+                            
+                        </div>
+                        <button class="show-more-btn">
+                            {{ 'beepgarden.show_more'|trans }}
+                        </button>
+                      </div>
+                    </div>
+                    <div class="col col-3 ">
+                      <div class="card-wrapper">
+                        <div class="icon">
+                            {% if editmode %}
+                                {{ pimcore_image("card_4_image", {
+                                    "thumbnail": "biepgarten",
+                                    "width": "40px",
+                                    "height": "40px",
+                                }) }}
+                            {% endif %}
+                            {% set card_4_image = pimcore_image("card_4_image").getImage() %}
+                            <img src="{{ card_4_image.getThumbnail("biepgarten") }}" alt="{{ card_4_image.getMetadata('alt') }}">
+                        </div>
+                        <div class="feature-title">
+                            {{ pimcore_input("card_4_title", {'width': 150}) }}
+                        </div>
+                        <div class="feature-desc">
+                            {% if editmode %}
+                                {{pimcore_input("card_4_desc", {'width': 150})}}
+
+                            {% else %}
+                                {% set original_text_4 = pimcore_input("card_4_desc", {'width': 150}).getValue() %}
+                                {% set max_length_4 = 80 %}
+                                {% set truncated_text_4 = original_text_4|length > max_length_4 ? original_text_4[:max_length_4] ~ ' ...' : original_text_4 %}
+                                {{ truncated_text_4 }}
+                                <div data-full-text="{{ original_text_4 }}"></div>
+                            {% endif %}
+                            
+                        </div>
+                        <button class="show-more-btn">
+                            {{ 'beepgarden.show_more'|trans }}
+                        </button>
+                      </div>
+                    </div>
+                    <div class="col col-3 ">
+                      <div class="card-wrapper">
+                        <div class="icon">
+                            {% if editmode %}
+                                {{ pimcore_image("card_5_image", {
+                                    "thumbnail": "biepgarten",
+                                    "width": "40px",
+                                    "height": "40px",
+                                }) }}
+                            {% endif %}
+                            {% set card_5_image = pimcore_image("card_5_image").getImage() %}
+                            <img src="{{ card_5_image.getThumbnail("biepgarten") }}" alt="{{ card_5_image.getMetadata('alt') }}">
+                        </div>
+                        <div class="feature-title">
+                            {{ pimcore_input("card_5_title", {'width': 150}) }}
+                        </div>
+                        <div class="feature-desc">
+                            {% if editmode %}
+                                {{pimcore_input("card_5_desc", {'width': 150})}}
+
+                            {% else %}
+                                {% set original_text_5 = pimcore_input("card_5_desc", {'width': 150}).getValue() %}
+                                {% set max_length_5 = 80 %}
+                                {% set truncated_text_5 = original_text_5|length > max_length_5 ? original_text_5[:max_length_5] ~ ' ...' : original_text_5 %}
+                                {{ truncated_text_5 }}
+                                <div data-full-text="{{ original_text_5 }}"></div>
+                            {% endif %}
+                            
+                        </div>
+                        <button class="show-more-btn">
+                            {{ 'beepgarden.show_more'|trans }}
+                        </button>
+                      </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="container cta full-width-1920">
+            <div class="row">
+                <div class="col col-8">
+                    {% if editmode %}
+                        {{ pimcore_image("product", {
+                            "thumbnail": "biepgarten",
+                            "width": "160",
+                            "height": "90",
+                        }) }}
+                    {% endif %}
+                    {% set product = pimcore_image("product").getImage() %}
+                    <img src="{{ product.getThumbnail("biepgarten") }}" alt="{{ product.getMetadata('alt') }}">
+                </div>
+                <div class="col col-4">
+                    <div class="product-desc">
+                        {{  pimcore_wysiwyg("product_desc", {
+                                "height": 900
+                            }) 
+                        }}
+                        <div class="buy-btn">
+                            {{ pimcore_link('buy') }}
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div> 
+    <div class="container full-widht">
+
+    </div>
+</div>
+
+{% if editmode %}
+    <link href="/static/css/styles.css" media="screen" rel="stylesheet" type="text/css" />
+    <link href="/static/css/styles.data.css" media="screen" rel="stylesheet" type="text/css" />
+    <link href="/static/css/editmode.css?t={{ date().timestamp }}" media="screen" rel="stylesheet" type="text/css" />
+{% endif %}
+
+<footer class="footer">
+
+    <div class="footer--logo beepgarden">
+        <a href="{{ document.getProperty('mainnavStartNode') }}"></a>
+    </div>
+
+    <div class="footer--social">
+        <ul>
+            {% if pimcore_website_config('beepgarden_instagram') %}
+                <li>
+                    <a href="{{ pimcore_website_config('beepgarden_instagram') }}" target="_blank">
+                        <i class="iconfont-instagram"></i>
+                    </a>
+                </li>
+            {% endif %}
+            {% if pimcore_website_config('beepgarden_pinterest') %}
+                <li>
+                    <a href="{{ pimcore_website_config('beepgarden_pinterest') }}" target="_blank">
+                        <i class="iconfont-pinterest"></i>
+                    </a>
+                </li>
+            {% endif %}
+        </ul>
+    </div>
+
+    <div class="footer--info">
+        <h2>{{ pimcore_input('footer-h2') }}</h2>
+        <ul>
+            {% if pimcore_website_config('beepgarden_address') %}
+                <li>
+                    <i class="iconfont-poi"></i>
+                    <span>{{ pimcore_website_config('beepgarden_address') }}</span>
+                </li>
+            {% endif %}
+            {% if pimcore_website_config('beepgarden_phone') %}
+                <li>
+                    <a href="tel:{{ pimcore_website_config('beepgarden_phone')|replace({' ': ''}) }}">
+                        <i class="iconfont-phone"></i>
+                        <span>{{ pimcore_website_config('beepgarden_phone') }}</span>
+                    </a>
+                </li>
+            {% endif %}
+            {% if pimcore_website_config('beepgarden_fax') %}
+                <li>
+                    <span>
+                        <i class="iconfont-fax"></i>
+                        <span>{{ pimcore_website_config('beepgarden_fax') }}</span>
+                    </span>
+                </li>
+            {% endif %}
+            {% if pimcore_website_config('beepgarden_email') %}
+                <li>
+                    <a href="mailto:{{ pimcore_website_config('beepgarden_email') }}">
+                        <i class="iconfont-envelope"></i>
+                        <span>{{ pimcore_website_config('beepgarden_email') }}</span>
+                    </a>
+                </li>
+            {% endif %}
+        </ul>
+    </div>
+
+    <div class="footer--menu">
+        <ul>
+            {% for i in pimcore_iterate_block(pimcore_block('footer-menu')) %}
+                <li>
+                    {{ pimcore_link('footer-menu-link') }}
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+</footer>
+
+{% block headscripts deferred %}
+{{ pimcore_head_script() }}
+{% endblock %}
+
+{% block inlinescripts deferred %}
+    {{ pimcore_inline_script() }}
+{% endblock %}
+<script src="/static/js/beepgarten/app.js"></script>
+</body>
+</html>

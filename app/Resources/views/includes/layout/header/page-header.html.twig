@@ -1,0 +1,104 @@
+<header class="page-header">
+    {% if not editmode %}
+        <div class="header--top">
+            <div class="header--top--inner">
+                <div class="header--logo">
+                    <a href="{{ document.getProperty('mainnavStartNode') }}"
+                       class="logo">{{ pimcore_website_config('page-title') }}</a>
+                </div>
+                <button class="main-menu--hamburger" aria-expanded="false" aria-label="Open the menu">
+                    <span class="bar" aria-hidden="true"></span>
+                    <span class="bar" aria-hidden="true"></span>
+                    <span class="bar" aria-hidden="true"></span>
+                </button>
+            </div>
+            <div class="header--nav">
+                <div class="header--nav--inner">
+                    {{ include('includes/layout/header/mainnav/newNav.html.twig') }}
+                    {% if  document.getProperty('legal') or document.getProperty('privacy') %}
+                        <div class="header--nav--bottom-links">
+                            {% if  document.getProperty('legal') %}
+                                <a href="{{document.getProperty('legal').getFullPath()}}">{{document.getProperty('legal').getProperty('navigation_name')}}</a>
+                            {% endif %}
+                            {% if  document.getProperty('privacy') %}
+                                <a href="{{document.getProperty('privacy').getFullPath()}}">{{document.getProperty('privacy').getProperty('navigation_name')}}</a>
+                            {% endif %}
+                        </div>
+                    {% endif %}
+            </div>
+        </div>
+        </div>
+    {% endif %}
+
+     {% if editmode %}
+        <div class="page-header--lead-stuff">
+            <label>
+                {{ pimcore_relation('headerobject',{
+                    "types": ["asset"],
+                    "subtypes": {
+                        "asset": ["video", "image"]
+                    },
+                    "width": 600,
+                    "reload": "true"
+                }) }}
+            </label>
+            <label>
+                {{ pimcore_select("horizontal", {
+                    "store": [
+                        ["left", "Links"],
+                        ["right", "Rechts"],
+                    ],
+                    "defaultValue" : "left",
+                    "reload": "true"
+                }) }}
+            </label>
+            <label>
+                {{ pimcore_select("vertical", {
+                    "store": [
+                        ["top", "Oben"],
+                        ["center", "Mittig"],
+                        ["bottom", "Unten"],
+                    ],
+                    "defaultValue" : "bottom",
+                    "reload": "true"
+                }) }}
+            </label>
+        </div>
+    {% endif %}
+
+    <div class="page-header--lead">
+        {% set hor = 'hor-' ~ pimcore_select("horizontal").getData() %}
+        {% set ver = 'ver-' ~ pimcore_select("vertical").getData() %}
+
+        <div class="page-header--image {% if document.getProperty('portal') %}portal{% endif %}">
+            {% if not pimcore_relation('headerobject').isEmpty() %}
+                {% set headerobject = pimcore_relation('headerobject').getElement() %}
+                {% if headerobject is instanceof('\\Pimcore\\Model\\Asset\\Image') %}
+                    {% if document.getProperty('portal') %}
+                        {{ headerobject.getThumbnail('headerImagePortal').getHTML()|raw }}
+                    {% else %}
+                        {{ headerobject.getThumbnail('headerImage').getHTML()|raw }}
+                    {% endif %}
+                {% else %}
+                    <video src="{{ headerobject }}" {% if not editmode %}autoplay loop muted{% endif %}></video>
+                {% endif %}
+            {% endif %}
+        </div>
+        {% if editmode %}
+            <div class="page-header--cta-orientation {{ hor }} {{ ver }}">
+                <div class="page-header--cta">
+                    <h1>{{ pimcore_input('h2', { "placeholder": "H2" }) }}</h1>
+                </div>
+            </div>
+        {% else %}
+            {% if not pimcore_input('h2').isEmpty() %}
+                <div class="page-header--cta-orientation {{ hor }} {{ ver }}">
+                    <div class="page-header--cta">
+                        <h1>{{ pimcore_input('h2').getData() }}</h1>
+                    </div>
+                </div>
+            {% endif %}
+        {% endif %}
+
+
+</header>

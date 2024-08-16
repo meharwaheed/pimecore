@@ -1,0 +1,92 @@
+{# margins #}
+{% set marginTop = pimcore_select('margin-top').getData() %}
+{% set margin = pimcore_select('margin-bottom').getData() %}
+
+{# background color #}
+{% set bgcolor = pimcore_select('background-color').getData() %}
+
+{# id #}
+{% set anchorId = pimcore_input('anchor').getData() %}
+
+{# html #}
+<div {% if anchorId %} id="{{ anchorId }}"{% endif %}
+    class="contentblock contentblock--teaserslider margin-top-{{ marginTop }} margin-bottom-{{ margin }} bg-{{ bgcolor }}">
+    <div class="container">
+        {% if not editmode %}
+        <div class="splide">{% endif %}
+            <div class="splide__track">
+                <ul class="splide__list">
+                    {% set count = pimcore_block('index').getCount() %}
+                    {% set asset = '\\Pimcore\\Model\\Asset' %}
+                    {% set teaser = '\\Pimcore\\Model\\DataObject\\Teaser' %}
+                    {% for blocknr, blockel in pimcore_iterate_block(pimcore_block('index', {
+
+                        'default': 1
+                    })) %}
+                        <li class="splide__slide">
+                            {% if editmode %}
+                                {% set relation = pimcore_relation('teaserslider', {
+                                    'types': ['object','asset'],
+                                    'classes': ['Teaser'],
+                                    'title': 'Bitte gewünschte Bilder/Teaser hierher ziehen',
+                                    'width': '568px',
+                                    'reload': 'true'
+                                }) %}
+                                <label>
+                                    {{ pimcore_select("variant", {
+                                        "store": [
+                                            ["33", "33"],
+                                            ["50", "50"],
+                                            ["66", "66"]
+                                        ],
+                                        "defaultValue" : "50",
+                                        "width": "85px"
+                                    }) }}
+                                </label>
+                                <label>
+                                    {{ relation|raw }}
+                                </label>
+                                {% if not relation.getElement() is instanceof(asset) %}
+                                    {{ pimcore_checkbox("transparent") }} Transparent
+                                {% endif %}
+                            {% else %}
+                                {% set relation = pimcore_relation('teaserslider') %}
+                                {% if not relation.isEmpty() %}
+                                    {% set element = relation.getElement() %}
+                                    {% set variant = pimcore_select('variant').getData() %}
+                                    <div class="teaserslider--item variant-{{ variant }}">
+                                        {% if element is instanceof('\\Pimcore\\Model\\Asset') %}
+                                            <a href="{{ element.getThumbnail('lightbox') }}" class="gallery--image">
+                                                {{ element.getThumbnail('teaserslider-' ~ variant).getHtml()|raw }}
+                                            </a>
+                                        {% elseif element is instanceof('\\Pimcore\\Model\\DataObject\\Teaser') %}
+                                            {% set version = 'version-full' %}
+                                            {% if pimcore_checkbox('transparent').isChecked() %}
+                                                {% set version = 'version-transparent' %}
+                                            {% endif %}
+                                            {% set cat = element.getCategory() %}
+                                            <a href="{{ element.getLink().getHref() }}"
+                                               class="{{ version }} cat-{{ cat }}" target="{{ element.getLink().getTarget() }}">
+                                                {{ element.getImage().getThumbnail('teaserslider-' ~ variant).getHtml()|raw }}
+                                                <span class="teaserslider--item-content">
+                                                    <span>
+                                                        {% if not pimcore_checkbox('transparent').isChecked() %}
+                                                            <span class="symbol">
+                                                                <i class="iconfont"></i>
+                                                            </span>
+                                                        {% endif %}
+                                                        <span class="teasertitle">{{ element.getTitle() }}</span>
+                                                    </span>
+                                                </span>
+                                            </a>
+                                        {% endif %}
+                                    </div>
+                                {% endif %}
+                            {% endif %}
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% if not editmode %}</div>{% endif %}
+    </div>
+</div>

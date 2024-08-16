@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="{{ app.request.locale }}">
+<head>
+    {{ include('includes/layout/head.html.twig') }}
+</head>
+{% set bodyClasses = '' %}
+{% if not editmode %}
+    {% set bodyClasses = bodyClasses ~ ' frontend'  %}
+{% endif %}
+{% if not document.getProperty('portal') %}
+    {% set bodyClasses = bodyClasses ~ ' subpages'  %}
+{% endif %}
+{% if document.getProperty('siteClass') %}
+    {% set bodyClasses = bodyClasses ~ ' site-' ~ document.getProperty('siteClass')  %}
+{% endif %}
+
+<body class="preload{{ bodyClasses }}">
+<!-- Google Tag Manager (noscript) -->
+<noscript>
+    <iframe src=https://www.googletagmanager.com/ns.html?id=GTM-MFP63DK
+                  height="0" width="0" style="display:none;visibility:hidden">
+    </iframe>
+</noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+<a href="#content" class="a11y--jump-link sr-only-focusable" accesskey="0">{{ "Zum Inhalt springen"|trans }} (Alt+0)</a>
+<a href="#main-nav" class="a11y--jump-link sr-only-focusable" accesskey="1">{{ "Zum Hauptmenü springen"|trans }} (Alt+1)</a>
+
+<input type="checkbox" id="main-nav--toggle" class="main-nav--toggle" />
+
+{# get root node if there is no document defined (for pages which are routed directly through static route) #}
+{% if not document is defined or not document %}
+    {% set document = pimcore_document(1) %}
+{% endif %}
+
+{#{% if not editmode %}
+    {% if pimcore_website_config('modal-on-load') %}
+        <conecto-modal visible>
+            {{ pimcore_action('modal', 'default') }}
+        </conecto-modal>
+    {% endif %}
+{% endif %}#}
+
+<div class="page-wrap">
+    {{ include('includes/layout/header/page-header.html.twig') }}
+    <main class="page-main" role="main" id="content">
+        {{ block('content') }}
+    </main>
+</div>
+
+{{ pimcore_inc(document.getProperty('footer')) }}
+
+{# output scripts added before #}
+{% block headscripts deferred %}
+{{ pimcore_head_script() }}
+{% endblock %}
+
+{% block inlinescripts deferred %}
+    {{ pimcore_inline_script() }}
+{% endblock %}
+{#<script type="module">
+    {{ conecto_inline_data('static/js/main.min.js')|raw }}
+</script>#}
+
+</body>
+</html>

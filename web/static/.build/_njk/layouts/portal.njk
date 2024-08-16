@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="de">
+<head>
+    <title>{{ pageTitle }}</title>
+    {% block head %}
+        {% include "partials/head/meta.njk" %}
+        {% include "partials/head/styles.njk" %}
+        <link href="images/favicon.ico" rel="icon" />
+    {% endblock %}
+</head>
+<body{% if bodyClass %} class="{{ bodyClass }}"{% endif %}>
+
+<conecto-modal visible>
+    <slot>
+        <h2>Überschrift</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi deleniti dicta quidem sunt temporibus vitae!
+            Aut blanditiis culpa earum quisquam. At consequuntur dolorum maxime nemo, officia perferendis quaerat quasi
+            suscipit.</p>
+        <p>Dolor enim fugit ipsum mollitia obcaecati quam quisquam repellendus, sed sit. Accusantium, aliquid deserunt,
+            dicta distinctio dolorum facilis fugiat hic laudantium magni nam, nemo optio quaerat quis sapiente unde
+            voluptate.</p>
+        <p>Accusamus ad adipisci aperiam architecto consectetur corporis, dolore, ea ex exercitationem illum neque
+            nesciunt obcaecati omnis perspiciatis quam quia quisquam, tenetur ut voluptatibus voluptatum. Asperiores
+            dolore ea saepe veniam voluptatem.</p>
+    </slot>
+</conecto-modal>
+
+{% block elements %}
+
+    {% from "macros/image-placeholder.njk" import image %}
+    {% from "macros/teaser.njk" import teaser %}
+
+    <div class="page-wrap">
+
+        <header class="page-header">
+
+            <div class="page-header--image">
+                <img src="images/jpg/image.jpg" alt="">
+            </div>
+
+            <div class="page-header--boxed">
+
+                <div class="page-header--logo">
+                    <a href="/" class="logo">Creative Theme</a>
+                </div>
+
+                <div class="page-header--nav">
+                    {% include "partials/page-header/page-header--nav.njk" %}
+                </div>
+
+                <div class="page-header--cta">
+                    <h3>CONECTO Vorlage</h3>
+                    <h2>Creative</h2>
+                    <a href="#" class="btn">Buttontext</a>
+                </div>
+
+                <div class="page-header--widgets">
+                    {% include "partials/page-header/page-header--teaserslider.njk" %}
+                </div>
+            </div>
+            <div class="page-header--meta">
+                {% include "partials/page-header/page-header--meta.njk" %}
+            </div>
+        </header>
+        <main class="page-main" role="main">
+            <article>
+                {% block content %}
+
+                {% endblock %}
+            </article>
+        </main>
+
+        {% include "partials/page-footer/page-footer.njk" %}
+
+    </div>
+
+{% endblock %}
+
+{#{% include "partials/photoswipe.njk" %}#}
+{% block footerscripts %}
+    {% include "partials/scripts.njk" %}
+{% endblock %}
+
+</body>
+</html>

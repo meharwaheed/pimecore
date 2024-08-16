@@ -1,0 +1,33 @@
+
+
+@each $name, $color in $sitecolors {
+  .site-#{$name} {
+    .contentblock--headtext {
+      h2 {
+        background-color: $color;
+      }
+    }
+    .contentblock--wysiwyg {
+      ul {
+        li {
+          &:before {
+            color: $color;
+          }
+        }
+      }
+    }
+    symbol {
+      background: $color;
+    }
+  }
+}
+
+.contentblock--headtext {
+  h2 {
+    &.color-none { background-color: $white; }
+    &.color-green { background-color: $color-garden; }
+    &.color-blue { background-color: $color-pool; }
+    &.color-brown { background-color: $color-planung; }
+    &.color-black { background-color: $color-zubehoer; }
+  }
+}

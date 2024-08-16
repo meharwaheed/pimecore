@@ -1,0 +1,172 @@
+{# margins #}
+{% set marginTop = pimcore_select('margin-top').getData() %}
+{% set margin = pimcore_select('margin-bottom').getData() %}
+
+{# background color #}
+{% set bgcolor = pimcore_select('background-color').getData() %}
+
+{# container-width #}
+{% set container = pimcore_select('container').getData() %}
+
+{# twocols #}
+{% set twocols = '' %}
+{% if pimcore_checkbox('twocols').isChecked() %}
+    {% set twocols = 'contentblock--headtext-twocols' %}
+{% endif %}
+
+{# link #}
+{% set link = pimcore_link('link') %}
+
+{# id #}
+{% set anchorId = pimcore_input('anchor').getData() %}
+
+{# html #}
+<div {% if anchorId %} id="{{ anchorId }}"{% endif %}
+    class="contentblock contentblock--wysiwyg contentblock--headtext contentblock--imageheadtext margin-top-{{ marginTop }} margin-bottom-{{ margin }} {{ twocols }} bg-{{ bgcolor }}">
+
+    {% if not link.isEmpty() %}
+        <a href="{{ link.getHref() }}" target="{{ link.getTarget() }}">
+    {% endif %}
+
+    {% if editmode %}
+        <div class="container">
+            <label>
+                {{ pimcore_relation('imageheadtext',{
+                    "types": ["asset"],
+                    "subtypes": {
+                        "asset": ["image"]
+                    },
+                    "width": 600,
+                    "reload": "true"
+                }) }}
+                <br>Element verlinken? {{ link|raw }}
+                <br>
+                <br>
+            </label>
+        </div>
+    {% endif %}
+
+    <div class="image-headline">
+
+        <div class="container container--image">
+            {% if not pimcore_relation('imageheadtext').isEmpty() %}
+                {{ pimcore_relation('imageheadtext').getElement().getThumbnail('imageheadtext').getHtml()|raw }}
+            {% endif %}
+        </div>
+
+        <div class="image--background"></div>
+
+        <div class="container container--{{ container }}">
+            <div class="image-headline--position">
+
+                {% set colorSelect = pimcore_select("color", {
+                    "store": [
+                        ["white", "Weiß"],
+                        ["green", "Grün"],
+                        ["blue", "Blau"],
+                        ["brown", "Braun"],
+                        ["black", "Schwarz"]
+                    ],
+                    "defaultValue" : "white",
+                    "width": 150,
+                    "reload": 'true'
+                }) %}
+                {% set symbolSelect = pimcore_select('symbol', {
+                    'store': [
+                        ["none", "Keines"],
+                        ["leaf", "Blatt"],
+                        ["wave", "Welle"],
+                        ["pencil_right", "Stift"],
+                        ["plus", "Plus"],
+                    ],
+                    'width': 150,
+                    'defaultValue': 'none',
+                    'reload': 'true'
+                }) %}
+                {% set symbolColorSelect = pimcore_select('symbolColor', {
+                    'store': [
+                        ["white", "Weiß"],
+                        ["green", "Grün"],
+                        ["blue", "Blau"],
+                        ["brown", "Braun"],
+                        ["black", "Schwarz"]
+                    ],
+                    'width': 150,
+                    'defaultValue': 'green'
+                }) %}
+
+                {% if editmode %}
+                    <div>
+                        <label>
+                            {{ colorSelect|raw }}
+                        </label>
+                        {% if colorSelect.getData() is same as 'white' %}
+                            <label>
+                                {{ symbolSelect|raw }}
+                            </label>
+                            {% if not symbolSelect.getData() is same as 'none' %}
+                                <label>
+                                    {{ symbolColorSelect|raw }}
+                                </label>
+                            {% endif %}
+                        {% endif %}
+                    </div>
+                {% endif %}
+
+                {% set color = colorSelect.getData() %}
+                {% set symbol = symbolSelect.getData() %}
+                {% set symbolColor = symbolColorSelect.getData() %}
+
+                <h2 class="color-{{ color }}">
+                    {% if not editmode %}
+                        {% if color is same as 'white' %}
+                            {% if not symbol is same as 'none' %}
+                                <div class="symbol background-{{ symbolColor }}">
+                                    <i class="iconfont-{{ symbol }}"></i>
+                                </div>
+                            {% endif %}
+                        {% endif %}
+                    {% endif %}
+                    {{ pimcore_input('headtext-h2', {
+                        'placeholder': 'Überschrift einfügen'
+                    }) }}
+                </h2>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="text">
+        <div class="container container--{{ container }}">
+            <div class="column">
+                {{ pimcore_wysiwyg("wysiwyg", {
+                    "customConfig": "/static/js/ckeditor_config.js",
+                    "toolbarGroups": [
+                        {
+                            "name": 'basicstyles',
+                            "groups": [ 'basicstyles', 'list', 'align', 'links']
+                        }
+                    ]
+                }) }}
+            </div>
+            {% if pimcore_checkbox('twocols').isChecked() %}
+                <div class="column">
+                    {{ pimcore_wysiwyg("wysiwyg-2", {
+                        "customConfig": "/static/js/ckeditor_config.js",
+                        "toolbarGroups": [
+                            {
+                                "name": 'basicstyles',
+                                "groups": [ 'basicstyles', 'list', 'align', 'links']
+                            }
+                        ]
+                    }) }}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    {% if not link.isEmpty() %}
+        </a>
+    {% endif %}
+
+</div>

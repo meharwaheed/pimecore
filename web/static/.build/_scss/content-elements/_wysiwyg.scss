@@ -1,0 +1,66 @@
+.contentblock--wysiwyg {
+
+/*  .container {
+    @include media-breakpoint-down(md) {
+      padding-left: pxToVwMobile(30px);
+      padding-right: pxToVwMobile(30px);
+    }
+  }*/
+
+  p {
+    @include fluidAll(font-size, 16px, 16px, 18px);
+    @include fluidAll(line-height, 25px, 25px, 36px);
+    @include fluid(margin-bottom, 25px);
+    color: $black;
+  }
+
+  a {
+    color: $color1;
+    text-decoration: underline;
+  }
+
+  strong {
+    font-weight: 700;
+  }
+
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    li {
+      position: relative;
+      @include fluid(padding-left, 22px);
+      @include fluid(margin-bottom, 8px);
+      &:before {
+        content: '';
+        position: absolute;
+        @include fluid(top, 8px);
+        left: 0;
+        @include fluid(width, 10px);
+        @include fluid(height, 10px);
+        @include fluidDiff(border-width, 3px, 2px);
+        border-style: solid;
+        border-color: $color1;
+        display: inline-block;
+        opacity: 0;
+        animation: diamondrotation 1s 1;
+        animation-fill-mode: forwards;
+
+      }
+    }
+  }
+
+
+}
+.contentblock--wysiwyg-lead {
+  p {
+    @include fluidDiff(font-size, 18px, 20px);
+    @include fluidDiff(line-height, 25px, 30px);
+    font-weight: $font-weight-bold;
+  }
+}
+
+.contentblock--headtext {
+
+}
+

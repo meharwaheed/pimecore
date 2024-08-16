@@ -1,0 +1,37 @@
+{# margins #}
+{% set marginTop = pimcore_select('margin-top').getData() %}
+{% set margin = pimcore_select('margin-bottom').getData() %}
+
+{# background color #}
+{% set bgcolor = pimcore_select('background-color').getData() %}
+
+{# container-width #}
+{% set container = pimcore_select('container').getData() %}
+
+{% set buttonClass = 'btn btn--flat' %}
+
+{# centered #}
+{% set centered = '' %}
+{% if pimcore_checkbox('centered').isChecked() %}
+    {% set centered = 'text-center' %}
+{% endif %}
+
+{# id #}
+{% set anchorId = pimcore_input('anchor').getData() %}
+
+{# html #}
+<div {% if anchorId %} id="{{ anchorId }}"{% endif %}
+    class="contentblock contentblock--headline margin-top-{{ marginTop }} margin-bottom-{{ margin }} {{ centered }} bg-{{ bgcolor }}">
+    <div class="container container--{{ container }}">
+        {% if editmode %}
+            <button type="button" class="{{ buttonClass }}">{% if pimcore_link('link').getText() == "" %}Text ...{% else %}{{ pimcore_link('link').getText() }}{% endif %}</button>
+            {{ pimcore_link('link', {
+                reload: true
+            }) }}
+        {% else %}
+            {{ pimcore_link('link', {
+                class: buttonClass
+            }) }}
+        {% endif %}
+    </div>
+</div>

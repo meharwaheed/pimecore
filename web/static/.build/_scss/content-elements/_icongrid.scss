@@ -1,0 +1,41 @@
+.contentblock--icongrid {
+
+}
+.iconblocks-grid {
+  @include media-breakpoint-up(md) {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 30px;
+  }
+}
+.iconblock {
+  display: grid;
+  grid-template-columns: pxToVwMobile(55px) auto;
+  grid-gap: pxToVwMobile(20px);
+  @include media-breakpoint-up(md) {
+    grid-template-columns: 68px auto;
+    grid-gap: 31px;
+    border-radius: 3px;
+  }
+}
+.iconblock--icon {
+  border: 2px solid #eee;
+  @include fluid(border-radius, 3px);
+  text-align: center;
+  @include fluidDiff(width, 51px, 64px);
+  @include fluidDiff(height, 51px, 64px);
+  @include fluidDiff(line-height, 51px, 64px);
+  display: grid;
+  place-items: center;
+  i[class^='iconfont'] {
+    color: $color2;
+    @include fluid(font-size, 42px);
+  }
+}
+.iconblock--text {
+  display: grid;
+  place-items: center;
+}
+.iconblock--text-content {
+
+}

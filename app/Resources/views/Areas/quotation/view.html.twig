@@ -1,0 +1,34 @@
+{# margins #}
+{% set marginTop = pimcore_select('margin-top').getData() %}
+{% set margin = pimcore_select('margin-bottom').getData() %}
+
+{# background color #}
+{% set bgcolor = pimcore_select('background-color').getData() %}
+
+{# container-width #}
+{% set container = pimcore_select('container').getData() %}
+
+{# lead #}
+{% set grey = '' %}
+{% if pimcore_checkbox('grey').isChecked() %}
+    {% set grey = 'contentblock--grey' %}
+{% endif %}
+
+{# id #}
+{% set anchorId = pimcore_input('anchor').getData() %}
+
+{# html #}
+<div {% if anchorId %} id="{{ anchorId }}"{% endif %}
+    class="contentblock contentblock--quotation margin-top-{{ marginTop }} margin-bottom-{{ margin }} {{ grey }} bg-{{ bgcolor }}">
+    <div class="container container--{{ container }}">
+        <blockquote>
+            <div class="quotation-mark quotation-mark--top"></div>
+            <div class="quote">
+                {{ pimcore_textarea("quotation-quote", {
+                    "placeholder": "Hier Zitat einfügen"
+                }) }}
+            </div>
+            <div class="quotation-mark quotation-mark--bottom"></div>
+        </blockquote>
+    </div>
+</div>

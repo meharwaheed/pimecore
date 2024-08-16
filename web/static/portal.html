@@ -1,0 +1,3193 @@
+<!doctype html>
+<html lang="de">
+<head>
+    <title>Start | FRONTEND</title>
+    
+        <meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="shortcut icon" href="/images/app_icons/favicon.ico" type="image/x-icon">
+<link rel="apple-touch-icon" href="/images/app_icons/apple-touch-icon.png">
+<meta name="msapplication-config" content="/browserconfig.xml">
+<meta name="theme-color" content="#1a878e">
+        
+
+<link rel="preload" href="css/styles.min.css" type="text/css" as="style" onload="this.onload=null;this.rel='stylesheet';"/>
+<link rel="preload" href="css/styles.data.css" type="text/css" as="style" onload="this.onload=null;this.rel='stylesheet';"/>
+
+
+        <link href="images/favicon.ico" rel="icon" />
+    
+    <style>
+
+    .modal-open {
+        overflow: hidden;
+        height: 100%;
+    }
+
+    #contentWrapper {
+        display: unset;
+    }
+
+    /***
+    * Reset CSS
+    */
+    #tarteaucitronRoot div, #tarteaucitronRoot span, #tarteaucitronRoot applet, #tarteaucitronRoot object, #tarteaucitronRoot iframe, #tarteaucitronRoot h1, #tarteaucitronRoot h2, #tarteaucitronRoot h3, #tarteaucitronRoot h4, #tarteaucitronRoot h5, #tarteaucitronRoot h6, #tarteaucitronRoot p, #tarteaucitronRoot blockquote, #tarteaucitronRoot pre, #tarteaucitronRoot a, #tarteaucitronRoot abbr, #tarteaucitronRoot acronym, #tarteaucitronRoot address, #tarteaucitronRoot big, #tarteaucitronRoot cite, #tarteaucitronRoot code, #tarteaucitronRoot del, #tarteaucitronRoot dfn, #tarteaucitronRoot em, #tarteaucitronRoot img, #tarteaucitronRoot ins, #tarteaucitronRoot kbd, #tarteaucitronRoot q, #tarteaucitronRoot s, #tarteaucitronRoot samp, #tarteaucitronRoot small, #tarteaucitronRoot strike, #tarteaucitronRoot strong, #tarteaucitronRoot sub, #tarteaucitronRoot sup, #tarteaucitronRoot tt, #tarteaucitronRoot var, #tarteaucitronRoot b, #tarteaucitronRoot u, #tarteaucitronRoot i, #tarteaucitronRoot center, #tarteaucitronRoot dl, #tarteaucitronRoot dt, #tarteaucitronRoot dd, #tarteaucitronRoot ol, #tarteaucitronRoot ul, #tarteaucitronRoot li, #tarteaucitronRoot fieldset, #tarteaucitronRoot form, #tarteaucitronRoot label, #tarteaucitronRoot legend, #tarteaucitronRoot table, #tarteaucitronRoot caption, #tarteaucitronRoot tbody, #tarteaucitronRoot tfoot, #tarteaucitronRoot thead, #tarteaucitronRoot tr, #tarteaucitronRoot th, #tarteaucitronRoot td, #tarteaucitronRoot article, #tarteaucitronRoot aside, #tarteaucitronRoot canvas, #tarteaucitronRoot details, #tarteaucitronRoot embed, #tarteaucitronRoot figure, #tarteaucitronRoot figcaption, #tarteaucitronRoot footer, #tarteaucitronRoot header, #tarteaucitronRoot hgroup, #tarteaucitronRoot menu, #tarteaucitronRoot nav, #tarteaucitronRoot output, #tarteaucitronRoot ruby, #tarteaucitronRoot section, #tarteaucitronRoot summary, #tarteaucitronRoot time, #tarteaucitronRoot mark, #tarteaucitronRoot audio, #tarteaucitronRoot video {
+        margin: 0;
+        padding: 0;
+        border: 0;
+        font-size: 100%;
+        font: inherit;
+        vertical-align: baseline;
+        /*background: initial;*/
+        text-align: initial;
+        text-shadow: initial;
+    }
+
+    /* HTML5 display-role reset for older browsers */
+    #tarteaucitronRoot article, #tarteaucitronRoot aside, #tarteaucitronRoot details, #tarteaucitronRoot figcaption, #tarteaucitronRoot figure, #tarteaucitronRoot footer, #tarteaucitronRoot header, #tarteaucitronRoot hgroup, #tarteaucitronRoot menu, #tarteaucitronRoot nav, #tarteaucitronRoot section {
+        display: block;
+    }
+
+    #tarteaucitronRoot ol, #tarteaucitronRoot ul {
+        list-style: none;
+    }
+
+    #tarteaucitronRoot blockquote, #tarteaucitronRoot q {
+        quotes: none;
+    }
+
+    #tarteaucitronRoot blockquote:before, #tarteaucitronRoot blockquote:after, #tarteaucitronRoot q:before, #tarteaucitronRoot q:after {
+        content: '';
+        content: none;
+    }
+
+    #tarteaucitronRoot table {
+        border-collapse: collapse;
+        border-spacing: 0;
+    }
+
+    #tarteaucitronRoot a:focus, #tarteaucitronRoot button:focus {
+        /*outline: 2px solid #cb3333;*/
+    }
+
+    /***
+     * Better scroll management
+     */
+    div#tarteaucitronMainLineOffset {
+        margin-top: 0!important;
+    }
+
+    div#tarteaucitronServices {
+        margin-top: 21px!important;
+    }
+
+    #tarteaucitronServices::-webkit-scrollbar {
+        width: 5px;
+    }
+
+    #tarteaucitronServices::-webkit-scrollbar-track {
+        -webkit-box-shadow: inset 0 0 0 rgba(0,0,0,0);
+    }
+
+    #tarteaucitronServices::-webkit-scrollbar-thumb {
+        background-color: #ddd;
+        outline: 0px solid slategrey;
+    }
+
+    div#tarteaucitronServices {
+        box-shadow: 0 0 35px #575757;
+    }
+
+    /***
+     * Responsive layout for the control panel
+     */
+    @media screen and (max-width: 479px) {
+        #tarteaucitron .tarteaucitronLine .tarteaucitronName {
+            width: 90% !important;
+        }
+
+        #tarteaucitron .tarteaucitronLine .tarteaucitronAsk {
+            float: left !important;
+            margin: 10px 15px 5px;
+        }
+    }
+
+    @media screen and (max-width: 767px) {
+        #tarteaucitronAlertSmall #tarteaucitronCookiesListContainer, #tarteaucitron {
+            background: #fff;
+            border: 0 !important;
+            bottom: 0 !important;
+            height: 100% !important;
+            left: 0 !important;
+            margin: 0 !important;
+            max-height: 100% !important;
+            max-width: 100% !important;
+            top: 0 !important;
+            width: 100% !important;
+        }
+
+        #tarteaucitron .tarteaucitronBorder {
+            border: 0 !important;
+        }
+
+        #tarteaucitronAlertSmall #tarteaucitronCookiesListContainer #tarteaucitronCookiesList {
+            border: 0 !important;
+        }
+
+        #tarteaucitron #tarteaucitronServices .tarteaucitronTitle {
+            text-align: left !important;
+        }
+
+        .tarteaucitronName .tarteaucitronH2 {
+            max-width: 80%;
+        }
+
+        #tarteaucitron #tarteaucitronServices .tarteaucitronLine .tarteaucitronAsk {
+            text-align: center !important;
+        }
+
+        #tarteaucitron #tarteaucitronServices .tarteaucitronLine .tarteaucitronAsk button {
+            margin-bottom: 5px;
+        }
+    }
+
+    @media screen and (min-width: 768px) and (max-width:991px) {
+        #tarteaucitron {
+            border: 0 !important;
+            left: 0 !important;
+            margin: 0 5% !important;
+            max-height: 80% !important;
+            width: 90% !important;
+        }
+    }
+
+    /***
+     * Common value
+     */
+    #tarteaucitron * {
+        zoom: 1; }
+
+    #tarteaucitronRoot div#tarteaucitron {
+        left: 0;
+        right: 0;
+        margin: auto;
+    }
+
+    #tarteaucitronRoot button#tarteaucitronBack {
+        background: #eee;
+    }
+
+    #tarteaucitron .clear {
+        clear: both;
+    }
+
+    #tarteaucitron a {
+        color: rgb(66, 66, 66);
+        font-size: 11px;
+        font-weight: 700;
+        text-decoration: none;
+    }
+
+    #tarteaucitronRoot button {
+        background: transparent;
+        border: 0;
+    }
+
+    #tarteaucitronAlertBig strong, #tarteaucitronAlertSmall strong, #tarteaucitronAlertBig a, #tarteaucitronAlertSmall a {
+        color: #fff;
+    }
+
+    #tarteaucitron strong {
+        font-size: 22px;
+        font-weight: 500;
+    }
+
+    #tarteaucitron ul {
+        padding: 0;
+    }
+
+    #tarteaucitron .tarteaucitronH1, #tarteaucitron .tarteaucitronH2, #tarteaucitron .tarteaucitronH3, #tarteaucitron .tarteaucitronH4, #tarteaucitron .tarteaucitronH5, #tarteaucitron .tarteaucitronH6 {
+        display: block;
+    }
+
+    .cookie-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    /***
+     * Root div added just before </body>
+     */
+    #tarteaucitronRoot {
+        left: 0;
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 100%;
+    }
+
+    #tarteaucitronRoot * {
+        box-sizing: initial;
+        color: #333;
+        font-family: sans-serif !important;
+        font-size: 14px;
+        line-height: normal;
+        vertical-align: initial;
+    }
+
+    #tarteaucitronRoot .tarteaucitronH1 {
+        font-size: 1.5em;
+        text-align: center;
+        color: #fff;
+        margin: 15px 0 28px;
+    }
+
+    #tarteaucitronRoot .tarteaucitronH2 {
+        display: inline-block;
+        margin: 12px 0 0 10px;
+        color: #fff;
+    }
+
+    #tarteaucitronCookiesNumberBis.tarteaucitronH2 {
+        margin-left: 0;
+    }
+
+    /***
+     * Control panel
+     */
+    #tarteaucitronBack {
+        background: #fff;
+        display: none;
+        height: 100%;
+        left: 0;
+        opacity: 0.7;
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 2147483646;
+    }
+
+    #tarteaucitron {
+        display: none;
+        max-height: 80%;
+        left: 50%;
+        margin: 0 auto 0 -430px;
+        padding: 0;
+        position: fixed;
+        top: 6%;
+        width: 860px;
+        z-index: 2147483647;
+    }
+
+    #tarteaucitron .tarteaucitronBorder {
+        background: #fff;
+        border: 2px solid #333;
+        border-top: 0;
+        height: auto;
+        overflow: auto;
+    }
+
+    #tarteaucitronAlertSmall #tarteaucitronCookiesListContainer #tarteaucitronClosePanelCookie, #tarteaucitron #tarteaucitronClosePanel {
+        background: #333333;
+        color: #fff;
+        cursor: pointer;
+        font-size: 12px;
+        font-weight: 700;
+        text-decoration: none;
+        padding: 4px 0;
+        position: absolute;
+        right: 0;
+        text-align: center;
+        width: 70px;
+    }
+
+    #tarteaucitron #tarteaucitronDisclaimer {
+        color: #555;
+        font-size: 12px;
+        margin: 15px auto 0;
+        width: 80%;
+    }
+
+    .tarteaucitronSelfLink, #tarteaucitronAlertSmall #tarteaucitronCookiesListContainer #tarteaucitronCookiesList .tarteaucitronHidden, #tarteaucitron #tarteaucitronServices .tarteaucitronHidden {
+        background: rgba(51, 51, 51, 0.07);
+    }
+
+    a.tarteaucitronSelfLink {
+        text-align: center!important;
+        display: block;
+        padding: 7px!important;
+    }
+
+    #tarteaucitron #tarteaucitronServices .tarteaucitronHidden {
+        display: none;
+        position: relative;
+    }
+
+    #tarteaucitronCookiesList .tarteaucitronH3.tarteaucitronTitle {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    #tarteaucitronAlertSmall #tarteaucitronCookiesListContainer #tarteaucitronCookiesList .tarteaucitronTitle, #tarteaucitron #tarteaucitronServices .tarteaucitronTitle button, #tarteaucitron #tarteaucitronInfo, #tarteaucitron #tarteaucitronServices .tarteaucitronDetails {
+        color: #fff;
+        display: inline-block;
+        font-size: 14px;
+        font-weight: 700;
+        margin: 20px 0px 0px;
+        padding: 5px 20px;
+        text-align: left;
+        width: auto;
+        background: #333;
+    }
+
+    #tarteaucitron #tarteaucitronServices .tarteaucitronMainLine .tarteaucitronName a, #tarteaucitron #tarteaucitronServices .tarteaucitronTitle a {
+        color: #fff;
+        font-weight: 500;
+    }
+
+    #tarteaucitron #tarteaucitronServices .tarteaucitronMainLine .tarteaucitronName a:hover, #tarteaucitron #tarteaucitronServices .tarteaucitronTitle a:hover {
+        text-decoration: none !important;
+    }
+
+    #tarteaucitron #tarteaucitronServices .tarteaucitronMainLine .tarteaucitronName a {
+        font-size: 22px;
+    }
+
+    #tarteaucitron #tarteaucitronServices .tarteaucitronTitle a {
+        font-size: 14px;
+    }
+
+    #tarteaucitronAlertSmall #tarteaucitronCookiesListContainer #tarteaucitronCookiesList .tarteaucitronTitle {
+        padding: 5px 10px;
+        margin: 0;
+    }
+
+    #tarteaucitron #tarteaucitronInfo, #tarteaucitron #tarteaucitronServices .tarteaucitronDetails {
+        color: #fff;
+        display: none;
+        font-size: 12px;
+        font-weight: 500;
+        margin-top: 0;
+        max-width: 270px;
+        padding: 20px;
+        position: absolute;
+        z-index: 2147483647;
+    }
+
+    #tarteaucitron #tarteaucitronInfo a {
+        color: #fff;
+        text-decoration: underline;
+    }
+
+    #tarteaucitron #tarteaucitronServices .tarteaucitronLine:hover {
+        background: rgba(51, 51, 51, 0.2);
+    }
+
+    #tarteaucitron #tarteaucitronServices .tarteaucitronLine {
+        background: rgba(51, 51, 51, 0.1);
+        border-left: 5px solid transparent;
+        margin: 0;
+        overflow: hidden;
+        padding: 15px 5px;
+    }
+
+    #tarteaucitron #tarteaucitronServices .tarteaucitronLine.tarteaucitronIsAllowed {
+        border-color: #1B870B;
+    }
+
+    #tarteaucitron #tarteaucitronServices .tarteaucitronLine.tarteaucitronIsDenied {
+        border-color: #9C1A1A;
+    }
+
+    #tarteaucitron #tarteaucitronServices .tarteaucitronMainLine {
+        background: #333;
+        border: 3px solid #333;
+        border-left: 9px solid #333;
+        border-top: 5px solid #333;
+        margin-bottom: 0;
+        margin-top: 21px;
+        position: relative;
+    }
+
+    #tarteaucitron #tarteaucitronServices .tarteaucitronMainLine:hover {
+        background: #333;
+    }
+
+    #tarteaucitron #tarteaucitronServices .tarteaucitronMainLine .tarteaucitronName {
+        margin-left: 15px;
+        margin-top: 2px;
+    }
+
+    #tarteaucitron #tarteaucitronServices .tarteaucitronMainLine .tarteaucitronName button {
+        color: #fff;
+    }
+
+    #tarteaucitron #tarteaucitronServices .tarteaucitronMainLine .tarteaucitronAsk {
+        margin-top: 0px !important;
+    }
+
+    #tarteaucitron #tarteaucitronServices .tarteaucitronLine .tarteaucitronName {
+        display: inline-block;
+        float: left;
+        margin-left: 10px;
+        text-align: left;
+        width: 50%;
+    }
+
+    #tarteaucitron #tarteaucitronServices .tarteaucitronLine .tarteaucitronName a:hover {
+        text-decoration: underline;
+    }
+
+    #tarteaucitron #tarteaucitronServices .tarteaucitronLine .tarteaucitronAsk {
+        display: inline-block;
+        float: right;
+        margin: 7px 15px 0;
+        text-align: right;
+    }
+
+    #tarteaucitron #tarteaucitronServices .tarteaucitronLine .tarteaucitronAsk .tarteaucitronAllow, #tarteaucitron #tarteaucitronServices .tarteaucitronLine .tarteaucitronAsk .tarteaucitronDeny, .tac_activate .tarteaucitronAllow {
+        background: gray;
+        border-radius: 4px;
+        color: #fff;
+        cursor: pointer;
+        display: inline-block;
+        padding: 6px 10px;
+        text-align: center;
+        text-decoration: none;
+        width: auto;
+        border: 0;
+    }
+
+    #tarteaucitron #tarteaucitronServices #tarteaucitronAllAllowed.tarteaucitronIsSelected {
+        background-color: #1B870B;
+        opacity: 1;
+    }
+
+    #tarteaucitron #tarteaucitronServices #tarteaucitronAllDenied.tarteaucitronIsSelected {
+        background-color: #9C1A1A;
+        opacity: 1;
+    }
+
+    #tarteaucitron #tarteaucitronServices .tarteaucitronLine.tarteaucitronIsAllowed .tarteaucitronAllow {
+        background-color: #1B870B;
+    }
+
+    #tarteaucitron #tarteaucitronServices .tarteaucitronLine.tarteaucitronIsDenied .tarteaucitronDeny {
+        background-color: #9C1A1A;
+    }
+
+    #tarteaucitron #tarteaucitronServices .tarteaucitronLine .tarteaucitronName .tarteaucitronListCookies {
+        color: #333;
+        font-size: 12px;
+    }
+
+    #tarteaucitron .tarteaucitronH3 {
+        font-size: 18px;
+    }
+
+    #tarteaucitron #tarteaucitronMainLineOffset .tarteaucitronName {
+        width: auto!important;
+        margin-left: 0!important;
+        font-size: 14px;
+    }
+
+    /***
+     * Big alert
+     */
+    .tarteaucitronAlertBigTop {
+        top: 0;
+    }
+
+    .tarteaucitronAlertBigBottom {
+        bottom: 0;
+    }
+
+    #tarteaucitronRoot #tarteaucitronAlertBig {
+        background: #333;
+        color: #fff;
+        display: none;
+        font-size: 15px !important;
+        left: 0;
+        position: fixed;
+        box-sizing: content-box;
+        z-index: 2147483645;
+        text-align: center;
+        padding: 10px;
+        margin: auto;
+        width: 100%;
+    }
+
+    #tarteaucitronAlertBig #tarteaucitronPrivacyUrl, #tarteaucitronAlertBig #tarteaucitronPrivacyUrlDialog, #tarteaucitronAlertBig #tarteaucitronDisclaimerAlert, #tarteaucitronAlertBig #tarteaucitronDisclaimerAlert strong {
+        font: 15px verdana;
+        color: #fff;
+    }
+
+    #tarteaucitronAlertBig #tarteaucitronDisclaimerAlert strong {
+        font-weight: 700;
+    }
+
+    #tarteaucitronAlertBig #tarteaucitronPrivacyUrl, #tarteaucitronAlertBig #tarteaucitronPrivacyUrlDialog {
+        cursor: pointer;
+    }
+
+    #tarteaucitronAlertBig #tarteaucitronCloseAlert, #tarteaucitronAlertBig #tarteaucitronPersonalize, .tarteaucitronCTAButton, #tarteaucitron #tarteaucitronPrivacyUrl, #tarteaucitron #tarteaucitronPrivacyUrlDialog, #tarteaucitronRoot .tarteaucitronDeny {
+        background: #008300;
+        color: #fff;
+        cursor: pointer;
+        display: inline-block;
+        font-size: 16px!important;
+        line-height: 1.2;
+        padding: 5px 10px;
+        text-decoration: none;
+        margin-left: 7px;
+    }
+
+    #tarteaucitronRoot .tarteaucitronDeny {
+        background: #9C1A1A;
+    }
+
+    #tarteaucitronAlertBig #tarteaucitronCloseAlert, #tarteaucitron #tarteaucitronPrivacyUrl, #tarteaucitron #tarteaucitronPrivacyUrlDialog {
+        background: #fff;
+        color: #333;
+        font-size: 13px;
+        margin-bottom: 3px;
+        margin-left: 7px;
+        padding: 4px 10px;
+    }
+
+    #tarteaucitronPercentage {
+        background: #0A0!important;
+        box-shadow: 0 0 2px #fff, 0 1px 2px #555;
+        height: 5px;
+        left: 0;
+        position: fixed;
+        width: 0;
+        z-index: 2147483644;
+    }
+
+    /***
+     * Small alert
+     */
+    .tarteaucitronAlertSmallTop,.tarteaucitronAlertSmallBottom {
+        bottom: 0;
+    }
+
+    #tarteaucitronAlertSmall {
+        background: #333;
+        display: none;
+        padding: 0;
+        position: fixed;
+        right: 0;
+        text-align: center;
+        width: auto;
+        z-index: 2147483646;
+    }
+
+    #tarteaucitronAlertSmall #tarteaucitronManager {
+        color: #fff;
+        cursor: pointer;
+        display: inline-block;
+        font-size: 11px !important;
+        padding: 8px 10px 8px;
+    }
+
+    #tarteaucitronAlertSmall #tarteaucitronManager:hover {
+        background: rgba(255, 255, 255, 0.05);
+    }
+
+    #tarteaucitronAlertSmall #tarteaucitronManager #tarteaucitronDot {
+        background-color: gray;
+        border-radius: 5px;
+        display: block;
+        height: 8px;
+        margin-bottom: 1px;
+        margin-top: 5px;
+        overflow: hidden;
+        width: 100%;
+    }
+
+    #tarteaucitronAlertSmall #tarteaucitronManager #tarteaucitronDot #tarteaucitronDotGreen, #tarteaucitronAlertSmall #tarteaucitronManager #tarteaucitronDot #tarteaucitronDotYellow, #tarteaucitronAlertSmall #tarteaucitronManager #tarteaucitronDot #tarteaucitronDotRed {
+        display: block;
+        float: left;
+        height: 100%;
+        width: 0%;
+    }
+
+    #tarteaucitronAlertSmall #tarteaucitronManager #tarteaucitronDot #tarteaucitronDotGreen {
+        background-color: #1B870B;
+    }
+
+    #tarteaucitronAlertSmall #tarteaucitronManager #tarteaucitronDot #tarteaucitronDotYellow {
+        background-color: #FBDA26;
+    }
+
+    #tarteaucitronAlertSmall #tarteaucitronManager #tarteaucitronDot #tarteaucitronDotRed {
+        background-color: #9C1A1A;
+    }
+
+    #tarteaucitronAlertSmall #tarteaucitronCookiesNumber {
+        background: rgba(255, 255, 255, 0.2);
+        color: #fff;
+        cursor: pointer;
+        display: inline-block;
+        font-size: 30px;
+        padding: 0px 10px;
+        vertical-align: top;
+    }
+
+    #tarteaucitronAlertSmall #tarteaucitronCookiesNumber:hover {
+        background: rgba(255, 255, 255, 0.3);
+    }
+
+    #tarteaucitronAlertSmall #tarteaucitronCookiesListContainer {
+        display: none;
+        max-height: 70%;
+        max-width: 500px;
+        position: fixed;
+        right: 0;
+        width: 100%;
+    }
+
+    #tarteaucitronAlertSmall #tarteaucitronCookiesListContainer #tarteaucitronCookiesList {
+        background: #fff;
+        border: 2px solid #333;
+        color: #333;
+        font-size: 11px;
+        height: auto;
+        overflow: auto;
+        text-align: left;
+    }
+
+    #tarteaucitronAlertSmall #tarteaucitronCookiesListContainer #tarteaucitronCookiesList strong {
+        color: #333;
+    }
+
+    #tarteaucitronAlertSmall #tarteaucitronCookiesListContainer #tarteaucitronCookiesTitle {
+        background: #333;
+        margin-top: 21px;
+        padding: 13px 0 9px 13px;
+        text-align: left;
+    }
+
+    #tarteaucitronAlertSmall #tarteaucitronCookiesListContainer #tarteaucitronCookiesTitle strong {
+        color: #fff;
+        font-size: 16px;
+    }
+
+    #tarteaucitronAlertSmall #tarteaucitronCookiesListContainer #tarteaucitronCookiesList .tarteaucitronCookiesListMain {
+        background: rgba(51, 51, 51, 0.1);
+        padding: 7px 5px 10px;
+        word-wrap: break-word;
+    }
+
+    #tarteaucitronAlertSmall #tarteaucitronCookiesListContainer #tarteaucitronCookiesList .tarteaucitronCookiesListMain:hover {
+        background: rgba(51, 51, 51, 0.2);
+    }
+
+    #tarteaucitronAlertSmall #tarteaucitronCookiesListContainer #tarteaucitronCookiesList .tarteaucitronCookiesListMain a {
+        color: #333;
+        text-decoration: none;
+    }
+
+    #tarteaucitronAlertSmall #tarteaucitronCookiesListContainer #tarteaucitronCookiesList .tarteaucitronCookiesListMain .tarteaucitronCookiesListLeft {
+        display: inline-block;
+        width: 50%;
+    }
+
+    #tarteaucitronAlertSmall #tarteaucitronCookiesListContainer #tarteaucitronCookiesList .tarteaucitronCookiesListMain .tarteaucitronCookiesListLeft a strong {
+        color: darkred;
+    }
+
+    #tarteaucitronAlertSmall #tarteaucitronCookiesListContainer #tarteaucitronCookiesList .tarteaucitronCookiesListMain .tarteaucitronCookiesListRight {
+        color: #333;
+        display: inline-block;
+        font-size: 11px;
+        margin-left: 10%;
+        vertical-align: top;
+        width: 30%;
+    }
+
+    /***
+     * Fallback activate link
+     */
+    .tac_activate {
+        background: #333;
+        color: #fff;
+        display: table;
+        font-size: 12px;
+        height: 100%;
+        line-height: initial;
+        margin: auto;
+        text-align: center;
+        width: 100%;
+    }
+
+    .tac_float {
+        display: table-cell;
+        text-align: center;
+        vertical-align: middle;
+    }
+
+    .tac_activate .tac_float strong {
+        color: #fff;
+    }
+
+    .tac_activate .tac_float .tarteaucitronAllow {
+        background-color: #1B870B;
+        display: inline-block;
+    }
+
+    /***
+     * CSS for services
+     */
+    ins.ferank-publicite, ins.adsbygoogle {
+        text-decoration: none;
+    }
+
+    div.amazon_product {
+        height: 240px;
+        width: 120px;
+    }
+
+    .tarteaucitronIsAllowed .tarteaucitronDeny {
+        opacity: 0.4!important;
+    }
+
+    .tarteaucitronIsDenied .tarteaucitronAllow {
+        opacity: 0.4!important;
+    }
+
+    .tarteaucitronIsAllowed .tarteaucitronAllow {
+        opacity: 1!important;
+    }
+
+    .tarteaucitronIsDenied .tarteaucitronDeny {
+        opacity: 1!important;
+    }
+
+    .tarteaucitronLine .tarteaucitronAllow, .tarteaucitronLine .tarteaucitronDeny {
+        opacity: 0.4;
+    }
+
+    div#tarteaucitronInfo {
+        display: block!important;
+        position: relative !important;
+        text-align: center!important;
+        max-width: 80%!important;
+        padding: 15px 0!important;
+        margin: -10px auto 40px!important;
+        font-size: 1em!important;
+        border-bottom: 1px solid;
+        border-top: 1px solid;
+        border-color: #555;
+    }
+
+    a.tarteaucitronSelfLink {
+        position: absolute;
+        left: 0;
+        right: 0;
+        padding-top: 13px!important;
+        display: block;
+        text-shadow: 0 0 14px white;
+        text-transform: uppercase;
+    }
+
+    .tarteaucitronMainLine .tarteaucitronH2 {
+        font-size: 1.2em!important;
+        margin-top: 4px!important;
+    }
+
+    span.tarteaucitronTitle.tarteaucitronH3 {
+        margin-top: 12px!important;
+    }
+
+
+    </style>
+</head>
+<body class="portal">
+
+
+
+    
+    
+
+    <div class="page-wrap">
+
+        <header class="page-header">
+
+            <div class="page-header--image">
+                <img src="images/jpg/image.jpg" alt="">
+            </div>
+
+            <div class="page-header--boxed">
+
+                <div class="page-header--logo">
+                    <a href="/" class="logo">Creative Theme</a>
+                </div>
+
+                <div class="page-header--nav">
+                    <input type="checkbox" id="main-nav--toggle" class="main-nav--toggle"/>
+
+<div class="main-nav--top">
+    <label for="main-nav--toggle" class="main-nav--burger">
+        <span></span>
+    </label>
+    <div class="mobile-menu-top">
+        <div class="mobile-menu--contact">
+            <a href="tel:+43654221001">
+                <i class="iconfont-phone"></i>
+                <span>+43 6542 21001</span>
+            </a>
+        </div>
+        <div class="mobile-menu--language">
+            <a href="#">EN</a>
+        </div>
+    </div>
+</div>
+
+<nav class="main-nav" role="navigation">
+
+    <ul class="main-nav--first-level">
+
+        <li>
+            <input type="checkbox" id="plusminus" class="dropdown">
+            <label for="plusminus" class="next"><span class="next--arrow"></span></label>
+            <a href="#">Home</a>
+            <ul class="main-nav--sub" aria="submenu">
+                <li>
+                    <a href="#">Firmengeschichte</a>
+                </li>
+                <li>
+                    <a href="#">Philosophie</a>
+                </li>
+                <li>
+                    <a href="#">Mitarbeiter</a>
+                </li>
+                <li>
+                    <a href="#">Jobs</a>
+                </li>
+            </ul>
+        </li>
+
+        <li>
+            <input type="checkbox" id="plusminus1" class="dropdown">
+            <label for="plusminus1" class="next"><span class="next--arrow"></span></label>
+            <a href="#">Über uns</a>
+            <ul class="main-nav--sub" aria="submenu">
+                <li>
+                    <a href="#">Firmengeschichte</a>
+                </li>
+                <li class="main-nav--sub-active">
+                    <a href="#">Philosophie</a>
+                </li>
+                <li>
+                    <a href="#">Mitarbeiter</a>
+                </li>
+                <li>
+                    <a href="#">Jobs</a>
+                </li>
+            </ul>
+        </li>
+
+        <li class="main-nav--active">
+            <input type="checkbox" id="plusminus2" class="dropdown">
+            <label for="plusminus2" class="next"><span class="next--arrow"></span></label>
+            <a href="#">Preise</a>
+            <ul class="main-nav--sub" aria="submenu">
+                <li>
+                    <a href="#">Firmengeschichte</a>
+                </li>
+                <li class="main-nav--sub-active">
+                    <a href="#">Philosophie</a>
+                </li>
+                <li>
+                    <a href="#">Mitarbeiter</a>
+                </li>
+                <li>
+                    <a href="#">Jobs</a>
+                </li>
+            </ul>
+        </li>
+
+        <li>
+            <input type="checkbox" id="plusminus3" class="dropdown">
+            <label for="plusminus3" class="next"><span class="next--arrow"></span></label>
+            <a href="#">Angebote</a>
+            <ul class="main-nav--sub" aria="submenu">
+                <li>
+                    <a href="#">Firmengeschichte</a>
+                </li>
+                <li class="main-nav--sub-active">
+                    <a href="#">Philosophie</a>
+                </li>
+                <li>
+                    <a href="#">Mitarbeiter</a>
+                </li>
+                <li>
+                    <a href="#">Jobs</a>
+                </li>
+            </ul>
+        </li>
+
+        <li>
+            <input type="checkbox" id="plusminus4" class="dropdown">
+            <label for="plusminus4" class="next"><span class="next--arrow"></span></label>
+            <a href="#">Kontakt</a>
+            <ul class="main-nav--sub" aria="submenu">
+                <li>
+                    <a href="#">Firmengeschichte</a>
+                </li>
+                <li class="main-nav--sub-active">
+                    <a href="#">Philosophie</a>
+                </li>
+                <li>
+                    <a href="#">Mitarbeiter</a>
+                </li>
+                <li>
+                    <a href="#">Jobs</a>
+                </li>
+            </ul>
+        </li>
+
+        <li>
+            <a href="#" class="btn btn--flat btn--outline-negative">Buchen</a>
+        </li>
+
+    </ul>
+
+    <div class="mobile-menu-bottom">
+        <ul class="mobile-menu-bottom--buttons">
+            <li><a href="#" class="btn btn--flat btn--outline-negative">Anfragen</a></li>
+            <li><a href="#" class="btn btn--flat btn--outline-negative--variant">Buchen</a></li>
+        </ul>
+        <ul class="page-header--social">
+            <li>
+                <a href="#">
+                    <i class="iconfont-facebook"></i>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="iconfont-twitter"></i>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="iconfont-instagram"></i>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="iconfont-youtube"></i>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+</nav>
+
+<div class="main-nav--overlay"></div>
+                </div>
+
+                <div class="page-header--cta">
+                    <h3>CONECTO Vorlage</h3>
+                    <h2>Creative</h2>
+                    <a href="#" class="btn">Buttontext</a>
+                </div>
+
+                <div class="page-header--widgets">
+                    <div class="teaserslider">
+    <div class="teaserslider--container">
+        
+        
+            <div>
+                <a href="#" class="teaser box-shadow">
+                    <div class="teaser--image">
+                        <figure>
+                            <img src="images/jpg/teaser.jpg"/>
+                        </figure>
+                    </div>
+                    <div class="teaser--content">
+                        <div class="teaser--content-container">
+                            <h3>Hier könnte Ihre Teaser Headline stehen 1</h3>
+                            <div class="arrow-right">
+                                <i class="iconfont-arrow-right"></i>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        
+            <div>
+                <a href="#" class="teaser box-shadow">
+                    <div class="teaser--image">
+                        <figure>
+                            <img src="images/jpg/teaser.jpg"/>
+                        </figure>
+                    </div>
+                    <div class="teaser--content">
+                        <div class="teaser--content-container">
+                            <h3>Hier könnte Ihre Teaser Headline stehen 2</h3>
+                            <div class="arrow-right">
+                                <i class="iconfont-arrow-right"></i>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        
+            <div>
+                <a href="#" class="teaser box-shadow">
+                    <div class="teaser--image">
+                        <figure>
+                            <img src="images/jpg/teaser.jpg"/>
+                        </figure>
+                    </div>
+                    <div class="teaser--content">
+                        <div class="teaser--content-container">
+                            <h3>Hier könnte Ihre Teaser Headline stehen 3</h3>
+                            <div class="arrow-right">
+                                <i class="iconfont-arrow-right"></i>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        
+    </div>
+    <div class="teaserslider--controls">
+        <div class="prev">
+            <i class="prev--arrow"></i>
+        </div>
+        <div class="next">
+            <i class="next--arrow"></i>
+        </div>
+    </div>
+</div>
+                </div>
+            </div>
+            <div class="page-header--meta">
+                <div class="page-header--meta-left">
+    <ul class="page-header--contact">
+        <li>
+            <a href="tel:+43654221001">
+                <i class="iconfont-phone"></i>
+                <span>+43 6542 21001</span>
+            </a>
+        </li>
+        <li class="mobile-hidden">
+            <a href="mailto:info@conecto.at">
+                <i class="iconfont-envelope"></i>
+                <span>info@conecto.at</span>
+            </a>
+        </li>
+    </ul>
+</div>
+
+<div class="page-header--meta-right mobile-hidden">
+    <ul class="page-header--social">
+        <li>
+            <a href="#">
+                <i class="iconfont-facebook"></i>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <i class="iconfont-twitter"></i>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <i class="iconfont-instagram"></i>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <i class="iconfont-youtube"></i>
+            </a>
+        </li>
+    </ul>
+    <ul class="page-header--language">
+        <li><a href="#">EN</a></li>
+    </ul>
+</div>
+            </div>
+        </header>
+        <main class="page-main" role="main">
+            <article>
+                
+    <div class="contentblock">
+        <div class="container container--narrow">
+            <h1>Willkommen auf der Conecto Pimcore-Vorlage!</h1>
+        </div>
+    </div>
+    <div class="contentblock contentblock--wysiwyg">
+    <div class="container container--narrow">
+        <div class="lead">
+            <p>
+                Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean
+                massa.
+                Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+            </p>
+        </div>
+    </div>
+</div>
+    <div class="contentblock contentblock--wysiwyg">
+    <div class="container container--narrow">
+        <p>
+            Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.
+            Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+        </p>
+    </div>
+</div>
+    <div class="contentblock contentblock--textbox">
+    <div class="textbox">
+        <div class="textbox--image">
+            <figure>
+                <img src="images/jpg/textbox.jpg"/>
+            </figure>
+        </div>
+        <div class="textbox--content">
+            <div class="textbox--content-container">
+                <h2>Headline 2</h2>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.
+                </p>
+                <a href="#" class="btn btn--outline-negative">Button</a>
+            </div>
+        </div>
+    </div>
+</div>
+    <div class="contentblock contentblock--headline">
+        <h2>Top aktuelle News</h2>
+    </div>
+    <div class="contentblock contentblock--teaserslider">
+    <div class="container">
+        <div class="teaserslider">
+            <div class="teaserslider--container">
+                    <div>
+                        <a href="#" class="teaser box-shadow">
+                            <div class="teaser--image">
+                                <figure>
+                                    <img src="images/jpg/teaser.jpg" />
+                                </figure>
+                            </div>
+                            <div class="teaser--content">
+                                <div class="teaser--content-container">
+                                    <h3>Ihre Teaser-Headline 1</h3>
+                                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula
+                                        eget dolor.</p>
+                                    <div class="arrow-right">
+                                        <i class="iconfont-arrow-right"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div>
+                        <a href="#" class="teaser box-shadow">
+                            <div class="teaser--image">
+                                <figure>
+                                    <img src="images/jpg/teaser.jpg" />
+                                </figure>
+                            </div>
+                            <div class="teaser--content">
+                                <div class="teaser--content-container">
+                                    <h3>Alternative Teaser-Headline 2</h3>
+                                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula
+                                        eget dolor. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula
+                                        eget dolor.</p>
+                                    <div class="arrow-right">
+                                        <i class="iconfont-arrow-right"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div>
+                        <a href="#" class="teaser box-shadow">
+                            <div class="teaser--image">
+                                <figure>
+                                    <img src="images/jpg/teaser.jpg" />
+                                </figure>
+                            </div>
+                            <div class="teaser--content">
+                                <div class="teaser--content-container">
+                                    <h3>Alternative Teaser-Headline 3</h3>
+                                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula
+                                        eget dolor. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula
+                                        eget dolor.</p>
+                                    <div class="arrow-right">
+                                        <i class="iconfont-arrow-right"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div>
+                        <a href="#" class="teaser box-shadow">
+                            <div class="teaser--image">
+                                <figure>
+                                    <img src="images/jpg/teaser.jpg" />
+                                </figure>
+                            </div>
+                            <div class="teaser--content">
+                                <div class="teaser--content-container">
+                                    <h3>Alternative Teaser-Headline 4</h3>
+                                    <p>Lorem ipsum dolor sit amet.</p>
+                                    <div class="arrow-right">
+                                        <i class="iconfont-arrow-right"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div>
+                        <a href="#" class="teaser box-shadow">
+                            <div class="teaser--image">
+                                <figure>
+                                    <img src="images/jpg/teaser.jpg" />
+                                </figure>
+                            </div>
+                            <div class="teaser--content">
+                                <div class="teaser--content-container">
+                                    <h3>Alternative Teaser-Headline 5</h3>
+                                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula
+                                        eget dolor. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula
+                                        eget dolor.</p>
+                                    <div class="arrow-right">
+                                        <i class="iconfont-arrow-right"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+            </div>
+            <div class="teaserslider--controls">
+                <div class="prev"><div class="prev--arrow"></div></div>
+                <div class="next"><div class="next--arrow"></div></div>
+            </div>
+        </div>
+    </div>
+</div>
+    <div class="contentblock contentblock--largeteaser">
+    <div class="container">
+        <div class="largeteaser">
+            <div class="largeteaser--image">
+                <figure>
+                    <img src="images/jpg/largeteaser.jpg"/>
+                </figure>
+            </div>
+            <div class="largeteaser--content">
+                <div class="largeteaser--content-container box-shadow">
+                    <div class="arrow-right">
+                        <i class="iconfont-arrow-right"></i>
+                    </div>
+                    <h3>Ihre Headline</h3>
+                    <p>Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis
+                        enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo.</p>
+                    <a href="#" class="arrow-link">
+                        <i class="iconfont-arrow-right"></i>
+                        Link
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <div class="contentblock contentblock--textbox">
+    <div class="textbox textbox--image-right">
+        <div class="textbox--image">
+            <figure>
+                <img src="images/jpg/textbox.jpg"/>
+            </figure>
+        </div>
+        <div class="textbox--content">
+            <div class="textbox--content-container">
+                <h2>Headline 2</h2>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.
+                </p>
+                <a href="#" class="btn btn--flat btn--outline-negative">Button</a>
+            </div>
+        </div>
+    </div>
+</div>
+    <div class="contentblock contentblock--largeteaser">
+    <div class="container">
+        <div class="largeteaser largeteaser--image-right">
+            <div class="largeteaser--image">
+                <figure>
+                    <img src="images/jpg/largeteaser.jpg"/>
+                </figure>
+            </div>
+            <div class="largeteaser--content">
+                <div class="largeteaser--content-container box-shadow">
+                    <div class="arrow-right">
+                        <i class="iconfont-arrow-right"></i>
+                    </div>
+                    <h3>Ihre Headline</h3>
+                    <p>Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis
+                        enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo.</p>
+                    <a href="#" class="arrow-link">
+                        <i class="iconfont-arrow-right"></i>
+                        Link
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+            </article>
+        </main>
+
+        <footer class="page-footer">
+
+    <div class="container">
+
+        <div class="footer--grid">
+
+            <div class="footer--address">
+                <address class="page-footer--address box-shadow">
+                    <div class="page-footer--address-logo">
+                        <a href="#" class="logo logo--black"></a>
+                    </div>
+                    <div>Mühlenweg 1, 5751 Maishofen</div>
+                    <div>
+                        <div>Tel: <a href="tel:+53654221001">+53 6542 21001</a></div>
+                        <div>Fax: <a href="tel:+5365422100130">+53 6542 21001-30</a></div>
+                        <div>E-Mail: <a href="mailto:info@conecto.at">info@conecto.at</a></div>
+                    </div>
+                    <a href="#" class="btn btn--flat">Jetzt anfragen</a>
+                </address>
+            </div>
+            <div class="footer--menus">
+                <nav class="footer-menu footer-menu--left">
+                    <h5>Links</h5>
+                    <ul>
+                        <li><a href="#" class="arrow-link"><i class="iconfont-arrow-right"></i>Gutscheine</a>
+                        </li>
+                        <li><a href="#" class="arrow-link"><i class="iconfont-arrow-right"></i>Newsletter</a>
+                        </li>
+                        <li><a href="#" class="arrow-link"><i class="iconfont-arrow-right"></i>Partner</a></li>
+                        <li><a href="#" class="arrow-link"><i class="iconfont-arrow-right"></i>Jobs</a></li>
+                    </ul>
+                </nav>
+                <nav class="footer-menu footer-menu--right">
+                    <h5>Service</h5>
+                    <ul>
+                        <li><a href="#" class="arrow-link"><i class="iconfont-arrow-right"></i>Online Buchen</a>
+                        </li>
+                        <li><a href="#" class="arrow-link"><i class="iconfont-arrow-right"></i>Online Anfrage</a>
+                        </li>
+                        <li><a href="#" class="arrow-link"><i class="iconfont-arrow-right"></i>Datenschutz</a></li>
+                        <li><a href="#" class="arrow-link"><i class="iconfont-arrow-right"></i>Impressum</a></li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="footer--widgets">
+
+                <div class="footer--newsletter" style="display: none;">
+                    <h5>Newsletter</h5>
+                    <form action="#">
+                        <div class="newsletter--input">
+                            <input type="email" placeholder="Ihre E-Mail-Adresse *"/>
+                        </div>
+                        <div class="newsletter--label">
+                            <label>
+                                <input type="checkbox" required />
+                                <span>Hiermit bestätige ich, dass ich den Text zum Datenschutz gelesen und akzeptiert habe.</span>
+                            </label>
+                        </div>
+                        <div class="newsletter--button">
+                            <button type="submit" class="btn btn--flat">Anmelden</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="footer--gallery">
+                    <h5>Gallery</h5>
+                    <div class="footer--gallery-grid">
+                        <a href="#">
+                            <img src="images/jpg/footer-gallery.jpg" />
+                            <span class="overlay"><i class="iconfont-arrow-right"></i></span>
+                        </a>
+                        <a href="#">
+                            <img src="images/jpg/footer-gallery.jpg" />
+                            <span class="overlay"><i class="iconfont-arrow-right"></i></span>
+                        </a>
+                        <a href="#">
+                            <img src="images/jpg/footer-gallery.jpg" />
+                            <span class="overlay"><i class="iconfont-arrow-right"></i></span>
+                        </a>
+                    </div>
+                    </ul>
+                </div>
+
+            </div>
+            <div class="footer--info">
+                <div class="footer--bottom">
+                    <div class="copyright">&copy; 2020 Conecto</div>
+                    <a href="#" class="logo--flat"><i class="iconfont-logo-flat"></i></a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</footer>
+
+<div class="scrolltop desktop-only">
+    <div class="more"></div>
+</div>
+
+    </div>
+
+
+
+
+
+    <script src="js/main.min.js" type="text/javascript" async="async"></script>
+
+
+<div id="tarteaucitronRoot" class="tarteaucitronBeforeVisible">
+    <div id="tarteaucitronPremium"></div><button type="button" id="tarteaucitronBack" onclick="tarteaucitron.userInterface.closePanel();" aria-label="x"></button>
+    <div id="tarteaucitron" role="dialog" aria-labelledby="dialogTitle"> <button type="button" id="tarteaucitronClosePanel" onclick="tarteaucitron.userInterface.closePanel();">       Schließen   </button>
+        <div id="tarteaucitronServices">
+            <div class="tarteaucitronLine tarteaucitronMainLine" id="tarteaucitronMainLineOffset"> <span class="tarteaucitronH1" role="heading" aria-level="1" id="dialogTitle">Cookie-Einstellungen</span>
+                <div id="tarteaucitronInfo"> 22Unsere Webseite verwendet Cookies. Diese haben zwei Funktionen: Zum einen sind sie erforderlich für die grundlegende Funktionalität unserer Website. Zum anderen können wir mit Hilfe der Cookies unsere Inhalte für Sie immer weiter verbessern. Hierzu werden pseudonymisierte Daten von Website-Besuchern gesammelt und ausgewertet. Das Einverständnis in die Verwendung der Cookies können Sie jederzeit widerrufen. Weitere Informationen zu Cookies auf dieser Website finden Sie in unserer Datenschutzerklärung und zu uns im Impressum. <br><br> <button type="button" id="tarteaucitronPrivacyUrlDialog" onclick="document.location = tarteaucitron.parameters.privacyUrl">       Datenschutzbestimmungen   </button> </div>
+                <div class="tarteaucitronName"> <span class="tarteaucitronH2" role="heading" aria-level="2">Einstellungen für alle Dienste</span> </div>
+                <div class="tarteaucitronAsk" id="tarteaucitronScrollbarAdjust"> <button type="button" id="tarteaucitronAllAllowed" class="tarteaucitronAllow" onclick="tarteaucitron.userInterface.respondAll(true);">               ✓ Erlaube alle Cookies            </button> <button type="button" id="tarteaucitronAllDenied" class="tarteaucitronDeny" onclick="tarteaucitron.userInterface.respondAll(false);">               ✗ Verbiete alle Cookies            </button> </div>
+            </div>
+            <div class="tarteaucitronBorder">
+                <div class="clear"></div>
+                <ul>
+                    <li id="tarteaucitronServicesTitle_api" class="tarteaucitronHidden">
+                        <div class="tarteaucitronTitle"> <button type="button" onclick="tarteaucitron.userInterface.toggle('tarteaucitronDetailsapi', 'tarteaucitronInfoBox');return false">✛ APIs</button> </div>
+                        <div id="tarteaucitronDetailsapi" class="tarteaucitronDetails tarteaucitronInfoBox"> APIs werden benutzt um Skripte zu laden, wie: Geolokalisierung, Suchmaschinen, Übersetzungen, ... </div>
+                        <ul id="tarteaucitronServices_api"></ul>
+                    </li>
+                    <li id="tarteaucitronServicesTitle_other" class="tarteaucitronHidden">
+                        <div class="tarteaucitronTitle"> <button type="button" onclick="tarteaucitron.userInterface.toggle('tarteaucitronDetailsother', 'tarteaucitronInfoBox');return false">✛ Andere</button> </div>
+                        <div id="tarteaucitronDetailsother" class="tarteaucitronDetails tarteaucitronInfoBox"> Dienste zum Anzeigen von Web-Inhalten. </div>
+                        <ul id="tarteaucitronServices_other"></ul>
+                    </li>
+                    <li id="tarteaucitronServicesTitle_analytic" class="tarteaucitronHidden">
+                        <div class="tarteaucitronTitle"> <button type="button" onclick="tarteaucitron.userInterface.toggle('tarteaucitronDetailsanalytic', 'tarteaucitronInfoBox');return false">✛ Besucher Zähldienste</button> </div>
+                        <div id="tarteaucitronDetailsanalytic" class="tarteaucitronDetails tarteaucitronInfoBox"> Die verwendeten Besucher Zähldienste generieren Statistiken die dabei helfen, die Seite zu verbessern. </div>
+                        <ul id="tarteaucitronServices_analytic"></ul>
+                    </li>
+                    <li id="tarteaucitronServicesTitle_comment" class="tarteaucitronHidden">
+                        <div class="tarteaucitronTitle"> <button type="button" onclick="tarteaucitron.userInterface.toggle('tarteaucitronDetailscomment', 'tarteaucitronInfoBox');return false">✛ Kommentare</button> </div>
+                        <div id="tarteaucitronDetailscomment" class="tarteaucitronDetails tarteaucitronInfoBox"> Kommentar Manager erleichtern die Organisation von Kommentaren und helfen dabei Spam zu verhindern. </div>
+                        <ul id="tarteaucitronServices_comment"></ul>
+                    </li>
+                    <li id="tarteaucitronServicesTitle_social" class="tarteaucitronHidden">
+                        <div class="tarteaucitronTitle"> <button type="button" onclick="tarteaucitron.userInterface.toggle('tarteaucitronDetailssocial', 'tarteaucitronInfoBox');return false">✛ Soziale Netzwerke</button> </div>
+                        <div id="tarteaucitronDetailssocial" class="tarteaucitronDetails tarteaucitronInfoBox"> Soziale Netzwerke können die Benutzbarkeit der Seite verbessern und ihren Bekanntheitsgrad erhöhen. </div>
+                        <ul id="tarteaucitronServices_social"></ul>
+                    </li>
+                    <li id="tarteaucitronServicesTitle_support" class="tarteaucitronHidden">
+                        <div class="tarteaucitronTitle"> <button type="button" onclick="tarteaucitron.userInterface.toggle('tarteaucitronDetailssupport', 'tarteaucitronInfoBox');return false">✛ Support</button> </div>
+                        <div id="tarteaucitronDetailssupport" class="tarteaucitronDetails tarteaucitronInfoBox"> Support Dienste erlauben es die Urheber der Seite zu kontaktieren und sie zu verbessern. </div>
+                        <ul id="tarteaucitronServices_support"></ul>
+                    </li>
+                    <li id="tarteaucitronServicesTitle_video" class="tarteaucitronHidden">
+                        <div class="tarteaucitronTitle"> <button type="button" onclick="tarteaucitron.userInterface.toggle('tarteaucitronDetailsvideo', 'tarteaucitronInfoBox');return false">✛ Videos</button> </div>
+                        <div id="tarteaucitronDetailsvideo" class="tarteaucitronDetails tarteaucitronInfoBox"> Videoplattformen erlauben Videoinhalte einzublenden und die Sichtbarkeit der Seite zu erhöhen. </div>
+                        <ul id="tarteaucitronServices_video"></ul>
+                    </li>
+                    <li id="tarteaucitronServicesTitle_ads" class="tarteaucitronHidden" style="display: block;">
+                        <div class="tarteaucitronTitle"> <button type="button" onclick="tarteaucitron.userInterface.toggle('tarteaucitronDetailsads', 'tarteaucitronInfoBox');return false">✛ Werbenetzwerke</button> </div>
+                        <div id="tarteaucitronDetailsads" class="tarteaucitronDetails tarteaucitronInfoBox"> Werbenetzwerke können mit dem Verkauf von Werbeplatzierungen auf der Seite Einnahmen erhalten. </div>
+                        <ul id="tarteaucitronServices_ads">
+                            <li id="facebookpixelLine" class="tarteaucitronLine">
+                                <div class="tarteaucitronName"> <span class="tarteaucitronH3" role="heading" aria-level="3">Facebook Pixel</span> <span id="tacCLfacebookpixel" class="tarteaucitronListCookies">Dieser Dienst kann 'Cookies' verwenden 8 cookies.</span><br> <a href="https://tarteaucitron.io/service/facebookpixel/" target="_blank" rel="noreferrer noopener" title="Cookie Details für Facebook Pixel auf unserer Seite (neues Fenster)">           Weiter lesen       </a> - <a href="https://fr-fr.facebook.com/business/help/www/651294705016616" target="_blank" rel="noreferrer noopener" title="Facebook Pixel (neues Fenster)">           Zur offiziellen Webseite       </a> </div>
+                                <div class="tarteaucitronAsk"> <button type="button" id="facebookpixelAllowed" class="tarteaucitronAllow" onclick="tarteaucitron.userInterface.respond(this, true);">           ✓ Erlauben       </button> <button type="button" id="facebookpixelDenied" class="tarteaucitronDeny" onclick="tarteaucitron.userInterface.respond(this, false);">           ✗ Ablehnen       </button> </div>
+                            </li>
+                        </ul>
+                    </li>
+                    <li id="tarteaucitronNoServicesTitle" class="tarteaucitronLine" style="display: none;">undefined</li>
+                </ul>
+                <div class="tarteaucitronHidden" id="tarteaucitronScrollbarChild" style="height:20px;display:block"></div>
+            </div>
+        </div>
+    </div>
+    <div id="tarteaucitronAlertBig" class="tarteaucitronAlertBigTop" style="display: block;"> <span id="tarteaucitronDisclaimerAlert">
+    Unsere Webseite verwendet Cookies. Diese haben zwei Funktionen: Zum einen sind sie erforderlich für die grundlegende Funktionalität
+     unserer Website. Zum anderen können wir mit Hilfe der Cookies unsere Inhalte für Sie immer weiter verbessern. Hierzu
+      werden pseudonymisierte Daten von Website-Besuchern gesammelt und ausgewertet. Das Einverständnis in die Verwendung
+      der Cookies können Sie jederzeit widerrufen. Weitere Informationen zu Cookies auf dieser Website finden Sie in unserer
+       Datenschutzerklärung und zu uns im Impressum.   </span> <button type="button" id="tarteaucitronPersonalize"
+       onclick="tarteaucitron.userInterface.openPanel();">       Personalisieren   </button> <button type="button"
+       id="tarteaucitronPrivacyUrl" onclick="document.location = tarteaucitron.parameters.privacyUrl">
+         Datenschutzbestimmungen
+         </button></div>
+    <div id="tarteaucitronAlertSmall" class="tarteaucitronAlertSmallTop" style="display: none;"> <button type="button" id="tarteaucitronManager" onclick="tarteaucitron.userInterface.openPanel();">       Datenschutz-Einstellungen       <span id="tarteaucitronDot">           <span id="tarteaucitronDotGreen" style="width: 0%;"></span>           <span id="tarteaucitronDotYellow" style="width: 100%;"></span>           <span id="tarteaucitronDotRed" style="width: 0%;"></span>       </span>   </button>
+        <!-- @whitespace   --><button type="button" id="tarteaucitronCookiesNumber" onclick="tarteaucitron.userInterface.toggleCookiesList();">1</button>
+        <div id="tarteaucitronCookiesListContainer"> <button type="button" id="tarteaucitronClosePanelCookie" onclick="tarteaucitron.userInterface.closePanel();">           Schließen       </button>
+            <div class="tarteaucitronCookiesListMain" id="tarteaucitronCookiesTitle"> <span class="tarteaucitronH2" role="heading" aria-level="2" id="tarteaucitronCookiesNumberBis">1 cookie</span> </div>
+            <div id="tarteaucitronCookiesList">
+                <div class="tarteaucitronHidden"> <span class="tarteaucitronTitle tarteaucitronH3" role="heading" aria-level="3">        pimcore.conecto.at    </span></div>
+                <ul class="cookie-list">
+                    <li class="tarteaucitronCookiesListMain">
+                        <div class="tarteaucitronCookiesListLeft"><button type="button" onclick="tarteaucitron.cookie.purge(['tarteaucitron']);tarteaucitron.cookie.number();tarteaucitron.userInterface.jsSizing('cookie');return false"><strong>×</strong></button> <strong>tarteaucitron</strong> </div>
+                        <div class="tarteaucitronCookiesListRight">!facebookpixel=wait</div>
+                    </li>
+                </ul>
+                <div class="tarteaucitronHidden" style="height:20px;display:block"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+/*jslint browser: true, evil: true */
+
+var scripts = document.getElementsByTagName('script'),
+    path = scripts[scripts.length - 1].src.split('?')[0],
+    tarteaucitronForceCDN = (tarteaucitronForceCDN === undefined) ? '' : tarteaucitronForceCDN,
+    cdn = (tarteaucitronForceCDN === '') ? path.split('/').slice(0, -1).join('/') + '/' : tarteaucitronForceCDN,
+    alreadyLaunch = (alreadyLaunch === undefined) ? 0 : alreadyLaunch,
+    tarteaucitronForceLanguage = (tarteaucitronForceLanguage === undefined) ? '' : tarteaucitronForceLanguage,
+    tarteaucitronForceExpire = (tarteaucitronForceExpire === undefined) ? '' : tarteaucitronForceExpire,
+    tarteaucitronCustomText = (tarteaucitronCustomText === undefined) ? '' : tarteaucitronCustomText,
+    // tarteaucitronExpireInDay: true for day(s) value - false for hour(s) value
+    tarteaucitronExpireInDay = (tarteaucitronExpireInDay === undefined || typeof tarteaucitronExpireInDay !== "boolean") ? true : tarteaucitronExpireInDay,
+    timeExpire = 31536000000,
+    tarteaucitronProLoadServices,
+    tarteaucitronNoAdBlocker = false;
+
+
+
+var tarteaucitron = {
+    "version": 20200114,
+    "cdn": cdn,
+    "user": {},
+    "lang": {},
+    "services": {},
+    "added": [],
+    "idprocessed": [],
+    "state": [],
+    "launch": [],
+    "parameters": {},
+    "isAjax": false,
+    "reloadThePage": false,
+    "events": {
+        "init": function () {},
+        "load": function () {},
+    },
+    "init": function (params) {
+        "use strict";
+        var origOpen;
+
+        tarteaucitron.parameters = params;
+        if (alreadyLaunch === 0) {
+            alreadyLaunch = 1;
+            if (window.addEventListener) {
+                window.addEventListener("load", function () {
+                    tarteaucitron.initEvents.loadEvent(false);
+                }, false);
+                window.addEventListener("scroll", function () {
+                    tarteaucitron.initEvents.scrollEvent();
+                }, false);
+
+                window.addEventListener("keydown", function (evt) {
+                    tarteaucitron.initEvents.keydownEvent(false, evt);
+                }, false);
+                window.addEventListener("hashchange", function () {
+                    tarteaucitron.initEvents.hashchangeEvent();
+                }, false);
+                window.addEventListener("resize", function () {
+                    tarteaucitron.initEvents.resizeEvent();
+                }, false);
+            } else {
+                window.attachEvent("onload", function () {
+                    tarteaucitron.initEvents.loadEvent(true);
+                });
+                window.attachEvent("onscroll", function () {
+                    tarteaucitron.initEvents.scrollEvent();
+                });
+                window.attachEvent("onkeydown", function (evt) {
+                    tarteaucitron.initEvents.keydownEvent(true, evt);
+
+                });
+                window.attachEvent("onhashchange", function () {
+                    tarteaucitron.initEvents.hashchangeEvent();
+                });
+                window.attachEvent("onresize", function () {
+                    tarteaucitron.initEvents.resizeEvent();
+                });
+            }
+
+            if (typeof XMLHttpRequest !== 'undefined') {
+                origOpen = XMLHttpRequest.prototype.open;
+                XMLHttpRequest.prototype.open = function () {
+
+                    if (window.addEventListener) {
+                        this.addEventListener("load", function () {
+                            if (typeof tarteaucitronProLoadServices === 'function') {
+                                tarteaucitronProLoadServices();
+                            }
+                        }, false);
+                    } else if (typeof this.attachEvent !== 'undefined') {
+                        this.attachEvent("onload", function () {
+                            if (typeof tarteaucitronProLoadServices === 'function') {
+                                tarteaucitronProLoadServices();
+                            }
+                        });
+                    } else {
+                        if (typeof tarteaucitronProLoadServices === 'function') {
+                            setTimeout(tarteaucitronProLoadServices, 1000);
+                        }
+                    }
+
+                    try {
+                        origOpen.apply(this, arguments);
+                    } catch (err) {}
+                };
+            }
+        }
+
+        if(tarteaucitron.events.init) {
+            tarteaucitron.events.init();
+        }
+    },
+    "initEvents": {
+        "loadEvent": function (isOldBrowser) {
+            tarteaucitron.load();
+            tarteaucitron.fallback(['tarteaucitronOpenPanel'], function (elem) {
+                if (isOldBrowser) {
+                    elem.attachEvent("onclick", function (event) {
+                        tarteaucitron.userInterface.openPanel();
+                        event.preventDefault();
+                    });
+                } else {
+                    elem.addEventListener("click", function (event) {
+                        tarteaucitron.userInterface.openPanel();
+                        event.preventDefault();
+                    }, false);
+                }
+            }, true);
+        },
+        "keydownEvent": function (isOldBrowser, evt) {
+            if (evt.keyCode === 27) {
+                tarteaucitron.userInterface.closePanel();
+            }
+
+            if (isOldBrowser) {
+                if ( evt.keyCode === 9 && focusableEls.indexOf(evt.target) >= 0) {
+                    if ( evt.shiftKey ) /* shift + tab */ {
+                        if (document.activeElement === firstFocusableEl) {
+                            lastFocusableEl.focus();
+                            evt.preventDefault();
+                        }
+                    } else /* tab */ {
+                        if (document.activeElement === lastFocusableEl) {
+                            firstFocusableEl.focus();
+                            evt.preventDefault();
+                        }
+                    }
+                }
+            }
+        },
+        "hashchangeEvent": function () {
+            if (document.location.hash === tarteaucitron.hashtag && tarteaucitron.hashtag !== '') {
+                tarteaucitron.userInterface.openPanel();
+            }
+        },
+        "resizeEvent": function () {
+            var tacElem = document.getElementById('tarteaucitron');
+            var tacCookieContainer = document.getElementById('tarteaucitronCookiesListContainer');
+
+            if (tacElem && tacElem.style.display === 'block') {
+                tarteaucitron.userInterface.jsSizing('main');
+            }
+
+            if (tacCookieContainer && tacCookieContainer.style.display === 'block') {
+                tarteaucitron.userInterface.jsSizing('cookie');
+            }
+        },
+        "scrollEvent": function () {
+            var scrollPos = window.pageYOffset || document.documentElement.scrollTop;
+            var heightPosition;
+            var tacPercentage = document.getElementById('tarteaucitronPercentage');
+            var tacAlertBig = document.getElementById('tarteaucitronAlertBig');
+
+            if (tacAlertBig && !tarteaucitron.highPrivacy) {
+                if (tacAlertBig.style.display === 'block') {
+                    heightPosition = tacAlertBig.offsetHeight + 'px';
+
+                    if (scrollPos > (screen.height * 2)) {
+                        tarteaucitron.userInterface.respondAll(true);
+                    } else if (scrollPos > (screen.height / 2)) {
+                        document.getElementById('tarteaucitronDisclaimerAlert').innerHTML = '<strong>' + tarteaucitron.lang.alertBigScroll + '</strong> ' + tarteaucitron.lang.alertBig;
+                    }
+
+                    if (tacPercentage) {
+                        if (tarteaucitron.orientation === 'top') {
+                            tacPercentage.style.top = heightPosition;
+                        } else {
+                            tacPercentage.style.bottom = heightPosition;
+                        }
+                        tacPercentage.style.width = ((100 / (screen.height * 2)) * scrollPos) + '%';
+                    }
+                }
+            }
+        },
+    },
+    "load": function () {
+        "use strict";
+        var cdn = tarteaucitron.cdn,
+            language = tarteaucitron.getLanguage(),
+            pathToLang = cdn + 'lang/tarteaucitron.' + language + '.js?v=' + tarteaucitron.version,
+            pathToServices = cdn + 'tarteaucitron.services.js?v=' + tarteaucitron.version,
+            linkElement = document.createElement('link'),
+            defaults = {
+                "adblocker": false,
+                "hashtag": '#tarteaucitron',
+                "cookieName": 'tarteaucitron',
+                "highPrivacy": true,
+                "orientation": "middle",
+                "bodyPosition": "bottom",
+                "removeCredit": false,
+                "showAlertSmall": true,
+                "cookieslist": true,
+                "handleBrowserDNTRequest": false,
+                "AcceptAllCta" : true,
+                "moreInfoLink": true,
+                "privacyUrl": "",
+                "useExternalCss": false,
+                "useExternalJs": false
+            },
+            params = tarteaucitron.parameters;
+
+        // Don't show the middle bar if we are on the privacy policy page
+        if (window.location.href == tarteaucitron.parameters.privacyUrl && tarteaucitron.parameters.orientation == "middle") {
+            tarteaucitron.parameters.orientation = "bottom";
+        }
+
+        // Step -1
+        if (typeof tarteaucitronCustomPremium !== 'undefined') {
+            tarteaucitronCustomPremium();
+        }
+
+        // Step 0: get params
+        if (params !== undefined) {
+
+            for (var k in defaults) {
+                if(!tarteaucitron.parameters.hasOwnProperty(k)) {
+                    tarteaucitron.parameters[k] = defaults[k];
+                }
+            }
+        }
+
+        // global
+        tarteaucitron.orientation = tarteaucitron.parameters.orientation;
+        tarteaucitron.hashtag = tarteaucitron.parameters.hashtag;
+        tarteaucitron.highPrivacy = tarteaucitron.parameters.highPrivacy;
+        tarteaucitron.handleBrowserDNTRequest = tarteaucitron.parameters.handleBrowserDNTRequest;
+
+        // Step 1: load css
+        if ( !tarteaucitron.parameters.useExternalCss ) {
+            linkElement.rel = 'stylesheet';
+            linkElement.type = 'text/css';
+            linkElement.href = cdn + 'css/tarteaucitron.css?v=' + tarteaucitron.version;
+            document.getElementsByTagName('head')[0].appendChild(linkElement);
+        }
+        // Step 2: load language and services
+        tarteaucitron.addInternalScript(pathToLang, '', function () {
+
+          if(tarteaucitronCustomText !== ''){
+            tarteaucitron.lang = tarteaucitron.AddOrUpdate(tarteaucitron.lang, tarteaucitronCustomText);
+          }
+            tarteaucitron.addInternalScript(pathToServices, '', function () {
+
+
+                // css for new middle bar
+                if (tarteaucitron.orientation === 'middle') {
+                    var customThemeMiddle = document.createElement('style'),
+                        cssRuleMiddle = 'div#tarteaucitronRoot.tarteaucitronBeforeVisible:before {content: \'\';position: fixed;width: 100%;height: 100%;background: white;top: 0;left: 0;z-index: 999;opacity: 0.5;}div#tarteaucitronAlertBig:before {content: \'' + tarteaucitron.lang.middleBarHead + '\';font-size: 50px;}body #tarteaucitronRoot div#tarteaucitronAlertBig {width: 60%;min-width: 285px;height: auto;margin: auto;left: 50%;top: 50%;transform: translate(-50%, -50%);box-shadow: 0 0 9000px #000;border-radius: 20px;padding: 50px 0;}span#tarteaucitronDisclaimerAlert {padding: 0 30px;}#tarteaucitronRoot span#tarteaucitronDisclaimerAlert {margin: 50px 0;display: block;text-align: center;font-size: 21px;}';
+
+                    customThemeMiddle.type = 'text/css';
+                    if (customThemeMiddle.styleSheet) {
+                        customThemeMiddle.styleSheet.cssText = cssRuleMiddle;
+                    } else {
+                        customThemeMiddle.appendChild(document.createTextNode(cssRuleMiddle));
+                    }
+                    document.getElementsByTagName('head')[0].appendChild(customThemeMiddle);
+                }
+
+                var body = document.body,
+                    div = document.createElement('div'),
+                    html = '',
+                    index,
+                    orientation = 'Top',
+                    cat = ['ads', 'analytic', 'api', 'comment', 'social', 'support', 'video', 'other'],
+                    i;
+
+                cat = cat.sort(function (a, b) {
+                    if (tarteaucitron.lang[a].title > tarteaucitron.lang[b].title) { return 1; }
+                    if (tarteaucitron.lang[a].title < tarteaucitron.lang[b].title) { return -1; }
+                    return 0;
+                });
+
+                // Step 3: prepare the html
+                html += '<div id="tarteaucitronPremium"></div>';
+                html += '<button type="button" id="tarteaucitronBack" onclick="tarteaucitron.userInterface.closePanel();" aria-label="' + tarteaucitron.lang.close + '"></button>';
+                html += '<div id="tarteaucitron" role="dialog" aria-labelledby="dialogTitle">';
+                html += '   <button type="button" id="tarteaucitronClosePanel" onclick="tarteaucitron.userInterface.closePanel();">';
+                html += '       ' + tarteaucitron.lang.close;
+                html += '   </button>';
+                html += '   <div id="tarteaucitronServices">';
+                html += '      <div class="tarteaucitronLine tarteaucitronMainLine" id="tarteaucitronMainLineOffset">';
+                html += '         <span class="tarteaucitronH1" role="heading" aria-level="1" id="dialogTitle">'+ tarteaucitron.lang.title + '</span>';
+                html += '         <div id="tarteaucitronInfo">';
+                html += '         ' + tarteaucitron.lang.disclaimer;
+                if (tarteaucitron.parameters.privacyUrl !== "") {
+                    html += '   <br/><br/>';
+                    html += '   <button type="button" id="tarteaucitronPrivacyUrlDialog" onclick="document.location = tarteaucitron.parameters.privacyUrl">';
+                    html += '       ' + tarteaucitron.lang.privacyUrl;
+                    html += '   </button>';
+                }
+                html += '         </div>';
+                html += '         <div class="tarteaucitronName">';
+                html += '            <span class="tarteaucitronH2" role="heading" aria-level="2">' + tarteaucitron.lang.all + '</span>';
+                html += '         </div>';
+                html += '         <div class="tarteaucitronAsk" id="tarteaucitronScrollbarAdjust">';
+                html += '            <button type="button" id="tarteaucitronAllAllowed" class="tarteaucitronAllow" onclick="tarteaucitron.userInterface.respondAll(true);">';
+                html += '               &#10003; ' + tarteaucitron.lang.allowAll;
+                html += '            </button> ';
+                html += '            <button type="button" id="tarteaucitronAllDenied" class="tarteaucitronDeny" onclick="tarteaucitron.userInterface.respondAll(false);">';
+                html += '               &#10007; ' + tarteaucitron.lang.denyAll;
+                html += '            </button>';
+                html += '         </div>';
+                html += '      </div>';
+                html += '      <div class="tarteaucitronBorder">';
+                html += '         <div class="clear"></div><ul>';
+                for (i = 0; i < cat.length; i += 1) {
+                    html += '         <li id="tarteaucitronServicesTitle_' + cat[i] + '" class="tarteaucitronHidden">';
+                    html += '            <div class="tarteaucitronTitle">';
+                    html += '               <button type="button" onclick="tarteaucitron.userInterface.toggle(\'tarteaucitronDetails' + cat[i] + '\', \'tarteaucitronInfoBox\');return false">&#10011; ' + tarteaucitron.lang[cat[i]].title + '</button>';
+                    html += '            </div>';
+                    html += '            <div id="tarteaucitronDetails' + cat[i] + '" class="tarteaucitronDetails tarteaucitronInfoBox">';
+                    html += '               ' + tarteaucitron.lang[cat[i]].details;
+                    html += '            </div>';
+                    html += '         <ul id="tarteaucitronServices_' + cat[i] + '"></ul></li>';
+                }
+                html += '             <li id="tarteaucitronNoServicesTitle" class="tarteaucitronLine">' + tarteaucitron.lang.noServices + '</li>';
+                html += '         </ul>';
+                html += '         <div class="tarteaucitronHidden" id="tarteaucitronScrollbarChild" style="height:20px;display:block"></div>';
+                if (tarteaucitron.parameters.removeCredit === false) {
+                    html += '     <a class="tarteaucitronSelfLink" href="https://tarteaucitron.io/" rel="nofollow noreferrer noopener" target="_blank" title="tarteaucitron ' + tarteaucitron.lang.newWindow + '">🍋 ' + tarteaucitron.lang.credit + '</a>';
+                }
+                html += '       </div>';
+                html += '   </div>';
+                html += '</div>';
+
+                if (tarteaucitron.parameters.orientation === 'bottom') {
+                    orientation = 'Bottom';
+                }
+
+                if (tarteaucitron.parameters.highPrivacy && !tarteaucitron.parameters.AcceptAllCta) {
+                    html += '<div id="ta    rteaucitronAlertBig" class="tarteaucitronAlertBig' + orientation + '">';
+                    //html += '<div class="tarteaucitronAlertBigWrapper">';
+                    html += '   <span id="tarteaucitronDisclaimerAlert">';
+                    html += '       ' + tarteaucitron.lang.alertBigPrivacy;
+                    html += '   </span>';
+                    //html += '   <span class="tarteaucitronAlertBigBtnWrapper">';
+                    html += '   <button type="button" id="tarteaucitronPersonalize" onclick="tarteaucitron.userInterface.openPanel();">';
+                    html += '       ' + tarteaucitron.lang.personalize;
+                    html += '   </button>';
+
+                    if (tarteaucitron.parameters.privacyUrl !== "") {
+                        html += '   <button type="button" id="tarteaucitronPrivacyUrl" onclick="document.location = tarteaucitron.parameters.privacyUrl">';
+                        html += '       ' + tarteaucitron.lang.privacyUrl;
+                        html += '   </button>';
+                    }
+
+                    //html += '   </span>';
+                    //html += '</div>';
+                    html += '</div>';
+                } else {
+                    html += '<div id="tarteaucitronAlertBig" class="tarteaucitronAlertBig' + orientation + '">';
+                    //html += '<div class="tarteaucitronAlertBigWrapper">';
+                    html += '   <span id="tarteaucitronDisclaimerAlert">';
+
+                    if (tarteaucitron.parameters.highPrivacy) {
+                        html += '       ' + tarteaucitron.lang.alertBigPrivacy;
+                    } else {
+                        html += '       ' + tarteaucitron.lang.alertBigClick + ' ' + tarteaucitron.lang.alertBig;
+                    }
+
+                    html += '   </span>';
+                    //html += '   <span class="tarteaucitronAlertBigBtnWrapper">';
+                    html += '   <button type="button" id="tarteaucitronPersonalize" onclick="tarteaucitron.userInterface.respondAll(true);">';
+                    html += '       &#10003; ' + tarteaucitron.lang.acceptAll;
+                    html += '   </button>';
+
+
+                    if (tarteaucitron.parameters.orientation === 'middle') {
+                                    html += '   <button type="button" class="tarteaucitronCTAButton tarteaucitronDeny"  onclick="tarteaucitron.userInterface.respondAll(false);">';
+                                    html += '       &#10007; ' + tarteaucitron.lang.denyAll;
+                                    html += '   </button>';
+                                    html += '   <br/><br/>';
+                    }
+
+                    html += '   <button type="button" id="tarteaucitronCloseAlert" onclick="tarteaucitron.userInterface.openPanel();">';
+                    html += '       ' + tarteaucitron.lang.personalize;
+                    html += '   </button>';
+
+                    if (tarteaucitron.parameters.privacyUrl !== "") {
+                        html += '   <button type="button" id="tarteaucitronPrivacyUrl" onclick="document.location = tarteaucitron.parameters.privacyUrl">';
+                        html += '       ' + tarteaucitron.lang.privacyUrl;
+                        html += '   </button>';
+                    }
+
+                    //html += '   </span>';
+                    //html += '</div>';
+                    html += '</div>';
+                    html += '<div id="tarteaucitronPercentage"></div>';
+                }
+
+                if (tarteaucitron.parameters.showAlertSmall === true) {
+                    html += '<div id="tarteaucitronAlertSmall" class="tarteaucitronAlertSmall' + orientation + '">';
+                    html += '   <button type="button" id="tarteaucitronManager" onclick="tarteaucitron.userInterface.openPanel();">';
+                    html += '       ' + tarteaucitron.lang.alertSmall;
+                    html += '       <span id="tarteaucitronDot">';
+                    html += '           <span id="tarteaucitronDotGreen"></span>';
+                    html += '           <span id="tarteaucitronDotYellow"></span>';
+                    html += '           <span id="tarteaucitronDotRed"></span>';
+                    html += '       </span>';
+                    if (tarteaucitron.parameters.cookieslist === true) {
+                        html += '   </button><!-- @whitespace';
+                        html += '   --><button type="button" id="tarteaucitronCookiesNumber" onclick="tarteaucitron.userInterface.toggleCookiesList();">0</button>';
+                        html += '   <div id="tarteaucitronCookiesListContainer">';
+                        html += '       <button type="button" id="tarteaucitronClosePanelCookie" onclick="tarteaucitron.userInterface.closePanel();">';
+                        html += '           ' + tarteaucitron.lang.close;
+                        html += '       </button>';
+                        html += '       <div class="tarteaucitronCookiesListMain" id="tarteaucitronCookiesTitle">';
+                        html += '            <span class="tarteaucitronH2" role="heading" aria-level="2" id="tarteaucitronCookiesNumberBis">0 cookie</span>';
+                        html += '       </div>';
+                        html += '       <div id="tarteaucitronCookiesList"></div>';
+                        html += '    </div>';
+                    } else {
+                        html += '   </div>';
+                    }
+                    html += '</div>';
+                }
+
+                tarteaucitron.addInternalScript(tarteaucitron.cdn + 'advertising.js?v=' + tarteaucitron.version, '', function () {
+                    if (tarteaucitronNoAdBlocker === true || tarteaucitron.parameters.adblocker === false) {
+
+                        // create a wrapper container at the same level than tarteaucitron so we can add an aria-hidden when tarteaucitron is opened
+                        /*var wrapper = document.createElement('div');
+                        wrapper.id = "contentWrapper";
+
+                        while (document.body.firstChild)
+                        {
+                            wrapper.appendChild(document.body.firstChild);
+                        }
+
+                        // Append the wrapper to the body
+                        document.body.appendChild(wrapper);*/
+
+                        div.id = 'tarteaucitronRoot';
+                        if (tarteaucitron.parameters.bodyPosition === 'top') {
+                            // Prepend tarteaucitron: #tarteaucitronRoot first-child of the body for better accessibility
+                            var bodyFirstChild = body.firstChild;
+                            body.insertBefore(div, bodyFirstChild);
+                        }
+                        else {
+                            // Append tarteaucitron: #tarteaucitronRoot last-child of the body
+                            body.appendChild(div, body);
+                        }
+                        div.innerHTML = html;
+
+                        //ie compatibility
+                        var tacRootAvailableEvent;
+                        if(typeof(Event) === 'function') {
+                            tacRootAvailableEvent = new Event("tac.root_available");
+                        }else{
+                            tacRootAvailableEvent = document.createEvent('Event');
+                            tacRootAvailableEvent.initEvent("tac.root_available", true, true);
+                        }
+                        //end ie compatibility
+
+                        window.dispatchEvent(tacRootAvailableEvent);
+
+                        if (tarteaucitron.job !== undefined) {
+                            tarteaucitron.job = tarteaucitron.cleanArray(tarteaucitron.job);
+                            for (index = 0; index < tarteaucitron.job.length; index += 1) {
+                                tarteaucitron.addService(tarteaucitron.job[index]);
+                            }
+                        } else {
+                            tarteaucitron.job = []
+                        }
+
+                        tarteaucitron.isAjax = true;
+
+                        tarteaucitron.job.push = function (id) {
+
+                            // ie <9 hack
+                            if (typeof tarteaucitron.job.indexOf === 'undefined') {
+                                tarteaucitron.job.indexOf = function (obj, start) {
+                                    var i,
+                                        j = this.length;
+                                    for (i = (start || 0); i < j; i += 1) {
+                                        if (this[i] === obj) { return i; }
+                                    }
+                                    return -1;
+                                };
+                            }
+
+                            if (tarteaucitron.job.indexOf(id) === -1) {
+                                Array.prototype.push.call(this, id);
+                            }
+                            tarteaucitron.launch[id] = false;
+                            tarteaucitron.addService(id);
+                        };
+
+                        if (document.location.hash === tarteaucitron.hashtag && tarteaucitron.hashtag !== '') {
+                            tarteaucitron.userInterface.openPanel();
+                        }
+
+                        tarteaucitron.cookie.number();
+                        setInterval(tarteaucitron.cookie.number, 60000);
+                    }
+                }, tarteaucitron.parameters.adblocker);
+
+                if (tarteaucitron.parameters.adblocker === true) {
+                    setTimeout(function () {
+                        if (tarteaucitronNoAdBlocker === false) {
+                            html = '<div id="tarteaucitronAlertBig" class="tarteaucitronAlertBig' + orientation + '" style="display:block" role="alert" aria-live="polite">';
+                            html += '   <p id="tarteaucitronDisclaimerAlert">';
+                            html += '       ' + tarteaucitron.lang.adblock + '<br/>';
+                            html += '       <strong>' + tarteaucitron.lang.adblock_call + '</strong>';
+                            html += '   </p>';
+                            html += '   <button type="button" class="tarteaucitronCTAButton" onclick="location.reload();">';
+                            html += '       ' + tarteaucitron.lang.reload;
+                            html += '   </button>';
+                            html += '</div>';
+                            html += '<div id="tarteaucitronPremium"></div>';
+
+                            div.id = 'tarteaucitronRoot';
+                            if (tarteaucitron.parameters.bodyPosition === 'top') {
+                                // Prepend tarteaucitron: #tarteaucitronRoot first-child of the body for better accessibility
+                                var bodyFirstChild = body.firstChild;
+                                body.insertBefore(div, bodyFirstChild);
+                            }
+                            else {
+                                // Append tarteaucitron: #tarteaucitronRoot last-child of the body
+                                body.appendChild(div, body);
+                            }
+                            div.innerHTML = html;
+                        }
+                    }, 1500);
+                }
+            });
+        });
+
+        if(tarteaucitron.events.load) {
+            tarteaucitron.events.load();
+        }
+    },
+    "addService": function (serviceId) {
+        "use strict";
+        var html = '',
+            s = tarteaucitron.services,
+            service = s[serviceId],
+            cookie = tarteaucitron.cookie.read(),
+            hostname = document.location.hostname,
+            hostRef = document.referrer.split('/')[2],
+            isNavigating = (hostRef === hostname && window.location.href !== tarteaucitron.parameters.privacyUrl),
+            isAutostart = (!service.needConsent),
+            isWaiting = (cookie.indexOf(service.key + '=wait') >= 0),
+            isDenied = (cookie.indexOf(service.key + '=false') >= 0),
+            isAllowed = (cookie.indexOf(service.key + '=true') >= 0),
+            isResponded = (cookie.indexOf(service.key + '=false') >= 0 || cookie.indexOf(service.key + '=true') >= 0),
+            isDNTRequested = (navigator.doNotTrack === "1" || navigator.doNotTrack === "yes" || navigator.msDoNotTrack === "1" || window.doNotTrack === "1");
+
+        if (tarteaucitron.added[service.key] !== true) {
+            tarteaucitron.added[service.key] = true;
+
+            html += '<li id="' + service.key + 'Line" class="tarteaucitronLine">';
+            html += '   <div class="tarteaucitronName">';
+            html += '       <span class="tarteaucitronH3" role="heading" aria-level="3">' + service.name + '</span>';
+            html += '       <span id="tacCL' + service.key + '" class="tarteaucitronListCookies"></span><br/>';
+
+            if (tarteaucitron.parameters.moreInfoLink == true) {
+
+                var link = 'https://tarteaucitron.io/service/' + service.key + '/';
+                if (service.readmoreLink !== undefined && service.readmoreLink !== '') {
+                    link = service.readmoreLink;
+                }
+                if (tarteaucitron.parameters.readmoreLink !== undefined && tarteaucitron.parameters.readmoreLink !== '') {
+                    link = tarteaucitron.parameters.readmoreLink;
+                }
+                html += '       <a href="' + link + '" target="_blank" rel="noreferrer noopener" title="'+ tarteaucitron.lang.cookieDetail + ' ' + service.name + ' ' + tarteaucitron.lang.ourSite + ' ' + tarteaucitron.lang.newWindow +'">';
+                html += '           ' + tarteaucitron.lang.more;
+                html += '       </a>';
+                html += '        - ';
+                html += '       <a href="' + service.uri + '" target="_blank" rel="noreferrer noopener" title="' + service.name + ' ' + tarteaucitron.lang.newWindow + '">';
+                html += '           ' + tarteaucitron.lang.source;
+                html += '       </a>';
+            }
+
+            html += '   </div>';
+            html += '   <div class="tarteaucitronAsk">';
+            html += '       <button type="button" id="' + service.key + 'Allowed" class="tarteaucitronAllow" onclick="tarteaucitron.userInterface.respond(this, true);">';
+            html += '           &#10003; ' + tarteaucitron.lang.allow;
+            html += '       </button> ';
+            html += '       <button type="button" id="' + service.key  + 'Denied" class="tarteaucitronDeny" onclick="tarteaucitron.userInterface.respond(this, false);">';
+            html += '           &#10007; ' + tarteaucitron.lang.deny;
+            html += '       </button>';
+            html += '   </div>';
+            html += '</li>';
+
+            tarteaucitron.userInterface.css('tarteaucitronServicesTitle_' + service.type, 'display', 'block');
+
+            if (document.getElementById('tarteaucitronServices_' + service.type) !== null) {
+                document.getElementById('tarteaucitronServices_' + service.type).innerHTML += html;
+            }
+
+            tarteaucitron.userInterface.css('tarteaucitronNoServicesTitle', 'display', 'none');
+
+            tarteaucitron.userInterface.order(service.type);
+        }
+
+        tarteaucitron.pro('!' + service.key + '=' + isAllowed);
+
+        // allow by default for non EU
+        if (isResponded === false && tarteaucitron.user.bypass === true) {
+            isAllowed = true;
+            tarteaucitron.cookie.create(service.key, true);
+        }
+
+        if ((!isResponded && (isAutostart || (isNavigating && isWaiting)) && !tarteaucitron.highPrivacy) || isAllowed) {
+            if (!isAllowed) {
+                tarteaucitron.cookie.create(service.key, true);
+            }
+            if (tarteaucitron.launch[service.key] !== true) {
+                tarteaucitron.launch[service.key] = true;
+                service.js();
+                tarteaucitron.sendEvent(service.key + '_loaded');
+            }
+            tarteaucitron.state[service.key] = true;
+            tarteaucitron.userInterface.color(service.key, true);
+        } else if (isDenied) {
+            if (typeof service.fallback === 'function') {
+                service.fallback();
+            }
+            tarteaucitron.state[service.key] = false;
+            tarteaucitron.userInterface.color(service.key, false);
+        } else if (!isResponded && isDNTRequested && tarteaucitron.handleBrowserDNTRequest) {
+            tarteaucitron.cookie.create(service.key, 'false');
+            if (typeof service.fallback === 'function') {
+                service.fallback();
+            }
+            tarteaucitron.state[service.key] = false;
+            tarteaucitron.userInterface.color(service.key, false);
+        } else if (!isResponded) {
+            tarteaucitron.cookie.create(service.key, 'wait');
+            if (typeof service.fallback === 'function') {
+                service.fallback();
+            }
+            tarteaucitron.userInterface.color(service.key, 'wait');
+            tarteaucitron.userInterface.openAlert();
+        }
+
+        tarteaucitron.cookie.checkCount(service.key);
+        tarteaucitron.sendEvent(service.key + '_added')
+    },
+    "sendEvent" : function(event_key) {
+        if(event_key !== undefined) {
+            //ie compatibility
+            var send_event_item;
+            if(typeof(Event) === 'function') {
+                send_event_item = new Event(event_key);
+            }else{
+                send_event_item = document.createEvent('Event');
+                send_event_item.initEvent(event_key, true, true);
+            }
+            //end ie compatibility
+
+            document.dispatchEvent(send_event_item);
+        }
+    },
+    "cleanArray": function cleanArray(arr) {
+        "use strict";
+        var i,
+            len = arr.length,
+            out = [],
+            obj = {},
+            s = tarteaucitron.services;
+
+        for (i = 0; i < len; i += 1) {
+            if (!obj[arr[i]]) {
+                obj[arr[i]] = {};
+                if (tarteaucitron.services[arr[i]] !== undefined) {
+                    out.push(arr[i]);
+                }
+            }
+        }
+
+        out = out.sort(function (a, b) {
+            if (s[a].type + s[a].key > s[b].type + s[b].key) { return 1; }
+            if (s[a].type + s[a].key < s[b].type + s[b].key) { return -1; }
+            return 0;
+        });
+
+        return out;
+    },
+    "userInterface": {
+        "css": function (id, property, value) {
+            "use strict";
+            if (document.getElementById(id) !== null) {
+                document.getElementById(id).style[property] = value;
+            }
+        },
+        "addClass": function (id, className) {
+            "use strict";
+            if (document.getElementById(id) !== null) {
+                document.getElementById(id).classList.add(className);
+            }
+        },
+        "removeClass": function (id, className) {
+            "use strict";
+            if (document.getElementById(id) !== null) {
+                document.getElementById(id).classList.remove(className);
+            }
+        },
+        "respondAll": function (status) {
+            "use strict";
+            var s = tarteaucitron.services,
+                service,
+                key,
+                index = 0;
+
+            for (index = 0; index < tarteaucitron.job.length; index += 1) {
+                service = s[tarteaucitron.job[index]];
+                key = service.key;
+                if (tarteaucitron.state[key] !== status) {
+                    if (status === false && tarteaucitron.launch[key] === true) {
+                        tarteaucitron.reloadThePage = true;
+                    }
+                    if (tarteaucitron.launch[key] !== true && status === true) {
+
+                        tarteaucitron.pro('!' + key + '=engage');
+
+                        tarteaucitron.launch[key] = true;
+                        tarteaucitron.services[key].js();
+                    }
+                    tarteaucitron.state[key] = status;
+                    tarteaucitron.cookie.create(key, status);
+                    tarteaucitron.userInterface.color(key, status);
+                }
+            }
+        },
+        "respond": function (el, status) {
+            "use strict";
+            var key = el.id.replace(new RegExp("(Eng[0-9]+|Allow|Deni)ed", "g"), '');
+
+            // return if same state
+            if (tarteaucitron.state[key] === status) {
+                return;
+            }
+
+            if (status === false && tarteaucitron.launch[key] === true) {
+                tarteaucitron.reloadThePage = true;
+            }
+
+            // if not already launched... launch the service
+            if (status === true) {
+                if (tarteaucitron.launch[key] !== true) {
+
+                    tarteaucitron.pro('!' + key + '=engage');
+
+                    tarteaucitron.launch[key] = true;
+                    tarteaucitron.sendEvent(key + '_loaded');
+                    tarteaucitron.services[key].js();
+                }
+            }
+            tarteaucitron.state[key] = status;
+            tarteaucitron.cookie.create(key, status);
+            tarteaucitron.userInterface.color(key, status);
+        },
+        "color": function (key, status) {
+            "use strict";
+            var c = 'tarteaucitron',
+                nbDenied = 0,
+                nbPending = 0,
+                nbAllowed = 0,
+                sum = tarteaucitron.job.length,
+                index;
+
+            if (status === true) {
+                document.getElementById(key + 'Line').classList.add('tarteaucitronIsAllowed');
+                document.getElementById(key + 'Line').classList.remove('tarteaucitronIsDenied');
+            } else if (status === false) {
+                document.getElementById(key + 'Line').classList.remove('tarteaucitronIsAllowed');
+                document.getElementById(key + 'Line').classList.add('tarteaucitronIsDenied');
+            }
+
+            // check if all services are allowed
+            for (index = 0; index < sum; index += 1) {
+                if (tarteaucitron.state[tarteaucitron.job[index]] === false) {
+                    nbDenied += 1;
+                } else if (tarteaucitron.state[tarteaucitron.job[index]] === undefined) {
+                    nbPending += 1;
+                } else if (tarteaucitron.state[tarteaucitron.job[index]] === true) {
+                    nbAllowed += 1;
+                }
+            }
+
+            tarteaucitron.userInterface.css(c + 'DotGreen', 'width', ((100 / sum) * nbAllowed) + '%');
+            tarteaucitron.userInterface.css(c + 'DotYellow', 'width', ((100 / sum) * nbPending) + '%');
+            tarteaucitron.userInterface.css(c + 'DotRed', 'width', ((100 / sum) * nbDenied) + '%');
+
+            if (nbDenied === 0 && nbPending === 0) {
+                tarteaucitron.userInterface.removeClass(c + 'AllDenied', c + 'IsSelected');
+                tarteaucitron.userInterface.addClass(c + 'AllAllowed', c + 'IsSelected');
+
+                tarteaucitron.userInterface.addClass(c + 'MainLineOffset', c + 'IsAllowed');
+                tarteaucitron.userInterface.removeClass(c + 'MainLineOffset', c + 'IsDenied');
+            } else if (nbAllowed === 0 && nbPending === 0) {
+                tarteaucitron.userInterface.removeClass(c + 'AllAllowed', c + 'IsSelected');
+                tarteaucitron.userInterface.addClass(c + 'AllDenied', c + 'IsSelected');
+
+                tarteaucitron.userInterface.removeClass(c + 'MainLineOffset', c + 'IsAllowed');
+                tarteaucitron.userInterface.addClass(c + 'MainLineOffset', c + 'IsDenied');
+            } else {
+                tarteaucitron.userInterface.removeClass(c + 'AllAllowed', c + 'IsSelected');
+                tarteaucitron.userInterface.removeClass(c + 'AllDenied', c + 'IsSelected');
+
+                tarteaucitron.userInterface.removeClass(c + 'MainLineOffset', c + 'IsAllowed');
+                tarteaucitron.userInterface.removeClass(c + 'MainLineOffset', c + 'IsDenied');
+            }
+
+            // close the alert if all service have been reviewed
+            if (nbPending === 0) {
+                tarteaucitron.userInterface.closeAlert();
+            }
+
+            if (tarteaucitron.services[key].cookies.length > 0 && status === false) {
+                tarteaucitron.cookie.purge(tarteaucitron.services[key].cookies);
+            }
+
+            if (status === true) {
+                if (document.getElementById('tacCL' + key) !== null) {
+                    document.getElementById('tacCL' + key).innerHTML = '...';
+                }
+                setTimeout(function () {
+                    tarteaucitron.cookie.checkCount(key);
+                }, 2500);
+            } else {
+                tarteaucitron.cookie.checkCount(key);
+            }
+        },
+        "openPanel": function () {
+            "use strict";
+
+            tarteaucitron.userInterface.css('tarteaucitron', 'display', 'block');
+            tarteaucitron.userInterface.css('tarteaucitronBack', 'display', 'block');
+            tarteaucitron.userInterface.css('tarteaucitronCookiesListContainer', 'display', 'none');
+
+            document.getElementById('tarteaucitronClosePanel').focus();
+            document.getElementsByTagName('body')[0].classList.add('modal-open');
+            tarteaucitron.userInterface.focusTrap();
+            tarteaucitron.userInterface.jsSizing('main');
+
+            //ie compatibility
+            var tacOpenPanelEvent;
+            if(typeof(Event) === 'function') {
+                tacOpenPanelEvent = new Event("tac.open_panel");
+            }else{
+                tacOpenPanelEvent = document.createEvent('Event');
+                tacOpenPanelEvent.initEvent("tac.open_panel", true, true);
+            }
+            //end ie compatibility
+
+            window.dispatchEvent(tacOpenPanelEvent);
+        },
+        "closePanel": function () {
+            "use strict";
+
+            if (document.location.hash === tarteaucitron.hashtag) {
+                if (window.history) {
+                    window.history.replaceState('', document.title, window.location.pathname + window.location.search);
+                } else {
+                    document.location.hash = '';
+                }
+            }
+            tarteaucitron.userInterface.css('tarteaucitron', 'display', 'none');
+            tarteaucitron.userInterface.css('tarteaucitronCookiesListContainer', 'display', 'none');
+
+            tarteaucitron.fallback(['tarteaucitronInfoBox'], function (elem) {
+                elem.style.display = 'none';
+            }, true);
+
+            if (tarteaucitron.reloadThePage === true) {
+                window.location.reload();
+            } else {
+                tarteaucitron.userInterface.css('tarteaucitronBack', 'display', 'none');
+            }
+            if (document.getElementById('tarteaucitronCloseAlert') !== null) {
+                document.getElementById('tarteaucitronCloseAlert').focus();
+            }
+            document.getElementsByTagName('body')[0].classList.remove('modal-open');
+
+            //ie compatibility
+            var tacClosePanelEvent;
+            if(typeof(Event) === 'function') {
+                tacClosePanelEvent = new Event("tac.close_panel");
+            }else{
+                tacClosePanelEvent = document.createEvent('Event');
+                tacClosePanelEvent.initEvent("tac.close_panel", true, true);
+            }
+            //end ie compatibility
+
+            window.dispatchEvent(tacClosePanelEvent);
+        },
+        "focusTrap": function() {
+            "use strict";
+
+            var focusableEls,
+                firstFocusableEl,
+                lastFocusableEl,
+                filtered;
+
+            focusableEls = document.getElementById('tarteaucitron').querySelectorAll('a[href], button');
+            filtered = [];
+
+            // get only visible items
+            for (var i = 0, max = focusableEls.length; i < max; i++) {
+                if (focusableEls[i].offsetHeight > 0) {
+                   filtered.push(focusableEls[i]);
+                }
+            }
+
+            firstFocusableEl = filtered[0];
+            lastFocusableEl = filtered[filtered.length - 1];
+
+            //loop focus inside tarteaucitron
+            document.getElementById('tarteaucitron').addEventListener("keydown", function (evt) {
+
+                if ( evt.key === 'Tab' || evt.keyCode === 9 ) {
+
+                    if ( evt.shiftKey ) /* shift + tab */ {
+                        if (document.activeElement === firstFocusableEl) {
+                            lastFocusableEl.focus();
+                            evt.preventDefault();
+                        }
+                    } else /* tab */ {
+                        if (document.activeElement === lastFocusableEl) {
+                            firstFocusableEl.focus();
+                            evt.preventDefault();
+                        }
+                    }
+                }
+            })
+        },
+        "openAlert": function () {
+            "use strict";
+            var c = 'tarteaucitron';
+            tarteaucitron.userInterface.css(c + 'Percentage', 'display', 'block');
+            tarteaucitron.userInterface.css(c + 'AlertSmall', 'display', 'none');
+            tarteaucitron.userInterface.css(c + 'AlertBig',   'display', 'block');
+            tarteaucitron.userInterface.addClass(c + 'Root',   'tarteaucitronBeforeVisible');
+
+            //ie compatibility
+            var tacOpenAlertEvent;
+            if(typeof(Event) === 'function') {
+                tacOpenAlertEvent = new Event("tac.open_alert");
+            }else{
+                tacOpenAlertEvent = document.createEvent('Event');
+                tacOpenAlertEvent.initEvent("tac.open_alert", true, true);
+            }
+            //end ie compatibility
+
+            window.dispatchEvent(tacOpenAlertEvent);
+        },
+        "closeAlert": function () {
+            "use strict";
+            var c = 'tarteaucitron';
+            tarteaucitron.userInterface.css(c + 'Percentage', 'display', 'none');
+            tarteaucitron.userInterface.css(c + 'AlertSmall', 'display', 'block');
+            tarteaucitron.userInterface.css(c + 'AlertBig',   'display', 'none');
+            tarteaucitron.userInterface.removeClass(c + 'Root',   'tarteaucitronBeforeVisible');
+            tarteaucitron.userInterface.jsSizing('box');
+
+            //ie compatibility
+            var tacCloseAlertEvent;
+            if(typeof(Event) === 'function') {
+                tacCloseAlertEvent = new Event("tac.close_alert");
+            }else{
+                tacCloseAlertEvent = document.createEvent('Event');
+                tacCloseAlertEvent.initEvent("tac.close_alert", true, true);
+            }
+            //end ie compatibility
+
+            window.dispatchEvent(tacCloseAlertEvent);
+        },
+        "toggleCookiesList": function () {
+            "use strict";
+            var div = document.getElementById('tarteaucitronCookiesListContainer');
+
+            if (div === null) {
+                return;
+            }
+
+            if (div.style.display !== 'block') {
+                tarteaucitron.cookie.number();
+                div.style.display = 'block';
+                tarteaucitron.userInterface.jsSizing('cookie');
+                tarteaucitron.userInterface.css('tarteaucitron', 'display', 'none');
+                tarteaucitron.userInterface.css('tarteaucitronBack', 'display', 'block');
+                tarteaucitron.fallback(['tarteaucitronInfoBox'], function (elem) {
+                    elem.style.display = 'none';
+                }, true);
+            } else {
+                div.style.display = 'none';
+                tarteaucitron.userInterface.css('tarteaucitron', 'display', 'none');
+                tarteaucitron.userInterface.css('tarteaucitronBack', 'display', 'none');
+            }
+        },
+        "toggle": function (id, closeClass) {
+            "use strict";
+            var div = document.getElementById(id);
+
+            if (div === null) {
+                return;
+            }
+
+            if (closeClass !== undefined) {
+                tarteaucitron.fallback([closeClass], function (elem) {
+                    if (elem.id !== id) {
+                        elem.style.display = 'none';
+                    }
+                }, true);
+            }
+
+            if (div.style.display !== 'block') {
+                div.style.display = 'block';
+            } else {
+                div.style.display = 'none';
+            }
+        },
+        "order": function (id) {
+            "use strict";
+            var main = document.getElementById('tarteaucitronServices_' + id),
+                allDivs,
+                store = [],
+                i;
+
+            if (main === null) {
+                return;
+            }
+
+            allDivs = main.childNodes;
+
+            if (typeof Array.prototype.map === 'function' && typeof Enumerable === 'undefined') {
+                Array.prototype.map.call(main.children, Object).sort(function (a, b) {
+                //var mainChildren = Array.from(main.children);
+                //mainChildren.sort(function (a, b) {
+                    if (tarteaucitron.services[a.id.replace(/Line/g, '')].name > tarteaucitron.services[b.id.replace(/Line/g, '')].name) { return 1; }
+                    if (tarteaucitron.services[a.id.replace(/Line/g, '')].name < tarteaucitron.services[b.id.replace(/Line/g, '')].name) { return -1; }
+                    return 0;
+                }).forEach(function (element) {
+                    main.appendChild(element);
+                });
+            }
+        },
+        "jsSizing": function (type) {
+            "use strict";
+            var scrollbarMarginRight = 10,
+                scrollbarWidthParent,
+                scrollbarWidthChild,
+                servicesHeight,
+                e = window,
+                a = 'inner',
+                windowInnerHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight,
+                mainTop,
+                mainHeight,
+                closeButtonHeight,
+                headerHeight,
+                cookiesListHeight,
+                cookiesCloseHeight,
+                cookiesTitleHeight,
+                paddingBox,
+                alertSmallHeight,
+                cookiesNumberHeight;
+
+            if (type === 'box') {
+                if (document.getElementById('tarteaucitronAlertSmall') !== null && document.getElementById('tarteaucitronCookiesNumber') !== null) {
+
+                    // reset
+                    tarteaucitron.userInterface.css('tarteaucitronCookiesNumber', 'padding', '0px 10px');
+
+                    // calculate
+                    alertSmallHeight = document.getElementById('tarteaucitronAlertSmall').offsetHeight;
+                    cookiesNumberHeight = document.getElementById('tarteaucitronCookiesNumber').offsetHeight;
+                    paddingBox = (alertSmallHeight - cookiesNumberHeight) / 2;
+
+                    // apply
+                    tarteaucitron.userInterface.css('tarteaucitronCookiesNumber', 'padding', paddingBox + 'px 10px');
+                }
+            } else if (type === 'main') {
+
+                // get the real window width for media query
+                if (window.innerWidth === undefined) {
+                    a = 'client';
+                    e = document.documentElement || document.body;
+                }
+
+                // height of the services list container
+                if (document.getElementById('tarteaucitron') !== null && document.getElementById('tarteaucitronClosePanel') !== null && document.getElementById('tarteaucitronMainLineOffset') !== null) {
+
+                    // reset
+                    tarteaucitron.userInterface.css('tarteaucitronServices', 'height', 'auto');
+
+                    // calculate
+                    mainHeight = document.getElementById('tarteaucitron').offsetHeight;
+                    closeButtonHeight = document.getElementById('tarteaucitronClosePanel').offsetHeight;
+
+                    // apply
+                    servicesHeight = (mainHeight - closeButtonHeight + 2);
+                    tarteaucitron.userInterface.css('tarteaucitronServices', 'height', servicesHeight + 'px');
+                    tarteaucitron.userInterface.css('tarteaucitronServices', 'overflow-x', 'auto');
+                }
+
+                // align the main allow/deny button depending on scrollbar width
+                if (document.getElementById('tarteaucitronServices') !== null && document.getElementById('tarteaucitronScrollbarChild') !== null) {
+
+                    // media query
+                    if (e[a + 'Width'] <= 479) {
+                        tarteaucitron.userInterface.css('tarteaucitronScrollbarAdjust', 'marginLeft', '11px');
+                    } else if (e[a + 'Width'] <= 767) {
+                        scrollbarMarginRight = 12;
+                    }
+
+                    scrollbarWidthParent = document.getElementById('tarteaucitronServices').offsetWidth;
+                    scrollbarWidthChild = document.getElementById('tarteaucitronScrollbarChild').offsetWidth;
+                    tarteaucitron.userInterface.css('tarteaucitronScrollbarAdjust', 'marginRight', ((scrollbarWidthParent - scrollbarWidthChild) + scrollbarMarginRight) + 'px');
+                }
+
+                // center the main panel
+                if (document.getElementById('tarteaucitron') !== null) {
+
+                    // media query
+                    if (e[a + 'Width'] <= 767) {
+                        mainTop = 0;
+                    } else {
+                        mainTop = ((windowInnerHeight - document.getElementById('tarteaucitron').offsetHeight) / 2) - 21;
+                    }
+
+                    if (document.getElementById('tarteaucitronMainLineOffset') !== null) {
+                        if (document.getElementById('tarteaucitron').offsetHeight < (windowInnerHeight / 2)) {
+                            mainTop -= document.getElementById('tarteaucitronMainLineOffset').offsetHeight;
+                        }
+                    }
+
+                    // correct
+                    if (mainTop < 0) {
+                        mainTop = 0;
+                    }
+
+                    // apply
+                    tarteaucitron.userInterface.css('tarteaucitron', 'top', mainTop + 'px');
+                }
+
+
+            } else if (type === 'cookie') {
+
+                // put cookies list at bottom
+                if (document.getElementById('tarteaucitronAlertSmall') !== null) {
+                    tarteaucitron.userInterface.css('tarteaucitronCookiesListContainer', 'bottom', (document.getElementById('tarteaucitronAlertSmall').offsetHeight) + 'px');
+                }
+
+                // height of cookies list
+                if (document.getElementById('tarteaucitronCookiesListContainer') !== null) {
+
+                    // reset
+                    tarteaucitron.userInterface.css('tarteaucitronCookiesList', 'height', 'auto');
+
+                    // calculate
+                    cookiesListHeight = document.getElementById('tarteaucitronCookiesListContainer').offsetHeight;
+                    cookiesCloseHeight = document.getElementById('tarteaucitronClosePanelCookie').offsetHeight;
+                    cookiesTitleHeight = document.getElementById('tarteaucitronCookiesTitle').offsetHeight;
+
+                    // apply
+                    tarteaucitron.userInterface.css('tarteaucitronCookiesList', 'height', (cookiesListHeight - cookiesCloseHeight - cookiesTitleHeight - 2) + 'px');
+                }
+            }
+        }
+    },
+    "cookie": {
+        "owner": {},
+        "create": function (key, status) {
+            "use strict";
+
+            if (tarteaucitronForceExpire !== '') {
+                // The number of day(s)/hour(s) can't be higher than 1 year
+                if ((tarteaucitronExpireInDay && tarteaucitronForceExpire < 365) || (!tarteaucitronExpireInDay && tarteaucitronForceExpire < 8760)) {
+                    if (tarteaucitronExpireInDay) {
+                        // Multiplication to tranform the number of days to milliseconds
+                        timeExpire = tarteaucitronForceExpire * 86400000;
+                    } else {
+                        // Multiplication to tranform the number of hours to milliseconds
+                        timeExpire = tarteaucitronForceExpire * 3600000;
+                    }
+                }
+            }
+
+            var d = new Date(),
+                time = d.getTime(),
+                expireTime = time + timeExpire, // 365 days
+                regex = new RegExp("!" + key + "=(wait|true|false)", "g"),
+                cookie = tarteaucitron.cookie.read().replace(regex, ""),
+                value = tarteaucitron.parameters.cookieName + '=' + cookie + '!' + key + '=' + status,
+                domain = (tarteaucitron.parameters.cookieDomain !== undefined && tarteaucitron.parameters.cookieDomain !== '') ? 'domain=' + tarteaucitron.parameters.cookieDomain + ';' : '';
+
+            d.setTime(expireTime);
+            document.cookie = value + '; expires=' + d.toGMTString() + '; path=/;' + domain;
+        },
+        "read": function () {
+            "use strict";
+            var nameEQ = tarteaucitron.parameters.cookieName + "=",
+                ca = document.cookie.split(';'),
+                i,
+                c;
+
+            for (i = 0; i < ca.length; i += 1) {
+                c = ca[i];
+                while (c.charAt(0) === ' ') {
+                    c = c.substring(1, c.length);
+                }
+                if (c.indexOf(nameEQ) === 0) {
+                    return c.substring(nameEQ.length, c.length);
+                }
+            }
+            return '';
+        },
+        "purge": function (arr) {
+            "use strict";
+            var i;
+
+            for (i = 0; i < arr.length; i += 1) {
+                document.cookie = arr[i] + '=; expires=Thu, 01 Jan 2000 00:00:00 GMT; path=/;';
+                document.cookie = arr[i] + '=; expires=Thu, 01 Jan 2000 00:00:00 GMT; path=/; domain=.' + location.hostname + ';';
+                document.cookie = arr[i] + '=; expires=Thu, 01 Jan 2000 00:00:00 GMT; path=/; domain=.' + location.hostname.split('.').slice(-2).join('.') + ';';
+            }
+        },
+        "checkCount": function (key) {
+            "use strict";
+            var arr = tarteaucitron.services[key].cookies,
+                nb = arr.length,
+                nbCurrent = 0,
+                html = '',
+                i,
+                status = document.cookie.indexOf(key + '=true');
+
+            if (status >= 0 && nb === 0) {
+                html += tarteaucitron.lang.useNoCookie;
+            } else if (status >= 0) {
+                for (i = 0; i < nb; i += 1) {
+                    if (document.cookie.indexOf(arr[i] + '=') !== -1) {
+                        nbCurrent += 1;
+                        if (tarteaucitron.cookie.owner[arr[i]] === undefined) {
+                            tarteaucitron.cookie.owner[arr[i]] = [];
+                        }
+                        if (tarteaucitron.cookie.crossIndexOf(tarteaucitron.cookie.owner[arr[i]], tarteaucitron.services[key].name) === false) {
+                            tarteaucitron.cookie.owner[arr[i]].push(tarteaucitron.services[key].name);
+                        }
+                    }
+                }
+
+                if (nbCurrent > 0) {
+                    html += tarteaucitron.lang.useCookieCurrent + ' ' + nbCurrent + ' cookie';
+                    if (nbCurrent > 1) {
+                        html += 's';
+                    }
+                    html += '.';
+                } else {
+                    html += tarteaucitron.lang.useNoCookie;
+                }
+            } else if (nb === 0) {
+                html = tarteaucitron.lang.noCookie;
+            } else {
+                html += tarteaucitron.lang.useCookie + ' ' + nb + ' cookie';
+                if (nb > 1) {
+                    html += 's';
+                }
+                html += '.';
+            }
+
+            if (document.getElementById('tacCL' + key) !== null) {
+                document.getElementById('tacCL' + key).innerHTML = html;
+            }
+        },
+        "crossIndexOf": function (arr, match) {
+            "use strict";
+            var i;
+            for (i = 0; i < arr.length; i += 1) {
+                if (arr[i] === match) {
+                    return true;
+                }
+            }
+            return false;
+        },
+        "number": function () {
+            "use strict";
+            var cookies = document.cookie.split(';'),
+                nb = (document.cookie !== '') ? cookies.length : 0,
+                html = '',
+                i,
+                name,
+                namea,
+                nameb,
+                c,
+                d,
+                s = (nb > 1) ? 's' : '',
+                savedname,
+                regex = /^https?\:\/\/([^\/?#]+)(?:[\/?#]|$)/i,
+                regexedDomain = (tarteaucitron.cdn.match(regex) !== null) ? tarteaucitron.cdn.match(regex)[1] : tarteaucitron.cdn,
+                host = (tarteaucitron.domain !== undefined) ? tarteaucitron.domain : regexedDomain;
+
+            cookies = cookies.sort(function (a, b) {
+                namea = a.split('=', 1).toString().replace(/ /g, '');
+                nameb = b.split('=', 1).toString().replace(/ /g, '');
+                c = (tarteaucitron.cookie.owner[namea] !== undefined) ? tarteaucitron.cookie.owner[namea] : '0';
+                d = (tarteaucitron.cookie.owner[nameb] !== undefined) ? tarteaucitron.cookie.owner[nameb] : '0';
+                if (c + a > d + b) { return 1; }
+                if (c + a < d + b) { return -1; }
+                return 0;
+            });
+
+            if (document.cookie !== '') {
+                for (i = 0; i < nb; i += 1) {
+                    name = cookies[i].split('=', 1).toString().replace(/ /g, '');
+                    if (tarteaucitron.cookie.owner[name] !== undefined && tarteaucitron.cookie.owner[name].join(' // ') !== savedname) {
+                        savedname = tarteaucitron.cookie.owner[name].join(' // ');
+                        html += '<div class="tarteaucitronHidden">';
+                        html += '     <span class="tarteaucitronTitle tarteaucitronH3" role="heading" aria-level="3">';
+                        html += '        ' + tarteaucitron.cookie.owner[name].join(' // ');
+                        html += '    </span>';
+                        html += '</div><ul class="cookie-list">';
+                    } else if (tarteaucitron.cookie.owner[name] === undefined && host !== savedname) {
+                        savedname = host;
+                        html += '<div class="tarteaucitronHidden">';
+                        html += '     <span class="tarteaucitronTitle tarteaucitronH3" role="heading" aria-level="3">';
+                        html += '        ' + host;
+                        html += '    </span>';
+                        html += '</div><ul class="cookie-list">';
+                    }
+                    html += '<li class="tarteaucitronCookiesListMain">';
+                    html += '    <div class="tarteaucitronCookiesListLeft"><button type="button" onclick="tarteaucitron.cookie.purge([\'' + cookies[i].split('=', 1) + '\']);tarteaucitron.cookie.number();tarteaucitron.userInterface.jsSizing(\'cookie\');return false"><strong>&times;</strong></button> <strong>' + name + '</strong>';
+                    html += '    </div>';
+                    html += '    <div class="tarteaucitronCookiesListRight">' + cookies[i].split('=').slice(1).join('=') + '</div>';
+                    html += '</li>';
+                }
+                html += '</ul>';
+            } else {
+                html += '<div class="tarteaucitronCookiesListMain">';
+                html += '    <div class="tarteaucitronCookiesListLeft"><strong>-</strong></div>';
+                html += '    <div class="tarteaucitronCookiesListRight"></div>';
+                html += '</div>';
+            }
+
+            html += '<div class="tarteaucitronHidden" style="height:20px;display:block"></div>';
+
+            if (document.getElementById('tarteaucitronCookiesList') !== null) {
+                document.getElementById('tarteaucitronCookiesList').innerHTML = html;
+            }
+
+            if (document.getElementById('tarteaucitronCookiesNumber') !== null) {
+                document.getElementById('tarteaucitronCookiesNumber').innerHTML = nb;
+            }
+
+            if (document.getElementById('tarteaucitronCookiesNumberBis') !== null) {
+                document.getElementById('tarteaucitronCookiesNumberBis').innerHTML = nb + ' cookie' + s;
+            }
+
+            for (i = 0; i < tarteaucitron.job.length; i += 1) {
+                tarteaucitron.cookie.checkCount(tarteaucitron.job[i]);
+            }
+        }
+    },
+    "getLanguage": function () {
+        "use strict";
+
+        var availableLanguages = 'bg,cn,cs,da,de,el,en,es,fi,fr,hu,it,ja,nl,pl,pt,ro,ru,sk,tr',
+            defaultLanguage = 'en';
+
+        if (tarteaucitronForceLanguage !== '') {
+            if (availableLanguages.indexOf(tarteaucitronForceLanguage) !== -1) {
+                return tarteaucitronForceLanguage;
+            }
+        }
+
+        if (!navigator) { return 'en'; }
+
+        var lang = navigator.language || navigator.browserLanguage ||
+                navigator.systemLanguage || navigator.userLang || null,
+            userLanguage = lang ? lang.substr(0, 2) : null;
+
+        if (availableLanguages.indexOf(userLanguage) === -1) {
+            return defaultLanguage;
+        }
+        return userLanguage;
+    },
+    "getLocale": function () {
+        "use strict";
+        if (!navigator) { return 'en_US'; }
+
+        var lang = navigator.language || navigator.browserLanguage ||
+                navigator.systemLanguage || navigator.userLang || null,
+            userLanguage = lang ? lang.substr(0, 2) : null;
+
+        if (userLanguage === 'fr') {
+            return 'fr_FR';
+        } else if (userLanguage === 'en') {
+            return 'en_US';
+        } else if (userLanguage === 'de') {
+            return 'de_DE';
+        } else if (userLanguage === 'es') {
+            return 'es_ES';
+        } else if (userLanguage === 'it') {
+            return 'it_IT';
+        } else if (userLanguage === 'pt') {
+            return 'pt_PT';
+        } else if (userLanguage === 'nl') {
+            return 'nl_NL';
+        } else if (userLanguage === 'el') {
+            return 'el_EL';
+        } else {
+            return 'en_US';
+        }
+    },
+    "addScript": function (url, id, callback, execute, attrName, attrVal, internal) {
+        "use strict";
+        var script,
+            done = false;
+
+        if (execute === false) {
+            if (typeof callback === 'function') {
+                callback();
+            }
+        } else {
+            script = document.createElement('script');
+            script.type = 'text/javascript';
+            script.id = (id !== undefined) ? id : '';
+            script.async = true;
+            script.src = url;
+
+            if (attrName !== undefined && attrVal !== undefined) {
+                script.setAttribute(attrName, attrVal);
+            }
+
+            if (typeof callback === 'function') {
+                if ( !tarteaucitron.parameters.useExternalJs ) {
+                    script.onreadystatechange = script.onload = function () {
+                        var state = script.readyState;
+                        if (!done && (!state || /loaded|complete/.test(state))) {
+                            done = true;
+                            callback();
+                        }
+                    };
+                } else {
+                    callback();
+                }
+            }
+
+            if ( !tarteaucitron.parameters.useExternalJs || !internal ) {
+                document.getElementsByTagName('head')[0].appendChild(script);
+            }
+        }
+    },
+    "addInternalScript": function (url, id, callback, execute, attrName, attrVal) {
+        tarteaucitron.addScript(url, id, callback, execute, attrName, attrVal, true);
+    },
+    "makeAsync": {
+        "antiGhost": 0,
+        "buffer": '',
+        "init": function (url, id) {
+            "use strict";
+            var savedWrite = document.write,
+                savedWriteln = document.writeln;
+
+            document.write = function (content) {
+                tarteaucitron.makeAsync.buffer += content;
+            };
+            document.writeln = function (content) {
+                tarteaucitron.makeAsync.buffer += content.concat("\n");
+            };
+
+            setTimeout(function () {
+                document.write = savedWrite;
+                document.writeln = savedWriteln;
+            }, 20000);
+
+            tarteaucitron.makeAsync.getAndParse(url, id);
+        },
+        "getAndParse": function (url, id) {
+            "use strict";
+            if (tarteaucitron.makeAsync.antiGhost > 9) {
+                tarteaucitron.makeAsync.antiGhost = 0;
+                return;
+            }
+            tarteaucitron.makeAsync.antiGhost += 1;
+            tarteaucitron.addInternalScript(url, '', function () {
+                if (document.getElementById(id) !== null) {
+                    document.getElementById(id).innerHTML += "<span style='display:none'>&nbsp;</span>" + tarteaucitron.makeAsync.buffer;
+                    tarteaucitron.makeAsync.buffer = '';
+                    tarteaucitron.makeAsync.execJS(id);
+                }
+            });
+        },
+        "execJS": function (id) {
+            /* not strict because third party scripts may have errors */
+            var i,
+                scripts,
+                childId,
+                type;
+
+            if (document.getElementById(id) === null) {
+                return;
+            }
+
+            scripts = document.getElementById(id).getElementsByTagName('script');
+            for (i = 0; i < scripts.length; i += 1) {
+                type = (scripts[i].getAttribute('type') !== null) ? scripts[i].getAttribute('type') : '';
+                if (type === '') {
+                    type = (scripts[i].getAttribute('language') !== null) ? scripts[i].getAttribute('language') : '';
+                }
+                if (scripts[i].getAttribute('src') !== null && scripts[i].getAttribute('src') !== '') {
+                    childId = id + Math.floor(Math.random() * 99999999999);
+                    document.getElementById(id).innerHTML += '<div id="' + childId + '"></div>';
+                    tarteaucitron.makeAsync.getAndParse(scripts[i].getAttribute('src'), childId);
+                } else if (type.indexOf('javascript') !== -1 || type === '') {
+                    eval(scripts[i].innerHTML);
+                }
+            }
+        }
+    },
+    "fallback": function (matchClass, content, noInner) {
+        "use strict";
+        var elems = document.getElementsByTagName('*'),
+            i,
+            index = 0;
+
+        for (i in elems) {
+            if (elems[i] !== undefined) {
+                for (index = 0; index < matchClass.length; index += 1) {
+                    if ((' ' + elems[i].className + ' ')
+                            .indexOf(' ' + matchClass[index] + ' ') > -1) {
+                        if (typeof content === 'function') {
+                            if (noInner === true) {
+                                content(elems[i]);
+                            } else {
+                                elems[i].innerHTML = content(elems[i]);
+                            }
+                        } else {
+                            elems[i].innerHTML = content;
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "engage": function (id) {
+        "use strict";
+        var html = '',
+            r = Math.floor(Math.random() * 100000),
+            engage = tarteaucitron.services[id].name + ' ' + tarteaucitron.lang.fallback;
+
+        if (tarteaucitron.lang['engage-' + id] !== undefined) {
+            engage = tarteaucitron.lang['engage-' + id];
+        }
+
+        html += '<div class="tac_activate">';
+        html += '   <div class="tac_float">';
+        html += '      ' + engage;
+        html += '      <button type="button" class="tarteaucitronAllow" id="Eng' + r + 'ed' + id + '" onclick="tarteaucitron.userInterface.respond(this, true);">';
+        html += '          &#10003; ' + tarteaucitron.lang.allow;
+        html += '       </button>';
+        html += '   </div>';
+        html += '</div>';
+
+        return html;
+    },
+    "extend": function (a, b) {
+        "use strict";
+        var prop;
+        for (prop in b) {
+            if (b.hasOwnProperty(prop)) {
+                a[prop] = b[prop];
+            }
+        }
+    },
+    "proTemp": '',
+    "proTimer": function () {
+        "use strict";
+        setTimeout(tarteaucitron.proPing, 500);
+    },
+    "pro": function (list) {
+        "use strict";
+        tarteaucitron.proTemp += list;
+        clearTimeout(tarteaucitron.proTimer);
+        tarteaucitron.proTimer = setTimeout(tarteaucitron.proPing, 500);
+    },
+    "proPing": function () {
+        "use strict";
+        if (tarteaucitron.uuid !== '' && tarteaucitron.uuid !== undefined && tarteaucitron.proTemp !== '') {
+            var div = document.getElementById('tarteaucitronPremium'),
+                timestamp = new Date().getTime(),
+                url = 'https://tarteaucitron.io/log/?';
+
+            if (div === null) {
+                return;
+            }
+
+            url += 'account=' + tarteaucitron.uuid + '&';
+            url += 'domain=' + tarteaucitron.domain + '&';
+            url += 'status=' + encodeURIComponent(tarteaucitron.proTemp) + '&';
+            url += '_time=' + timestamp;
+
+            div.innerHTML = '<img src="' + url + '" style="display:none" />';
+
+            tarteaucitron.proTemp = '';
+        }
+
+        tarteaucitron.cookie.number();
+    },
+    "AddOrUpdate" : function(source, custom){
+        /**
+         Utility function to Add or update the fields of obj1 with the ones in obj2
+         */
+        for(key in custom){
+            if(custom[key] instanceof Object){
+                source[key] = tarteaucitron.AddOrUpdate(source[key], custom[key]);
+            }else{
+                source[key] = custom[key];
+            }
+        }
+        return source;
+    },
+    "getElemWidth": function(elem) {
+        return elem.getAttribute('width') || elem.clientWidth;
+    },
+    "getElemHeight": function(elem) {
+        return elem.getAttribute('height') || elem.clientHeight;
+    }
+};
+
+</script>
+
+</body>
+</html>

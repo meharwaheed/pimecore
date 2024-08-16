@@ -1,0 +1,41 @@
+{# margins #}
+{% set marginTop = pimcore_select('margin-top').getData() %}
+{% set margin = pimcore_select('margin-bottom').getData() %}
+
+{# background color #}
+{% set bgcolor = pimcore_select('background-color').getData() %}
+
+{# container-width #}
+{% set container = pimcore_select('container').getData() %}
+
+{# lead #}
+{% set lead = '' %}
+{% if pimcore_checkbox('lead').isChecked() %}
+    {% set lead = 'contentblock--wysiwyg-lead' %}
+{% endif %}
+
+{# lead #}
+{% set grey = '' %}
+{% if pimcore_checkbox('grey').isChecked() %}
+    {% set grey = 'contentblock--grey' %}
+{% endif %}
+
+{# id #}
+{% set anchorId = pimcore_input('anchor').getData() %}
+
+{# html #}
+<div {% if anchorId %} id="{{ anchorId }}"{% endif %}
+    class="contentblock contentblock--wysiwyg margin-top-{{ marginTop }} margin-bottom-{{ margin }} {{ lead }} {{ grey }} bg-{{ bgcolor }}">
+    <div class="container container--{{ container }}">
+        {{  pimcore_wysiwyg("wysiwyg", {
+            "customConfig": "/static/js/ckeditor_config.js",
+            "toolbarGroups": [
+                {
+                    "name": 'basicstyles',
+                    "groups": [ 'basicstyles', 'list', 'align', 'links']
+                }
+            ]
+        })
+        }}
+    </div>
+</div>

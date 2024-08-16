@@ -1,0 +1,126 @@
+<div class="main-menu--search">
+    <form method="GET" action="{{ document.getProperty('searchpage') }}">
+        <input type="text" name="q" placeholder="Suchbegriff eingeben">
+        <button type="submit">
+            <i class="iconfont-magnifier"></i>
+        </button>
+    </form>
+</div>
+
+<nav class="main-menu" role="navigation">
+    {% if not document is defined or not document %}
+        {% set document = pimcore_document(1) %}
+    {% endif %}
+    {% set mainNavStartNode = document.getProperty('mainnavStartNode') %}
+    {% set mainNav = conecto_build_nav(document, mainNavStartNode) %}
+    {% set renderer = pimcore_nav_renderer('menu') %}
+    <ul class="main-menu--first-level">
+
+        {% for key, page in mainNav %}
+            {% if page.isVisible() and renderer.accept(page) %}
+                {% set activeClass = '' %}
+                {% set hiddenClass = '' %}
+                {% set siteClass = '' %}
+                {% set url = '' %}
+                {% if page.getActive(true) %}
+                    {% set activeClass = 'main-menu--active' %}
+                {% endif %}
+                {% if page.getCustomSetting('siteClass') %}
+                    {% set siteClass = 'site-' ~ page.getCustomSetting('siteClass') %}
+                {% endif %}
+                {% if page.getCustomSetting('url') %}
+                    {% set url = page.getCustomSetting('url') %}
+                {% endif %}
+                {% if not page.getCustomSetting('special') %}
+
+                    <li class="{{ activeClass }} {{ siteClass }} {{ page.getDocument().getProperty('menuColor') }}">
+                        {% if page.getDocument().getProperty('menuImage') is not empty %}
+                            {{ page.getDocument().getProperty('menuImage').getThumbnail('menuImage').html({
+                                'imgAttributes': {
+                                    'class': 'main-menu--image',
+                                }
+                            })|raw }}
+
+                        {% endif %}
+                        <div class="main-menu--item">
+                        {% if page.getHref() %}
+                            <a href="{{ url }}">
+                                <span>{{ page.label }}</span>
+
+                                <svg id='Right_Arrow_24' width='24' height='24' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'><rect width='24' height='24' stroke='none' fill='#000000' opacity='0'/>
+
+
+                                    <g transform="matrix(0.42 0 0 0.42 12 12)" >
+                                        <path style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(255,255,255); fill-rule: nonzero; opacity: 1;" transform=" translate(-25.01, -24.99)" d="M 38.035156 13.988281 C 37.628906 13.980469 37.257813 14.222656 37.09375 14.59375 C 36.933594 14.96875 37.015625 15.402344 37.300781 15.691406 L 45.277344 24 L 2.023438 24 C 1.664063 23.996094 1.328125 24.183594 1.148438 24.496094 C 0.964844 24.808594 0.964844 25.191406 1.148438 25.503906 C 1.328125 25.816406 1.664063 26.003906 2.023438 26 L 45.277344 26 L 37.300781 34.308594 C 36.917969 34.707031 36.933594 35.339844 37.332031 35.722656 C 37.730469 36.105469 38.363281 36.09375 38.746094 35.691406 L 49.011719 25 L 38.746094 14.308594 C 38.5625 14.109375 38.304688 13.996094 38.035156 13.988281 Z" stroke-linecap="round" />
+                                    </g>
+                                </svg>
+                            </a>
+                        {% else %}
+                            <span>{{ page.label }}</span>
+                        {% endif %}
+
+                        {% set submenu = false %}
+                        {% if page.hasPages() %}
+                            {% for child in page.getPages() %}
+                                {% if child.isVisible() %}
+                                    {% set submenu = true %}
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
+
+                        {% if submenu %}
+                            <button
+                                class="main-menu--sub-opener"
+                                aria-expanded="false"
+                                aria-controls="submenu-{{ page.id }}"
+                                aria-label="Open submenu for {{ page.label }}"
+                                type="button">
+                                <svg id='Expand_Arrow_24' width='24' height='24' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'><rect width='24' height='24' stroke='none' fill='#000000' opacity='0'/>
+
+
+                                    <g transform="matrix(0.45 0 0 0.45 12 12)" >
+                                        <path style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(255,255,255); fill-rule: nonzero; opacity: 1;" transform=" translate(-25, -25.08)" d="M 4.84375 12.90625 L 2.75 15 L 25 37.25 L 47.25 15 L 45.15625 12.90625 L 25 33.0625 Z" stroke-linecap="round" />
+                                    </g>
+                                </svg>
+                            </button>
+                            </div>
+                            <ul class="main-menu--sub" id="submenu-{{ page.id }}">
+                                {% for child in page.pages %}
+                                    {% if child.isVisible() and renderer.accept(child) %}
+                                        <li {% if child.getActive(true) %} class="main-menu--sub-active"{% endif %}>
+                                            {% set childUrl = '' %}
+                                            {% if child.getCustomSetting('url') %}
+                                                {% set childUrl = child.getCustomSetting('url') %}
+                                            {% endif %}
+                                            <a href="{{ childUrl }}">{{ child.label }}</a>
+
+                                        {% if child.hasPages() %}
+                                            <ul class="main-menu--sub--sub">
+                                                {% for subchild in child.pages %}
+                                                    {% if subchild.isVisible() and renderer.accept(subchild) %}
+                                                        <li {% if subchild.getActive(true) %} class="main-menu--sub-active"{% endif %}>
+                                                            {% set subchildUrl = '' %}
+                                                            {% if subchild.getCustomSetting('url') %}
+                                                                {% set subchildUrl = subchild.getCustomSetting('url') %}
+                                                            {% endif %}
+                                                            <a href="{{ subchildUrl }}">{{ subchild.label }}</a>
+                                                        </li>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </ul>
+                                        {% endif %}
+                                        </li>
+                                    {% endif %}
+                                {% endfor %}
+                            </ul>
+                        {% else %}
+                            </li>
+                        {% endif %}
+                    </li>
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+
+
+    </ul>
+</nav>

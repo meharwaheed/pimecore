@@ -1,0 +1,366 @@
+.main-nav--toggle {
+  display: none;
+}
+
+/* Toggler & Burger */
+
+$burgerWidthMobile: 40px;
+$burgerWidthMobile: 40px;
+$burgerWidth: 45px;
+$burgerLineHeightMobile: 3px;
+$burgerLineHeight: 4px;
+$burgerDistanceBetweenLinesMobile: 12px;
+$burgerDistanceBetweenLines: 15px;
+$burgerHeightMobile: ($burgerLineHeightMobile * 3) + ($burgerDistanceBetweenLinesMobile * 2);
+$burgerHeight: ($burgerLineHeight * 3) + ($burgerDistanceBetweenLines * 2);
+$topBottomValueMobile: ($burgerLineHeightMobile + $burgerDistanceBetweenLinesMobile) * -1;
+$topBottomValue: ($burgerLineHeight + $burgerDistanceBetweenLines) * -1;
+
+.main-nav--burger {
+  @include fluidDiff(width, $burgerWidthMobile, $burgerWidth);
+  @include fluidDiff(height, $burgerHeightMobile, $burgerHeight);
+  align-self: center;
+  cursor: pointer;
+  transition: all ease-in-out .15s;
+  position: absolute;
+
+  @include fluidDiff(top, 30px, 70px);
+  @include fluidDiff(right, 30px, 50px);
+
+  display: grid;
+  place-items: center;
+  border-left: 1px solid rgba(255, 255, 255, 0);
+  z-index: 20001;
+
+  span {
+    display: block;
+    @include fluidDiff(width, $burgerWidthMobile, $burgerWidth);
+    @include fluid(height, $burgerLineHeight);
+    background: $black;
+    position: relative;
+    transition: all ease-in-out .3s;
+    &:before,
+    &:after {
+      content: '';
+      display: block;
+      @include fluidDiff(width, $burgerWidthMobile, $burgerWidth);
+      @include fluid(height, $burgerLineHeight);
+      min-height: $burgerLineHeight;
+      background: $black;
+      position: absolute;
+      left: 0;
+      transition: all ease-in-out .3s;
+      opacity: 1;
+    }
+
+
+    &:before {
+      @include fluidDiff(top, $topBottomValueMobile, $topBottomValue);
+      transform-origin: center top;
+    }
+
+    &:after {
+      @include fluidDiff(bottom, $topBottomValueMobile, $topBottomValue);
+      transform-origin: center bottom;
+    }
+  }
+
+}
+
+/* Toggler Checked */
+
+.main-nav--toggle:checked {
+
+  // burger
+  &.main-nav--burger {
+
+    span {
+      background-color: transparent;
+
+      $translateYBeforeMobile: ($burgerHeightMobile - ($burgerLineHeightMobile))/2;
+      $translateYBefore: ($burgerHeight - ($burgerLineHeight))/2;
+      $translateYAfterMobile: $translateYBeforeMobile*-1;
+      $translateYAfter: $translateYBefore*-1;
+      $rotation: 45deg;
+      $rotationBefore: $rotation;
+      $rotationAfter: $rotation * -1;
+
+      &:before {
+        transform: translateY(pxToVwMobile($translateYBeforeMobile)) rotate($rotationBefore);
+        @include media-breakpoint-up(md) {
+          transform: translateY($translateYBefore) rotate($rotationBefore);
+        }
+      }
+
+      &:after {
+        transform: translateY(pxToVwMobile($translateYAfterMobile)) rotate($rotationAfter);
+        @include media-breakpoint-up(md) {
+          transform: translateY($translateYAfter) rotate($rotationAfter) ;
+        }
+      }
+    }
+  }
+
+  .main-nav {
+    display: block;
+  }
+
+}
+
+/* Main Nav Container */
+
+.main-nav {
+  z-index: 20000;
+  width: 100%;
+  height: calc(100vh - #{pxToVwMobile(90px)});
+  transition: opacity ease-in-out .15s;
+  overflow-x: hidden;
+  overflow-y: auto;
+  background: rgba($black, 0.8);
+  position: fixed;
+  right: 0;
+  @include fluidAll(top, $headerHeightMobile, $headerHeightTablet, $headerHeightDesktop);
+  @include fluidAll(padding-left, 40px, 50px, 100px);
+  @include fluidAll(padding-right, 40px, 50px, 100px);
+  @include fluidAll(padding-top, 40px, 87px, 174px);
+  @include fluidAll(padding-bottom, 40px, 87px, 174px);
+  display: none;
+
+  ::selection {
+    color: transparent;
+    background: transparent;
+  }
+
+  @include media-breakpoint-up(md) {
+    height: calc(100vh - #{pxToVw($headerHeightTablet)});
+  }
+  @include media-breakpoint-up(xl) {
+    height: calc(100vh - #{$headerHeightDesktop});
+  }
+
+  /* Main Nav Menu Points */
+
+  /* 1st level */
+
+  & > ul {
+    margin: 0 auto;
+    padding: 0;
+    list-style-type: none;
+    width: 100%;
+
+    @include media-breakpoint-up(md) {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-gap: pxToVw(50px);
+      grid-template-areas:
+        'li1 li1'
+        'li2 li3'
+        'li4 li5'
+        'li6 .';
+
+      & > li:nth-child(1) { grid-area: li1; }
+      & > li:nth-child(2) { grid-area: li2; }
+      & > li:nth-child(3) { grid-area: li3; }
+      & > li:nth-child(4) { grid-area: li4; }
+      & > li:nth-child(5) { grid-area: li5; }
+      & > li:nth-child(6) { grid-area: li6; }
+
+    }
+    @include media-breakpoint-up(xl) {
+      max-width: 1645px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-areas:
+        'li2 li3 li1'
+        'li4 li5 li6'
+        ;
+
+    }
+
+    & > li {
+      display: block;
+      position: relative;
+      @include fluidAll(padding-left, 63px, 65px, 100px);
+      @include fluidAll(margin-bottom, 35px, 0, 0);
+      &:before,
+      &:after {
+        @include pseudo(block, absolute);
+        background: $color1;
+        color: $white;
+        @include fluidAll(width, 50px, 50px, 70px);
+        @include fluidAll(height, 50px, 50px, 70px);
+        @include fluidAll(border-radius, 50px, 50px, 70px);
+        left: 0;
+        top: 0;
+        text-align: center;
+        box-shadow: 2px 2px 4px rgba($black, .25);
+      }
+      &:after {
+        background: none;
+        color: white;
+        border-radius: 0;
+        box-shadow: none;
+        font-family: '#{$icomoon-font-family}';
+        speak: none;
+        font-style: normal;
+        font-weight: normal;
+        font-variant: normal;
+        text-transform: none;
+        @include fluidAll(line-height, 50px, 50px, 70px);
+      }
+      &.search {
+        padding-left: 0;
+        &:before, &:after { display: none; }
+      }
+
+      & > a {
+        display: block;
+        color: $white;
+        @include fluidAll(font-size, 25px, 35px, 40px);
+        @include fluidAll(line-height, 30px, 40px, 45px);
+        @include fluidAll(padding-top, 10px, 5px, 10px);
+        @include fluidAll(margin-bottom, 29px, 31px, 31px);
+
+        font-weight: 300;
+        text-transform: uppercase;
+        position: relative;
+        &:after {
+          @include pseudo(block, absolute);
+          @include fluidAll(bottom, -14px, -15px, -15px);
+          left: 0;
+          height: 1px;
+          background: $white;
+          @include fluidAll(width, 190px, 185px, 250px);
+        }
+      }
+
+      &.site-garten { &:before { background-color: $color-garden; }}
+      &.site-pool { &:before { background-color: $color-pool; }}
+      &.site-schwimmteich { &:before { background-color: $color-schwimmteich; }}
+      &.site-planung { &:before { background-color: $color-planung; }}
+      &.site-zubehoer { &:before { background-color: $color-zubehoer; }}
+
+      &.site-garten { &:after {
+        content: $iconfont-leaf;
+        @include fluidAll(font-size, 29px, 29px, 40px);
+      }}
+      &.site-pool { &:after {
+        content: $iconfont-wave;
+        @include fluidAll(font-size, 36px, 36px, 50px);
+      }}
+      &.site-schwimmteich { &:after {
+        content: $iconfont-wave;
+        @include fluidAll(font-size, 36px, 36px, 50px);
+      }}
+      &.site-planung { &:after {
+        content: $iconfont-pencil_right;
+        @include fluidAll(font-size, 25px, 25px, 35px);
+        transform: rotate(-270deg);
+      }}
+      &.site-zubehoer { &:after {
+        content: $iconfont-plus;
+        @include fluidAll(font-size, 29px, 29px, 40px);
+      }}
+
+    }
+
+  }
+
+  /* 2nd Level */
+
+  .main-nav--sub {
+    @include reset-list;
+    li {
+      @include fluidAll(margin-bottom, 5px, 5px, 5px);
+      &.main-nav--sub-active {
+        a {
+        }
+      }
+    }
+
+    a {
+      color: $white;
+      font-weight: $font-weight-bold;
+      @include fluidAll(font-size, 18px, 18px, 18px);
+      @include fluidAll(line-height, 25px, 30px, 30px);
+    }
+  }
+
+}
+
+/* Menu Points Animation */
+
+@keyframes fadeInMenuPoints {
+  from {
+    opacity: 0;
+    transform: translate3d(-10%,0,0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0,0,0);
+  }
+}
+
+.main-nav > ul > li {
+  opacity: 0;
+}
+
+.main-nav--toggle:checked ~ .page-wrap {
+
+  user-select: none;
+
+  .main-nav > ul > li {
+    animation: fadeInMenuPoints 0.15s ease-in-out both;
+    &:nth-child(1) { animation-delay: 0.15s; }
+    &:nth-child(2) { animation-delay: 0.3s; }
+    &:nth-child(3) { animation-delay: 0.45s; }
+    &:nth-child(4) { animation-delay: 0.60s; }
+    &:nth-child(5) { animation-delay: 0.75s; }
+    &:nth-child(6) { animation-delay: 0.90s; }
+    @include media-breakpoint-up(xl) {
+      &:nth-child(2) { animation-delay: 0.15s; }
+      &:nth-child(3) { animation-delay: 0.3s; }
+      &:nth-child(1) { animation-delay: 0.45s; }
+    }
+  }
+
+}
+
+/* Search */
+
+li.search {
+  position: relative;
+  @include fluidAll(height, 60px, 60px, 60px);
+  border-bottom: 1px solid $white;
+  input {
+    appearance: none;
+    border-radius: 0;
+    border: none;
+    background: none;
+    @include fluidAll(height, 36px, 36px, 36px);
+    @include fluidAll(line-height, 36px, 36px, 36px);
+    @include fluidAll(padding-left, 54px, 54px, 54px);
+    @include fluidAll(font-size, 16px, 16px, 18 px);
+    color: rgba($white, 1);
+    text-transform: uppercase;
+    &::placeholder {
+      color: rgba($white, 0.3);
+    }
+  }
+  button {
+    position: absolute;
+    left: 0;
+    top: 0;
+    appearance: none;
+    border: none;
+    background: none;
+    padding: 0;
+    margin: 0;
+    display: block;
+    @include fluidAll(height, 36px, 36px, 36px);
+    @include fluidAll(width, 36px, 36px, 36px);
+    color: $white;
+  }
+  i.iconfont-magnifier {
+    @include fluidAll(font-size, 36px, 36px, 36px);
+  }
+}

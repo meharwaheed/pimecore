@@ -1,0 +1,227 @@
+@import 'variables';
+@import 'mixins';
+
+/* libraries */
+@import '../.build/node_modules/@splidejs/splide/dist/css/splide.min';
+@import '../.build/node_modules/baguettebox.js/src/baguetteBox';
+@import '../.build/node_modules/flatpickr/dist/flatpickr';
+
+/* basics */
+@import 'reboot';
+@import 'fonts';
+@import 'icons';
+@import 'helpers';
+@import 'base';
+
+/* elements */
+@import 'elements/datepicker';
+@import 'elements/form';
+@import 'elements/buttons';
+@import 'elements/teaser';
+@import 'elements/teaser--small';
+@import 'elements/teaserslider-controls';
+@import 'elements/logos';
+
+/* page-header */
+@import 'page-header/page-header';
+
+/* page-footer */
+@import 'page-footer/footer';
+
+/* content-elements elements */
+@import 'content-elements/gallery';
+@import 'content-elements/table';
+@import 'content-elements/divider';
+@import 'content-elements/buttons';
+@import 'content-elements/teasergrid';
+@import 'content-elements/icongrid';
+@import 'content-elements/multicolumns';
+@import 'content-elements/wideimage';
+@import 'content-elements/infoblock';
+@import 'content-elements/textbox';
+
+
+@import 'content-elements/teaserslider';
+@import 'content-elements/wysiwyg';
+@import 'content-elements/headlines';
+@import 'content-elements/quotation';
+@import 'content-elements/parallax';
+@import 'content-elements/headtext';
+@import 'content-elements/imageheadtext';
+@import 'content-elements/threeteasers';
+@import 'content-elements/twoteasers';
+@import 'content-elements/disruptor';
+@import 'content-elements/anchors';
+
+@import 'content-elements/colors';
+
+@include media-breakpoint-down(sm) {
+  .mobile-hidden {
+    display: none !important;
+  }
+}
+@include media-breakpoint-down(xl) {
+  .desktop-down-hidden {
+    display: none !important;
+  }
+}
+
+// general background for videos
+
+video {
+  background-color: $color1dark;
+}
+
+// todo: move to own file
+.contentblock--image {
+  img {
+    width: 100%;
+    height: auto;
+  }
+  .image-video {
+    width: 100%;
+    position: relative;
+
+    video {
+      width: 100%;
+      height: auto;
+    }
+  }
+}
+
+/* Contact Map */
+
+.contact_map {
+  height: 50vh;
+  z-index: 1;
+}
+
+/* Alert */
+
+.alert {
+  @include fluid(padding, 30px);
+  @include fluid(border-width, 2px);
+  border-style: solid;
+  border-color: $color1;
+  @include fluid(border-radius, 20px);
+  background: rgba($color1, 0.2);
+  color: $color1;
+  text-align: center;
+  @include fluid(margin-bottom, 30px);
+  position: relative;
+  z-index: 1;
+}
+
+/* Preload */
+
+.preload * {
+  transition: none !important;
+}
+
+.sf-toolbar { display: none !important; }
+
+/* Grids */
+
+.grid {
+  @include media-breakpoint-up(md) {
+    display: grid;
+    & > * {
+      height: 100%;
+    }
+  }
+}
+.grid--4 {
+  @include media-breakpoint-up(md) {
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 30px;
+  }
+  @include media-breakpoint-up(lgl) {
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 30px;
+  }
+}
+
+/* Prevent blurry display in Chrome */
+
+.page-header--logo,
+.main-nav--burger {
+  backface-visibility: visible;
+  transform: translateZ(0);
+}
+
+/* Search Results */
+
+.search-results {
+  @include fluid(margin-bottom, 100px);
+  ul {
+    @include reset-list;
+  }
+  li {
+    margin: 0;
+    &:last-child {
+      a {
+        border-bottom: none;
+        padding-bottom: 0;
+      }
+    }
+  }
+  a {
+    display: block;
+    border-bottom: 1px solid $colorBorder;
+    @include fluid(padding-top, 15px);
+    @include fluid(padding-top, 15px);
+  }
+  h3 {
+    color: $black;
+  }
+  p {
+    color: $black;
+    font-style: italic;
+  }
+  b {
+    font-weight: bold;
+    color: $color-planung;
+  }
+}
+
+/* Special Nav */
+
+.special-nav {
+  display: none;
+}
+@include media-breakpoint-up(xl) {
+  .special-nav {
+    position: absolute;
+    right: 120px;
+    top: 0;
+    display: block;
+    ul {
+      @include reset-list;
+      display: flex;
+    }
+    li {
+    }
+    a {
+      line-height: 100px;
+      padding-right: 30px;
+      font-family: Roboto,sans-serif;
+      text-transform: uppercase;
+      font-size: 22px;
+      transition: color ease-in-out .3s;
+      color: rgba(0,0,0,0.5);
+      &:hover {
+        color: rgba(0,0,0,1);
+      }
+    }
+    li {
+      &.main-nav--active {
+        a {
+          color: rgba(0,0,0,1);
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+}
+
+

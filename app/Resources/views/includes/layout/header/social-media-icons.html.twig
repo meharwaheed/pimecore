@@ -1,0 +1,35 @@
+{% if pimcore_website_config('facebook') %}
+    <li>
+        <a href="{{ pimcore_website_config('facebook') }}" target="_blank">
+            <i class="iconfont-facebook"></i>
+        </a>
+    </li>
+{% endif %}
+{% if pimcore_website_config('instagram') %}
+    <li>
+        <a href="{{ pimcore_website_config('instagram') }}" target="_blank">
+            <i class="iconfont-instagram"></i>
+        </a>
+    </li>
+{% endif %}
+{% if pimcore_website_config('pinterest') %}
+    <li>
+        <a href="{{ pimcore_website_config('pinterest') }}" target="_blank">
+            <i class="iconfont-pinterest"></i>
+        </a>
+    </li>
+{% endif %}
+{% if pimcore_website_config('twitter') %}
+    <li>
+        <a href="{{ pimcore_website_config('twitter') }}" target="_blank">
+            <i class="iconfont-twitter"></i>
+        </a>
+    </li>
+{% endif %}
+{% if pimcore_website_config('youtube') %}
+    <li>
+        <a href="{{ pimcore_website_config('youtube') }}" target="_blank">
+            <i class="iconfont-youtube"></i>
+        </a>
+    </li>
+{% endif %}

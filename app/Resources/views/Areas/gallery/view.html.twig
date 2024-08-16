@@ -1,0 +1,47 @@
+{# margins #}
+{% set marginTop = pimcore_select('margin-top').getData() %}
+{% set margin = pimcore_select('margin-bottom').getData() %}
+
+{# background color #}
+{% set bgcolor = pimcore_select('background-color').getData() %}
+
+{# container-width #}
+{% set container = pimcore_select('container').getData() %}
+
+{# large #}
+{% set large = '' %}
+{% if pimcore_checkbox('large').isChecked() %}
+    {% set large = 'contentblock--gallery-large' %}
+{% endif %}
+
+{# id #}
+{% set anchorId = pimcore_input('anchor').getData() %}
+
+{# html #}
+<div {% if anchorId %} id="{{ anchorId }}"{% endif %}
+    class="contentblock contentblock--gallery margin-top-{{ marginTop }} margin-bottom-{{ margin }} {{ large }} bg-{{ bgcolor }}" id="{{ currentId }}">
+    <div class="container container--narrow ">
+        {% if editmode %}
+            {{ pimcore_relations('gallery', {
+                'types': ['asset'],
+                'subtypes': {
+                    'asset': ['image']
+                },
+                'title': 'Bitte die gewünschten Bilder hierherziehen'
+            }) }}
+        {% else %}
+            <div class="gallery--container">
+                {% for key, element in pimcore_relations("gallery") %}
+                    {% if element is instanceof('Pimcore\\Model\\Asset\\Image') %}
+                        {% set lightboxImage = element.getThumbnail('lightbox') %}
+                        <a href="{{ lightboxImage }}" class="gallery--image">
+                            <figure>
+                                {{ element.getThumbnail('gallery').getHTML()|raw }}
+                            </figure>
+                        </a>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+</div>

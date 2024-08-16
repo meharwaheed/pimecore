@@ -1,0 +1,86 @@
+{# margins #}
+{% set marginTop = pimcore_select('margin-top').getData() %}
+{% set margin = pimcore_select('margin-bottom').getData() %}
+
+{# background color #}
+{% set bgcolor = pimcore_select('background-color').getData() %}
+
+{# html #}
+{% if not editmode %}
+    <script src="/static/js/materialize-parallax.js"></script>
+{% endif %}
+
+{# id #}
+{% set anchorId = pimcore_input('anchor').getData() %}
+
+<div {% if anchorId %} id="{{ anchorId }}"{% endif %}
+    class="contentblock contentblock--parallax parallax-container margin-top-{{ marginTop }} margin-bottom-{{ margin }} bg-{{ bgcolor }}">
+    {% if editmode %}
+        <div class="container">
+            <label>
+                {{ pimcore_relation('parallaxImage',{
+                    "types": ["asset"],
+                    "subtypes": {
+                        "asset": ["image"]
+                    },
+                    "width": 600,
+                    "reload": "true"
+                }) }}
+            </label>
+        </div>
+    {% endif %}
+    {% set relationEl = pimcore_relation('parallaxImage').getElement() %}
+    {% if not pimcore_relation('parallaxImage').isEmpty() %}
+        {% set thumbnail = relationEl.getThumbnail('parallax') %}
+        {% set mobileThumbnail = thumbnail.getPath() %}
+        {% set desktopThumbnail = thumbnail.getMedia('(min-width: 768px)').getPath() %}
+        <div class="parallax">
+            {{ thumbnail.getHtml()|raw }}
+        </div>
+    {% endif %}
+    <div class="container">
+        <div class="parallax--teaser">
+            <h3>{{ pimcore_input('parallax-h3', { 'placeholder': 'Überschrift' }) }}</h3>
+            {% if editmode %}
+                <div>
+                    <label>
+                        {{ pimcore_relation('parallaxContent',{
+                            "types": ["asset"],
+                            "subtypes": {
+                                "asset": ["image"]
+                            },
+                            "reload": "true"
+                        }) }}
+                    </label>
+                </div>
+            {% endif %}
+            {% if not editmode %}
+                {% if not pimcore_relation('parallaxContent').isEmpty() %}
+                    <div class="parallax--content-image">
+                        {{ pimcore_relation('parallaxContent').getElement().getThumbnail('parallaxContent').getHtml()|raw }}
+                    </div>
+                {% endif %}
+            {% endif %}
+            <div class="teasertext">
+                {{ pimcore_wysiwyg("parallax-wysiwyg", {
+                    "customConfig": "/static/js/ckeditor_config.js",
+                    "toolbarGroups": [
+                        {
+                            "name": 'basicstyles',
+                            "groups": [ 'basicstyles', 'list', 'align', 'links']
+                        }
+                    ]
+                }) }}
+            </div>
+            {{ pimcore_link('parallax-link', { 'class': 'btn' }) }}
+            {% if not editmode %}
+                <script>
+                    document.addEventListener('DOMContentLoaded', function() {
+                        var elems = document.querySelectorAll('.parallax');
+                        var instances = M.Parallax.init(elems);
+                    });
+                </script>
+            {% endif %}
+        </div>
+    </div>
+</div>

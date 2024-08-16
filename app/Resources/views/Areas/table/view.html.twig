@@ -1,0 +1,24 @@
+{# margins #}
+{% set marginTop = pimcore_select('margin-top').getData() %}
+{% set margin = pimcore_select('margin-bottom').getData() %}
+
+{# background color #}
+{% set bgcolor = pimcore_select('background-color').getData() %}
+
+{# container-width #}
+{% set container = pimcore_select('container').getData() %}
+
+{# id #}
+{% set anchorId = pimcore_input('anchor').getData() %}
+
+{# html #}
+<div {% if anchorId %} id="{{ anchorId }}"{% endif %}
+    class="contentblock contentblock--table margin-top-{{ marginTop }} margin-bottom-{{ margin }} bg-{{ bgcolor }}">
+    <div class="container container--{{ container }}">
+        <div class="contentblock--table-responsive">
+            {{ pimcore_wysiwyg("table", {
+                "customConfig": "/static/js/ckeditor_table_config.js"
+            }) }}
+        </div>
+    </div>
+</div>

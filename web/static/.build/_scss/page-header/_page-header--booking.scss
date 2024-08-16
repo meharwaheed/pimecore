@@ -1,0 +1,123 @@
+$bookingPadding: 20px;
+$bookingPaddingDesktop: 30px;
+.page-header--booking {
+  background: $white;
+  @include fluid(border-radius, 20px);
+  @include fluidDiff(padding-top, $bookingPadding, $bookingPaddingDesktop);
+  @include fluidDiff(padding-bottom, $bookingPadding, $bookingPaddingDesktop);
+
+  @include media-breakpoint-up(md) {
+    max-width: 370px;
+  }
+
+  .form-element {
+    margin-bottom: 0;
+  }
+
+}
+.booking-dates {
+  @include fluidDiff(padding-right, $bookingPadding, $bookingPaddingDesktop);
+  @include fluidDiff(padding-bottom, $bookingPadding, $bookingPaddingDesktop);
+  @include fluidDiff(padding-left, $bookingPadding, $bookingPaddingDesktop);
+  border-bottom: 1px solid rgba(0,0,0,.1);
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  @include fluid(grid-column-gap, 14px);
+  input {
+    @include fluidDiff(padding-left, 8px, 15px);
+  }
+}
+
+.booking-dates,
+.form-columns--twocols-dates {
+  input {
+    background-image: svg-load('../_images/svg/calendar.svg');
+    background-repeat: no-repeat;
+    background-position: right 10px center; // m 8px d 12.2px
+    @include fluid(background-size-x, 22px);
+    @include fluid(background-size-y, 19px);
+    cursor: default;
+  }
+}
+
+.booking-numbers {
+  @include fluidDiff(padding, $bookingPadding, $bookingPaddingDesktop);
+}
+.booking-button {
+  text-align: right;
+  //padding: 0 $generalPadding;
+  @include fluidDiff(padding-left, $bookingPadding, $bookingPaddingDesktop);
+  @include fluidDiff(padding-right, $bookingPadding, $bookingPaddingDesktop);
+}
+
+/* Numbers */
+
+.form-element {
+  &.booking-element--numbers {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    @include fluid(grid-column-gap, 14px);
+    @include fluid(padding-bottom, 15px);
+    label {
+      margin-bottom: 0;
+      @include fluid(line-height, 40px);
+    }
+    input[type=text] {
+      text-align: center;
+      padding: 0;
+      border: none;
+      @include fluid(font-size, 16px);
+      font-weight: $font-weight-bolder;
+    }
+  }
+}
+.booking-numbers {
+  .booking-element--numbers {
+    &:last-child {
+      padding-bottom: 0;
+    }
+  }
+}
+button {
+  &.minus,
+  &.plus {
+    cursor: pointer;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    background: $white;
+    @include fluid(width, 40px);
+    @include fluid(height, 40px);
+    @include fluid(line-height, 40px);
+    @include fluid(border-radius, 40px);
+    text-indent: -9999em;
+    position: relative;
+    &:before,
+    &:after {
+      content: '';
+      @include fluid(width, 14px);
+      @include fluid(height, 2px);
+      background: $black;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+    }
+    &:before {
+      transform: translateX(-50%) translateY(-50%);
+    }
+    &:after {
+      transform: translateX(-50%) translateY(-50%) rotate(90deg);
+    }
+  }
+  &.minus {
+    &:after {
+      display: none;
+    }
+  }
+}
+
+/* Numberpicker */
+
+.numberpicker {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  @include fluid(grid-column-gap, 11px);
+}

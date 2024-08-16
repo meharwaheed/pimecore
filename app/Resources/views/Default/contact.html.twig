@@ -1,0 +1,115 @@
+{% extends 'layout.html.twig' %}
+{% block content %}
+
+    <script src="https://www.google.com/recaptcha/api.js"></script>
+    {{ include('includes/contentblocks.html.twig') }}
+
+    <div class="contentblock contentblock--form">
+        <div class="container container--narrow">
+
+            {% if validation_error %}
+                <div class="error-message">
+                    {{ 'booking.Bitte die Pflichtfelder ausfüllen!'|trans }}
+                </div>
+            {% endif %}
+
+            {% if robot_error %}
+                <div class="error-message">
+                    {{ 'booking.Sie sind ein Roboter!'|trans }}
+                </div>
+            {% endif %}
+
+            <form method="POST" id="form">
+
+                <input type="hidden" name="isSend" value="Ja" />
+                <input type="hidden" name="sendcheck" value="" />
+
+                <div class="form-container">
+                    <div class="form-column">
+                        <div class="form-element">
+                            <label for="name">{{ 'booking.name'|trans }} *</label>
+                            <input type="text" placeholder="{{ 'Name'|trans }}" id="name" name="name" required>
+                        </div>
+                        <div class="form-element">
+                            <label for="email">{{ 'booking.E-Mail'|trans }} *</label>
+                            <input type="email" placeholder="{{ 'booking.max@mustermann.de'|trans }}" id="email" name="email" required>
+                        </div>
+                        <div class="form-element">
+                            <label for="phone">{{ 'booking.Telefon-Nummer'|trans }}</label>
+                            <input type="text" placeholder="{{ 'booking.Telefon-Nummer'|trans }}" id="phone" name="phone">
+                        </div>
+                    </div>
+                    <div class="form-column">
+                        <div class="form-element">
+                            <label for="street">{{ 'booking.Straße und Hausnummer'|trans }}</label>
+                            <input type="text" placeholder="{{ 'booking.Straße und Hausnummer'|trans }}" id="street" name="street">
+                        </div>
+                        <div class="form-columns--twocols form-columns--twocols-address">
+                            <div class="form-element form-element--small">
+                                <label for="postal">{{ 'booking.PLZ'|trans }}</label>
+                                <input type="text" placeholder="{{ 'booking.PLZ'|trans }}" id="postal" name="postal">
+                            </div>
+                            <div class="form-element">
+                                <label for="city">{{ 'booking.Stadt'|trans }}</label>
+                                <input type="text" placeholder="{{ 'booking.Stadt'|trans }}" id="city" name="city">
+                            </div>
+                        </div>
+
+                        <div class="form-element">
+                            <label for="country">{{ 'booking.Land'|trans }}</label>
+                            {% set countries = conecto_country_list(app.request.locale) %}
+                            <select id="country" name="country">
+                                <option value="">-- {{ 'booking.Bitte Land auswählen'|trans }} --</option>
+                                {% for key, country in countries %}
+                                    {% set selected = '' %}
+                                    {% if app.request.locale|upper == key %}
+                                        {% set selected = 'selected' %}
+                                    {% endif %}
+                                    <option value="{{ key }}" {{ selected }}>{{ country }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="form-element">
+                    <label for="message">{{ 'booking.Ihre Nachricht'|trans }}</label>
+                    <textarea name="message" id="message" cols="30" rows="10"></textarea>
+                </div>
+
+                <div class="form-element checkbox">
+                    <label>
+                        <input type="checkbox" id="data-protection" name="dataProtection" required>
+                        <span class="custom-checkbox"></span>
+                        {{ 'booking.agree'|trans({'%dsgvo': pimcore_website_config('datenschutz')})|raw }}
+                    </label>
+                </div>
+
+                <div class="form--button-container">
+                    <script>
+                        function onSubmit(token) {
+                            document.getElementById("form").submit();
+                        }
+                    </script>
+                    <button
+                            type="submit"
+                            class="btn g-recaptcha"
+                            data-sitekey="{{ pimcore_website_config('recaptcha_sitekey') }}"
+                            data-callback='onSubmit'
+                            data-action="submit">{{ 'booking.Anfrage absenden'|trans }}</button>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+
+    {{ pimcore_areablock("content-2", {
+        "controlsTrigger": "fixed",
+        "sorting": ['heading','wysiwyg','headtext','imageheadtext','quotation','parallax','teaserslider','disruptor','threeteasers','twoteasers'],
+        "allowed": ['heading','wysiwyg','headtext','imageheadtext','quotation','parallax','teaserslider','disruptor','threeteasers','twoteasers'],
+    }
+    ) }}
+
+{%  endblock %}

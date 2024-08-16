@@ -1,0 +1,62 @@
+{# margins #}
+{% set marginTop = pimcore_select('margin-top').getData() %}
+{% set margin = pimcore_select('margin-bottom').getData() %}
+
+{# background color #}
+{% set bgcolor = pimcore_select('background-color').getData() %}
+
+{# container-width #}
+{% set container = pimcore_select('container').getData() %}
+
+{# id #}
+{% set anchorId = pimcore_input('anchor').getData() %}
+
+{# html #}
+<div {% if anchorId %} id="{{ anchorId }}"{% endif %}
+    class="contentblock contentblock--disruptor margin-top-{{ marginTop }} margin-bottom-{{ margin }} bg-{{ bgcolor }}">
+    {#<div class="container">#}
+        {% if editmode %}<div class="container">{% endif %}
+            {% set image = pimcore_relation('disruptorImage',{
+                "types": ["asset"],
+                "subtypes": {
+                    "asset": ["image"]
+                },
+                "width": 600,
+                "reload": "true"
+            }) %}
+            {% if editmode %}
+                {{ image|raw }}
+            {% endif %}
+            <div class="disruptor--image">
+                {% if not image.isEmpty() %}
+                    <figure>
+                        {{ image.getElement().getThumbnail('disruptor').getHtml({'attributes': {'loading':'lazy'}})|raw }}
+                    </figure>
+                {% else %}
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                {% endif %}
+                <div class="centered">
+                    <h2>{{ pimcore_input('headline', {'placeholder':'Headline hier eingeben'}) }}</h2>
+                    {{ pimcore_link('button', {'class': 'btn'}) }}
+                </div>
+            </div>
+        {% if editmode %}</div>{% endif %}
+    {#</div>#}
+</div>

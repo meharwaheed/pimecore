@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>{{ 'inquiryMail.Neue Anfrage von'|trans }} {{ app.request.get('firstname') }} {{ app.request.get('lastname') }}</title>
+    <style type="text/css">
+        body {
+            color: #000;
+            font-family: sans-serif;
+        }
+        strong {
+            font-weight: bold !important;
+        }
+    </style>
+</head>
+
+<body style="padding: 20px; max-width: 500px;">
+
+{%  if editmode %}
+    <h2>Deine Kontaktanfrage</h2>
+    <hr>
+    Der Betreff wird unter "Einstellungen" eingetragen.
+    <br />
+    <br />
+    <br />
+{% endif %}
+
+<h3>{{ pimcore_input('headline', { 'placeholder': 'Überschrift der E-Mail' }) }}</h3>
+{{ pimcore_wysiwyg('content', { 'placeholder': 'Einleitender Text der E-Mail' }) }}
+
+<p><strong>Vorname</strong> {{ app.request.get('name') }}</p>
+<p><strong>E-Mail</strong> {{ app.request.get('email') }}</p>
+<p><strong>Telefon</strong> {{ app.request.get('phone') }}</p>
+<p><strong>Straße</strong> {{ app.request.get('street') }}</p>
+<p><strong>PLZ</strong> {{ app.request.get('postal') }}</p>
+<p><strong>Stadt</strong> {{ app.request.get('city') }}</p>
+<p><strong>Land</strong> {{ app.request.get('country') }}</p>
+<p><strong>Nachricht</strong> {{ app.request.get('message') }}</p>
+
+<br />
+
+{{ pimcore_wysiwyg('content_bottom', { 'placeholder': 'Abschließender Text der E-Mail' }) }}
+
+</body>
+</html>

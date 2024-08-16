@@ -1,0 +1,82 @@
+{# margins #}
+{% set marginTop = pimcore_select('margin-top').getData() %}
+{% set margin = pimcore_select('margin-bottom').getData() %}
+
+{# background color #}
+{% set bgcolor = pimcore_select('background-color').getData() %}
+
+{# container-width #}
+{% set container = pimcore_select('container').getData() %}
+
+{# orientation #}
+{% set imageRight = '' %}
+{% if pimcore_checkbox('textbox-image-right').isChecked() %}
+    {% set imageRight = 'textbox--image-right' %}
+{% endif %}
+
+{# id #}
+{% set anchorId = pimcore_input('anchor').getData() %}
+
+{# html #}
+<div {% if anchorId %} id="{{ anchorId }}"{% endif %}
+    class="contentblock contentblock--textbox margin-top-{{ marginTop }} margin-bottom-{{ margin }} bg-{{ bgcolor }}" id="{{ currentId }}">
+    <div class="container container--{{ container }}">
+        <div class="textbox {{ imageRight }}">
+            <div class="textbox--image">
+
+                {% if editmode %}
+                    <div class="backend-relation">
+                        {{ pimcore_relation('mediaobject',{
+                            "types": ["asset"],
+                            "subtypes": {
+                                "asset": ["video", "image"]
+                            },
+                            "width": 500,
+                            "reload": "true"
+                        }) }}
+                    </div>
+                {% endif %}
+
+                {% set mediaobject = pimcore_relation('mediaobject').getElement() %}
+
+                {% if not pimcore_relation('mediaobject').isEmpty() %}
+                    {% if editmode %}
+                        {% if mediaobject is instanceof('\\Pimcore\\Model\\Asset\\Image') %}
+                            {{ mediaobject.getThumbnail('textbox').getHTML()|raw }}
+                        {% else %}
+                            <video src="{{ mediaobject }}"></video>
+                        {% endif %}
+                    {% else %}
+                        {% if mediaobject is instanceof('\\Pimcore\\Model\\Asset\\Image') %}
+                            <figure>
+                                {{ mediaobject.getThumbnail('textbox').getHtml({'attributes': {'loading':'lazy'}})|raw }}
+                            </figure>
+                        {% else %}
+                            <video src="{{ mediaobject }}" controls></video>
+                        {% endif %}
+                    {% endif %}
+                {% endif %}
+
+            </div>
+            <div class="textbox--content">
+                <div class="textbox--content-container">
+                    <h2>{{ pimcore_input('textbox-h2') }}</h2>
+                    {{  pimcore_wysiwyg("textbox-wysiwyg", {
+                        "customConfig": "/static/js/ckeditor_config.js",
+                        "toolbarGroups": [
+                            {
+                                "name": 'basicstyles',
+                                "groups": [ 'basicstyles', 'list', "links"]
+                            }
+                        ]
+                    })
+                    }}
+                    {{ pimcore_link('link', {
+                        'class': 'btn btn--outline-negative'
+                    })
+                    }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

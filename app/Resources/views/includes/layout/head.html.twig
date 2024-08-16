@@ -1,0 +1,228 @@
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no">
+<link rel="apple-touch-icon" sizes="180x180" href="/static/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/static/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/static/favicons/favicon-16x16.png">
+<link rel="manifest" href="/static/favicons/site.webmanifest">
+<link rel="mask-icon" href="/static/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="/static/favicons/favicon.ico">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-config" content="/static/favicons/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+{% spaceless -%}
+
+    {#preload fonts#}
+    {% do pimcore_head_link({
+        "rel":"preload",
+        "href":preload(asset("static/fonts/roboto-v20-latin-300.woff2")),
+        "extras":{
+            "type":"font/woff2",
+            "crossorigin": "anonymous",
+            "as":"font"
+        }
+    }) %}
+    {% do pimcore_head_link({
+        "rel":"preload",
+        "href":preload(asset("roboto-v20-latin-regular.woff2")),
+        "extras":{
+            "type":"font/woff2",
+            "crossorigin": "anonymous",
+            "as":"font"
+        }
+    }) %}
+    {% do pimcore_head_link({
+        "rel":"preload",
+        "href":preload(asset("static/fonts/roboto-v20-latin-italic.woff2")),
+        "extras":{
+            "type":"font/woff2",
+            "crossorigin": "anonymous",
+            "as":"font"
+        }
+    }) %}
+    {% do pimcore_head_link({
+        "rel":"preload",
+        "href":preload(asset("static/fonts/roboto-v20-latin-500.woff2")),
+        "extras":{
+            "type":"font/woff2",
+            "crossorigin": "anonymous",
+            "as":"font"
+        }
+    }) %}
+    {% do pimcore_head_link({
+        "rel":"preload",
+        "href":preload(asset("static/fonts/iconfont.ttf")),
+        "extras":{
+            "type":"font/ttf",
+            "crossorigin": "anonymous",
+            "as":"font"
+        }
+    }) %}
+
+    {# add global stylesheets and scripts outside of any blocks to add them to the helpers before any others assets are added #}
+    {# we use the view helper to have cache buster functionality #}
+
+    {# css inclusion with link tag #}
+    {# do pimcore_head_link().appendStylesheet(asset('static/css/styles.css')) #}
+    {# inline css inclusion #}
+    {# do pimcore_head_style().appendStyle(fileContent) #}
+
+    {# {% set cssFile = conecto_inline_data('static/css/styles.min.css') %} #}
+    {# {% do pimcore_head_style().appendStyle(cssFile) %} %} #}
+
+    {#{% do pimcore_head_link({"rel":"preload", "href":preload(asset("static/css/styles.min.css"))}) %}
+        {% do pimcore_head_link({"rel":"preload", "href":preload(asset("static/css/styles.data.css"))}) %}#}
+
+    {% do pimcore_head_link({
+        "rel":"preload",
+        "href":preload(asset('static/css/styles.min.css')),
+        "extras":{
+            "type":"text/css",
+            "crossorigin": "anonymous",
+            "as":"style"
+        }
+    }) %}
+
+    {% do pimcore_head_link({
+        "rel":"preload",
+        "href":preload(asset('static/css/styles.data.css')),
+        "extras":{
+            "type":"text/css",
+            "crossorigin": "anonymous",
+            "as":"style"
+        }
+    }) %}
+
+    {% do pimcore_head_link({
+        "rel":"preload",
+        "href":preload(asset('static/js/main.min.js')),
+        "extras":{
+            "type":"text/javascript",
+            "crossorigin": "anonymous",
+            "as":"script"
+        }
+    }) %}
+    {% do pimcore_head_link({
+        "rel":"preload",
+        "href":preload(asset('static/css/new/navigation.css')),
+        "extras":{
+            "type":"text/css",
+            "crossorigin": "anonymous",
+            "as":"style"
+        }
+    }) %}
+    {% do pimcore_head_link({
+        "rel":"preload",
+        "href":preload(asset('static/newJs/navigation.js')),
+        "extras":{
+            "type":"text/javascript",
+            "crossorigin": "anonymous",
+            "as":"script"
+        }
+    }) %}
+
+    {% do pimcore_head_link().appendStylesheet(asset('static/css/styles.min.css')) %}
+    {% do pimcore_head_link().appendStylesheet(asset('static/css/styles.data.css')) %}
+    {% do pimcore_head_link().appendStylesheet(asset('static/css/new/navigation.css')) %}
+    {% do pimcore_head_script().appendFile(asset('static/newJs/navigation.js')) %}
+
+    {% if editmode %}
+        {% do pimcore_head_link().appendStylesheet(asset('static/css/editmode.css')) %}
+    {% endif %}
+
+    {% if not editmode %}
+        {% do pimcore_head_script().appendFile(asset('static/js/main.min.js')) %}
+    {% endif %}
+
+    {% if not document is defined or not document %}
+        {% set document = pimcore_document(1) %}
+    {% endif %}
+
+    {% if document is instanceof('\\Pimcore\\Model\\Document\\Link') %}
+        {# @var document \Pimcore\Model\Document\Link #}
+        {% set document = document.getObject() %}
+    {% endif %}
+
+    {% if document.getTitle() is not empty %}
+        {% do pimcore_head_title().set(document.getTitle()) %}
+    {% endif %}
+
+    {% if document.getDescription() is not empty %}
+        {% do pimcore_head_meta().setDescription(document.getDescription()) %}
+    {% endif %}
+
+    {% do pimcore_head_title().append(pimcore_website_config('page-title')) %}
+    {% do pimcore_head_title().setSeparator(' - ') %}
+
+    {% for key, lang in get_localized_links(document) %}
+        {% do pimcore_head_link().appendAlternate("#{lang.link}", null, null, {"hreflang": "#{key}"}) %}
+    {% endfor %}
+
+{%- endspaceless %}
+
+    {# we're using the deferred extension here to make sure this block is rendered after all helper calls #}
+    {% block layout_head_meta deferred %}
+
+    {{ pimcore_head_title() }}
+    {{ pimcore_head_meta() }}
+
+    {#{% if pimcore_placeholder('canonical').count() %}
+        <link rel="canonical" href="{{ pimcore_placeholder('canonical') }}"/>
+    {% endif %}#}
+
+    {% for meta in document.getMetaData() %}
+        {{ meta|raw }}
+    {% endfor %}
+
+    {% endblock %}
+
+    {% block head_stylesheets deferred %}
+
+    {# tarteaucitron #}
+    {{ include('includes/cookie-consent.html.twig') }}
+
+    {{ pimcore_head_style() }}
+    {{ pimcore_head_link() }}
+
+    {% endblock %}
+
+<!-- Matomo -->
+
+{#
+{% if document.getProperty('siteClass') %}
+    {% set siteClass = document.getProperty('siteClass')  %}
+{% endif %}
+#}
+
+    {% set siteClass = document.getProperty('siteClass')  %}
+
+<script type="text/javascript">
+    var _paq = window._paq = window._paq || [];
+    /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+    _paq.push(['trackPageView']);
+    _paq.push(['enableLinkTracking']);
+    (function() {
+        var u="//matomo.biegert-galabau.de/";
+        _paq.push(['setTrackerUrl', u+'matomo.php']);
+        {% if 'pool' in siteClass %}
+            _paq.push(['setSiteId', '2']);
+        {% elseif 'schwimmteich' in siteClass %}
+            _paq.push(['setSiteId', '3']);
+        {% elseif 'planung' in siteClass %}
+            _paq.push(['setSiteId', '4']);
+        {% else %}
+            _paq.push(['setSiteId', '1']);
+        {% endif %}
+        var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+        g.type='text/javascript'; g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+    })();
+</script>
+<!-- End Matomo Code -->
+
+  {#  <style>
+        {{ conecto_inline_data('static/css/styles.data.css')|raw }}
+    </style>
+    <style>
+        {{ conecto_inline_data('static/css/styles.min.css')|raw }}
+    </style>
+#}

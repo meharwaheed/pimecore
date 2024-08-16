@@ -1,0 +1,59 @@
+services:
+  # default configuration for services in *this* file
+  _defaults:
+    # automatically injects dependencies in your services
+    autowire: true
+    # automatically registers your services as commands, event subscribers, etc.
+    autoconfigure: true
+    # this means you cannot fetch services directly from the container via $container->get()
+    # if you need to do this, you can override this setting on individual services
+    public: false
+
+  #
+  # CONTROLLERS
+  #
+
+  # auto-register all controllers as services
+  AppBundle\Controller\:
+    resource: '../../Controller'
+    public: true
+    tags: ['controller.service_arguments']
+
+
+  #
+  # COMMANDS
+  #
+
+  # auto-register all commands as services
+  AppBundle\Command\:
+    resource: '../../Command/*'
+    tags: ['console.command']
+
+
+  #
+  # EVENTLISTENERS
+  #
+
+  # auto-register all event listeners as services
+  AppBundle\EventListener\:
+    resource: '../../EventListener/*'
+    tags: ['console.eventlistener']
+
+
+  #
+  # UTILITIES
+  #
+
+  AppBundle\Sitemap\Processor\ImageProcessor: ~
+
+  Pimcore\Sitemap\Document\DocumentTreeGenerator:
+    arguments:
+      $filters:
+        - '@Pimcore\Sitemap\Element\Filter\PublishedFilter'
+        - '@Pimcore\Sitemap\Element\Filter\PropertiesFilter'
+        - '@Pimcore\Sitemap\Document\Filter\DocumentTypeFilter'
+        - '@Pimcore\Sitemap\Document\Filter\SiteRootFilter'
+      $processors:
+        - '@Pimcore\Sitemap\Element\Processor\ModificationDateProcessor'
+        - '@Pimcore\Sitemap\Element\Processor\PropertiesProcessor'
+        - '@AppBundle\Sitemap\Processor\ImageProcessor'

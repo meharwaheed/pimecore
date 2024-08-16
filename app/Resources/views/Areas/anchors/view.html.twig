@@ -1,0 +1,34 @@
+{# margins #}
+{% set marginTop = pimcore_select('margin-top').getData() %}
+{% set margin = pimcore_select('margin-bottom').getData() %}
+
+{# background color #}
+{% set bgcolor = pimcore_select('background-color').getData() %}
+
+{# container-width #}
+{% set container = pimcore_select('container').getData() %}
+
+<div class="contentblock contentblock--anchors margin-top-{{ marginTop }} margin-bottom-{{ margin }} bg-{{ bgcolor }}">
+    <div class="container container--{{ container }}">
+        <div class="anchors--container">
+
+            <ul>
+                {% for i in pimcore_iterate_block(pimcore_block('linkblock')) %}
+                <li>
+                    {% if editmode %}
+                        {{ pimcore_link('anchorlink', {'class': "btn btn--flat special-link-class"}) }}
+                    {% else %}
+                        {% set link = pimcore_link('anchorlink') %}
+                        <a href="{{ link.getHref() }}"
+                           target="{{ link.getTarget() }}"
+                           class="btn btn--flat">
+                            {{ link.text }}
+                        </a>
+                    {% endif %}
+                </li>
+                {% endfor %}
+            </ul>
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,83 @@
+{# margins #}
+{% set marginTop = pimcore_select('margin-top').getData() %}
+{% set margin = pimcore_select('margin-bottom').getData() %}
+
+{# background color #}
+{% set bgcolor = pimcore_select('background-color').getData() %}
+
+{# container-width #}
+{% set container = pimcore_select('container').getData() %}
+
+{# thumbnail #}
+{% set thumbnail = 'image' %}
+
+{# autoplay #}
+{% set autoplay = '' %}
+{% if pimcore_checkbox('autoplay').isChecked() %}
+    {% set autoplay = 'autoplay' %}
+{% endif %}
+
+{# id #}
+{% set anchorId = pimcore_input('anchor').getData() %}
+
+{# link #}
+{% set link = pimcore_link('link') %}
+
+{# html #}
+<div  {% if anchorId %} id="{{ anchorId }}"{% endif %}
+    class="contentblock contentblock--image margin-top-{{ marginTop }} margin-bottom-{{ margin }} bg-{{ bgcolor }}">
+    <div class="container container--{{ container }}">
+
+        {% if editmode %}
+            <div class="backend-relation">
+                {{ pimcore_relation('mediaobject',{
+                    "types": ["asset"],
+                    "subtypes": {
+                        "asset": ["video", "image"]
+                    },
+                    "width": 500,
+                    "reload": "true"
+                }) }}
+                <br>Element verlinken? {{ link|raw }}
+                <br>
+                <br>
+            </div>
+        {% endif %}
+
+        {% set mediaobject = pimcore_relation('mediaobject').getElement() %}
+
+        {% if not pimcore_relation('mediaobject').isEmpty() %}
+            {% if editmode %}
+                {% if mediaobject is instanceof('\\Pimcore\\Model\\Asset\\Image') %}
+                    {{ mediaobject.getThumbnail(thumbnail).getHTML()|raw }}
+                {% else %}
+                    <div class="image-video">
+                        <video src="{{ mediaobject }}"></video>
+                    </div>
+                {% endif %}
+            {% else %}
+                {% if mediaobject is instanceof('\\Pimcore\\Model\\Asset\\Image') %}
+                    {% if link.isEmpty() %}
+                        {% set lightboxImage = mediaobject.getThumbnail('lightbox') %}
+                        <a href="{{ lightboxImage }}" rel="lightbox">
+                            <figure>
+                                {{ mediaobject.getThumbnail(thumbnail).getHtml({'attributes': {'loading':'lazy'}})|raw }}
+                            </figure>
+                        </a>
+                    {% else %}
+                        <a href="{{ link.getHref() }}" target="{{ link.getTarget() }}">
+                            <figure>
+                                {{ mediaobject.getThumbnail(thumbnail).getHtml({'attributes': {'loading':'lazy'}})|raw }}
+                            </figure>
+                        </a>
+                    {% endif %}
+                {% else %}
+                    <div class="image-video">
+                        <video {{ autoplay }} src="{{ mediaobject }}" controls="true" playsinline="true" type='video/mp4' muted></video>
+                    </div>
+                {% endif %}
+            {% endif %}
+        {% endif %}
+
+    </div>
+</div>

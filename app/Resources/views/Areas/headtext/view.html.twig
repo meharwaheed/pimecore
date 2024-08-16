@@ -1,0 +1,59 @@
+{# margins #}
+{% set marginTop = pimcore_select('margin-top').getData() %}
+{% set margin = pimcore_select('margin-bottom').getData() %}
+
+{# background color #}
+{% set bgcolor = pimcore_select('background-color').getData() %}
+
+{# container-width #}
+{% set container = pimcore_select('container').getData() %}
+
+{# twocols #}
+{% set twocols = '' %}
+{% if pimcore_checkbox('twocols').isChecked() %}
+    {% set twocols = 'contentblock--headtext-twocols' %}
+{% endif %}
+
+{# id #}
+{% set anchorId = pimcore_input('anchor').getData() %}
+
+{# html #}
+<div  {% if anchorId %} id="{{ anchorId }}"{% endif %}
+    class="contentblock contentblock--wysiwyg contentblock--headtext margin-top-{{ marginTop }} margin-bottom-{{ margin }} {{ twocols }} bg-{{ bgcolor }}">
+    <div class="headline">
+        <div class="container container--{{ container }}">
+            <h2>{{ pimcore_input('headtext-h2', {
+                    'placeholder': 'Überschrift einfügen'
+                }) }}</h2>
+        </div>
+        <div class="headline--background"></div>
+    </div>
+    <div class="text">
+        <div class="container container--{{ container }}">
+            <div class="column">
+                {{ pimcore_wysiwyg("wysiwyg", {
+                    "customConfig": "/static/js/ckeditor_config.js",
+                    "toolbarGroups": [
+                        {
+                            "name": 'basicstyles',
+                            "groups": [ 'basicstyles', 'list', 'align', 'links']
+                        }
+                    ]
+                }) }}
+            </div>
+            {% if pimcore_checkbox('twocols').isChecked() %}
+                <div class="column">
+                    {{ pimcore_wysiwyg("wysiwyg-2", {
+                        "customConfig": "/static/js/ckeditor_config.js",
+                        "toolbarGroups": [
+                            {
+                                "name": 'basicstyles',
+                                "groups": [ 'basicstyles', 'list', 'align', 'links']
+                            }
+                        ]
+                    }) }}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>

@@ -1,0 +1,36 @@
+<nav class="special-nav" role="navigation">
+    {% if not document is defined or not document %}
+        {% set document = pimcore_document(1) %}
+    {% endif %}
+    {% set mainNavStartNode = document.getProperty('mainnavStartNode') %}
+    {% set mainNav = conecto_build_nav(document, mainNavStartNode) %}
+    {% set renderer = pimcore_nav_renderer('menu') %}
+    <ul>
+        {% for key, page in mainNav %}
+            {% if page.isVisible() and renderer.accept(page) %}
+                {% set activeClass = '' %}
+                {% set hiddenClass = '' %}
+                {% set siteClass = '' %}
+                {% set url = '' %}
+                {% if page.getActive(true) %}
+                    {% set activeClass = 'main-nav--active' %}
+                {% endif %}
+                {% if page.getCustomSetting('siteClass') %}
+                    {% set siteClass = 'site-' ~ page.getCustomSetting('siteClass') %}
+                {% endif %}
+                {% if page.getCustomSetting('url') %}
+                    {% set url = page.getCustomSetting('url') %}
+                {% endif %}
+
+                {% if page.getCustomSetting('special') %}
+                    <li class="{{ activeClass }} {{ siteClass }}">
+                        <a href="{{ url }}">
+                            {{ page.label }}
+                        </a>
+                    </li>
+                {% endif %}
+
+            {% endif %}
+        {% endfor %}
+    </ul>
+</nav>

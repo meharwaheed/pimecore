@@ -1,0 +1,13 @@
+{
+  "scripts": {
+    "build:scss": "node-sass ./web/static/.build/scss -o ./web/static/css/new --output-style compressed",
+    "build:peepgarden-scss": "node-sass ./web/static/css/beepgarten/styles.scss -o ./web/static/css/beepgarten --output-style compressed",
+    "build:js": "terser ./web/static/.build/js/*.js -o ./web/static/js/newMain.min.js -c -m",
+    "build": "yarn build:scss && yarn build:peepgarden-scss && yarn build:js",
+    "watch": "yarn build:scss && yarn build:peepgarden-scss && yarn build:js -w"
+  },
+  "dependencies": {
+    "node-sass": "^9.0.0",
+    "terser": "^5.14.2"
+  }
+}

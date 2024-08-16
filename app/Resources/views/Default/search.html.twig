@@ -1,0 +1,27 @@
+{% extends 'layout.html.twig' %}
+{% block content %}
+    <div class="container">
+        <div class="contentblock contentblock--wysiwyg margin-bottom-small">
+            <h2>{{ searchstring }}</h2>
+        </div>
+    </div>
+    <div class="container">
+        <div class="search-results">
+            {% if results %}
+                <ul>
+                    {% for result in results %}
+                        <li>
+                            <a href="{{ result['path'] }}" class="searchresult">
+                                <h3>{{ result['title'] }}</h3>
+                                <p>{{ result['text']|raw }}</p>
+                            </a>
+                        </li>
+                {% endfor %}
+                </ul>
+            {% else %}
+                <p>Es konnte leider nichts gefunden werden!</p>
+            {% endif %}
+        </div>
+    </div>
+    {{ include('includes/contentblocks.html.twig') }}
+{% endblock %}

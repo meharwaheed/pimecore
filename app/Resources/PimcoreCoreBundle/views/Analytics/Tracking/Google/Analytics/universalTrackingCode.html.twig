@@ -1,0 +1,36 @@
+{% block beforeScriptTag %}{{ blocks.beforeScriptTag|raw }}{% endblock %}
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        {% block beforeScript %}{{ blocks.beforeScript|raw }}{% endblock %}
+
+        {% block beforeInit %}{{ blocks.beforeInit|raw }}{% endblock %}
+
+        {% block trackInit %}
+        tarteaucitron.user.analyticsUa = '{{ trackId }}';
+        tarteaucitron.user.analyticsAnonymizeIp = true
+
+        {% if universalConfiguration %}
+        tarteaucitron.user.analyticsUaCreate = {{ universalConfiguration|raw }}
+        {% endif %}
+        {% endblock %}
+
+        {% block beforeTrack %} tarteaucitron.user.analyticsPrepare = function () { {{ blocks.beforeTrack|raw }} } {% endblock %}
+
+        {% block track %}
+        if (typeof _gaqPageView != "undefined") {
+            tarteaucitron.user.analyticsPageView = _gaqPageView;
+        } else {
+            {% if defaultPath %}
+            tarteaucitron.user.analyticsPageView = '{{ defaultPath }}';
+            {% endif %}
+        }
+        (tarteaucitron.job = tarteaucitron.job || []).push('analytics');
+        {% endblock %}
+
+        {% block afterTrack %} tarteaucitron.user.analyticsMore = function () { {{ blocks.afterTrack|raw }} } {% endblock %}
+        {% block afterScript %}{{ blocks.afterScript|raw }}{% endblock %}
+    })
+</script>
+
+{% block afterScriptTag %}{{ blocks.afterScriptTag|raw }}{% endblock %}

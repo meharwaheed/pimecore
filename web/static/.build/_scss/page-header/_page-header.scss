@@ -1,0 +1,62 @@
+$headerHeightMobile: 90px;
+$headerHeightTablet: 100px;
+$headerHeightDesktop: 160px;
+
+.frontend {
+  .page-header {
+    @include fluidAll(padding-top, $headerHeightMobile, $headerHeightTablet, $headerHeightDesktop);
+  }
+
+  .page-header--top {
+    @include fluidAll(height, $headerHeightMobile, $headerHeightTablet, $headerHeightDesktop);
+    background: $white;
+    left: 0;
+    top: 0;
+    width: 100%;
+    box-shadow: 0 0 50px rgba($black, 0.1);
+    transition: transform ease-in-out .3s;
+    position: fixed;
+    z-index: 2;
+  }
+
+  .main-nav--retractable {
+    .page-header--top {
+      transform: translateY(pxToVwMobile($headerHeightMobile * -1));
+      @include media-breakpoint-up(md) {
+        transform: translateY(pxToVw($headerHeightTablet * -1));
+      }
+      @include media-breakpoint-up(xl) {
+        transform: translateY($headerHeightDesktop * -1);
+      }
+    }
+  }
+
+  .main-nav--extended {
+    .page-header--top {
+      transform: translateY(0);
+      @include media-breakpoint-up(md) {
+        transform: translateY(0);
+      }
+      @include media-breakpoint-up(xl) {
+        transform: translateY(0);
+      }
+    }
+  }
+
+  .main-nav--toggle:checked ~ .page-wrap {
+    .page-header--top {
+      transform: translateY(0);
+      @include media-breakpoint-up(md) {
+        transform: translateY(0);
+      }
+      @include media-breakpoint-up(xl) {
+        transform: translateY(0);
+      }
+    }
+  }
+
+}
+
+@import 'page-header--image';
+@import 'page-header--cta';
+@import 'page-header--nav';

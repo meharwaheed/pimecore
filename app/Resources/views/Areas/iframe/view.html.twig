@@ -1,0 +1,37 @@
+{# margins #}
+{% set marginTop = pimcore_select('margin-top').getData() %}
+{% set margin = pimcore_select('margin-bottom').getData() %}
+
+{# background color #}
+{% set bgcolor = pimcore_select('background-color').getData() %}
+
+{# container-width #}
+{% set container = pimcore_select('container').getData() %}
+
+{# height #}
+{% set height = pimcore_input('height').getData() %}
+
+{# url #}
+{% set url = pimcore_input('url').getData() %}
+{% set prefix = 'https://' %}
+{% if not (url starts with prefix) %}
+    {% if not (url starts with 'http://') %}
+        {% set url = prefix ~ url %}
+    {% endif %}
+{% endif %}
+
+{# autoplay #}
+{% if pimcore_checkbox('autoplay').isChecked() %}
+    {% set url = url ~'?autoplay=1&mute=1' %}
+{% endif %}
+
+{# id #}
+{% set anchorId = pimcore_input('anchor').getData() %}
+
+{# html #}
+<div {% if anchorId %} id="{{ anchorId }}"{% endif %}
+    class="contentblock contentblock--wysiwyg margin-top-{{ marginTop }} margin-bottom-{{ margin }} bg-{{ bgcolor }}">
+    <div class="container container--{{ container }}">
+        <iframe width="100%" height="{{ height }}" src="{{ url }}" frameborder="0"></iframe>
+    </div>
+</div>

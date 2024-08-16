@@ -1,0 +1,118 @@
+{# margins #}
+{% set marginTop = pimcore_select('margin-top').getData() %}
+{% set margin = pimcore_select('margin-bottom').getData() %}
+
+{# background color #}
+{% set bgcolor = pimcore_select('background-color').getData() %}
+
+{# container-width #}
+{% set container = pimcore_select('container').getData() %}
+
+{# link #}
+{% set link = pimcore_link('link') %}
+
+{# id #}
+{% set anchorId = pimcore_input('anchor').getData() %}
+
+{# html #}
+<div {% if anchorId %} id="{{ anchorId }}"{% endif %}
+    class="contentblock contentblock--threeteasers margin-top-{{ marginTop }} margin-bottom-{{ margin }} bg-{{ bgcolor }}">
+
+    {% if editmode %}
+        <div class="container">
+            <label>
+                <br>Element verlinken? {{ link|raw }}
+                <br>
+                <br>
+            </label>
+        </div>
+    {% endif %}
+
+    {% set relation1 = pimcore_relation('threeteasers-1', {
+        'types': ['asset'],
+        'title': 'Bitte gewünschte Bild hierher ziehen'
+    }) %}
+    {% set colorSelect = pimcore_select("color", {
+        "store": [
+            ["white", "Weiß"],
+            ["green", "Grün"],
+            ["blue", "Blau"],
+            ["brown", "Braun"],
+            ["black", "Schwarz"]
+        ],
+        "defaultValue" : "white",
+        "width": 150,
+        "reload": 'true'
+    }) %}
+    {% set relation2 = pimcore_relation('threeteasers-2', {
+        'types': ['asset'],
+        'title': 'Bitte gewünschtes Bild hierher ziehen'
+    }) %}
+
+    <div class="grid {{ container }}">
+
+        {% if editmode %}
+            <div>
+                {{ relation1|raw }}
+                {% if not relation1.isEmpty() %}
+                    {{ relation1.getElement().getThumbnail('threeteasers').getHtml()|raw }}
+                {% endif %}
+            </div>
+        {% else %}
+            {% if not relation1.isEmpty() %}
+                <a href="{{ relation1.getElement().getThumbnail('lightbox') }}">
+                    {{ relation1.getElement().getThumbnail('threeteasers').getHtml()|raw }}
+                </a>
+            {% endif %}
+        {% endif %}
+
+        {% if not editmode %}
+            {% if not link.isEmpty() %}
+                <a href="{{ link.getHref() }}" target="{{ link.getTarget() }}">
+            {% endif %}
+        {% endif %}
+        <div class="text-element background-{{ colorSelect.getData() }}">
+            <div class="text-element--content-container">
+                <div class="text-element--content">
+                    {% if editmode %}
+                        {{ colorSelect|raw }}
+                    {% endif %}
+                    <h3>{{ pimcore_input('threeteasers-input') }}</h3>
+                    <div class="threeteasers--text">
+                        {{ pimcore_wysiwyg("threeteasers-wysiwyg", {
+                            "customConfig": "/static/js/ckeditor_config.js",
+                            "toolbarGroups": [
+                                {
+                                    "name": 'basicstyles',
+                                    "groups": [ 'basicstyles', 'list', 'align', 'links']
+                                }
+                            ]
+                        }) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% if not editmode %}
+            {% if not link.isEmpty() %}
+                </a>
+            {% endif %}
+        {% endif %}
+
+        {% if editmode %}
+            <div>
+                {{ relation2|raw }}
+                {% if not relation2.isEmpty() %}
+                {{ relation2.getElement().getThumbnail('threeteasers').getHtml()|raw }}
+                {% endif %}
+            </div>
+        {% else %}
+            {% if not relation2.isEmpty() %}
+                <a href="{{ relation2.getElement().getThumbnail('lightbox') }}">
+                    {{ relation2.getElement().getThumbnail('threeteasers').getHtml()|raw }}
+                </a>
+            {% endif %}
+        {% endif %}
+    </div>
+
+</div>

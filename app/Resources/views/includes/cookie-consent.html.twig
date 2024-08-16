@@ -1,0 +1,40 @@
+
+{% if not editmode %}
+    {% set directory = '/static/vendor/tarteaucitron/' %}
+    <script>
+        var tarteaucitronForceCDN = '{{ directory }}';
+        var tarteaucitronForceLanguage = '{{ app.request.locale }}'
+    </script>
+    <script src="{{ directory }}tarteaucitron.js" defer></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            tarteaucitron.init({
+                "privacyUrl": "{{ pimcore_website_config('datenschutz') }}",
+                "hashtag": "#cookie-consent",
+                "cookieName": "consent",
+                "orientation": "middle",
+                "showAlertSmall": false,
+                "cookieslist": false,
+                "showIcon": false,
+                "iconPosition": "BottomRight",
+                "adblocker": false,
+                "DenyAllCta": true,
+                "AcceptAllCta": true,
+                "highPrivacy": true,
+                "handleBrowserDNTRequest": false,
+                "removeCredit": true,
+                "moreInfoLink": false,
+                "useExternalCss": false,
+                "useExternalJs": false,
+                "mandatory": true
+            })
+        })
+    </script>
+    
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', () => {
+            tarteaucitron.user.googletagmanagerId = 'GTM-MFP63DK';
+            (tarteaucitron.job = tarteaucitron.job || []).push('googletagmanager');
+        });
+    </script>
+{% endif %}

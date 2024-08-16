@@ -1,0 +1,36 @@
+{# margins #}
+{% set marginTop = pimcore_select('margin-top').getData() %}
+{% set margin = pimcore_select('margin-bottom').getData() %}
+
+{# background color #}
+{% set bgcolor = pimcore_select('background-color').getData() %}
+
+{# container-width #}
+{% set container = pimcore_select('container').getData() %}
+
+{# version #}
+{% set version = 'h2' %}
+{% if pimcore_select('version').getData() is not empty %}
+    {% set version = pimcore_select('version').getData() %}
+{% endif %}
+
+{# centered #}
+{% set centered = '' %}
+{% if pimcore_checkbox('centered').isChecked() %}
+    {% set centered = 'text-center' %}
+{% endif %}
+
+{# id #}
+{% set anchorId = pimcore_input('anchor').getData() %}
+
+{# html #}
+<div  {% if anchorId %} id="{{ anchorId }}"{% endif %}
+    class="contentblock contentblock--headline margin-top-{{ marginTop }} margin-bottom-{{ margin }} {{ centered }} bg-{{ bgcolor }}">
+    <div class="container container--{{ container }}">
+        <{{ version }}>
+            {{ pimcore_input('headline', {
+                'placeholder': 'Überschrift'
+            }) }}
+        </{{ version }}>
+    </div>
+</div>

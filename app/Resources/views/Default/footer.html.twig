@@ -1,0 +1,78 @@
+{% if editmode %}
+    <link href="/static/css/styles.css" media="screen" rel="stylesheet" type="text/css" />
+    <link href="/static/css/styles.data.css" media="screen" rel="stylesheet" type="text/css" />
+    <link href="/static/css/editmode.css?t={{ date().timestamp }}" media="screen" rel="stylesheet" type="text/css" />
+{% endif %}
+
+<footer class="footer">
+
+    <div class="footer--logo">
+        <a href="{{ document.getProperty('mainnavStartNode') }}"></a>
+    </div>
+
+    <div class="footer--social">
+        <ul>
+            {% if pimcore_website_config('instagram') %}
+                <li>
+                    <a href="{{ pimcore_website_config('instagram') }}" target="_blank">
+                        <i class="iconfont-instagram"></i>
+                    </a>
+                </li>
+            {% endif %}
+            {% if pimcore_website_config('pinterest') %}
+                <li>
+                    <a href="{{ pimcore_website_config('pinterest') }}" target="_blank">
+                        <i class="iconfont-pinterest"></i>
+                    </a>
+                </li>
+            {% endif %}
+        </ul>
+    </div>
+
+    <div class="footer--info">
+        <h2>{{ pimcore_input('footer-h2') }}</h2>
+        <ul>
+            {% if pimcore_website_config('address') %}
+                <li>
+                    <i class="iconfont-poi"></i>
+                    <span>{{ pimcore_website_config('address') }}</span>
+                </li>
+            {% endif %}
+            {% if pimcore_website_config('phone') %}
+                <li>
+                    <a href="tel:{{ pimcore_website_config('phone')|replace({' ': ''}) }}">
+                        <i class="iconfont-phone"></i>
+                        <span>{{ pimcore_website_config('phone') }}</span>
+                    </a>
+                </li>
+            {% endif %}
+            {% if pimcore_website_config('fax') %}
+                <li>
+                    <span>
+                        <i class="iconfont-fax"></i>
+                        <span>{{ pimcore_website_config('fax') }}</span>
+                    </span>
+                </li>
+            {% endif %}
+            {% if pimcore_website_config('email') %}
+                <li>
+                    <a href="mailto:{{ pimcore_website_config('email') }}">
+                        <i class="iconfont-envelope"></i>
+                        <span>{{ pimcore_website_config('email') }}</span>
+                    </a>
+                </li>
+            {% endif %}
+        </ul>
+    </div>
+
+    <div class="footer--menu">
+        <ul>
+            {% for i in pimcore_iterate_block(pimcore_block('footer-menu')) %}
+                <li>
+                    {{ pimcore_link('footer-menu-link') }}
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+</footer>
